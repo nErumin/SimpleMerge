@@ -237,3 +237,4 @@ gradle-app.setting
 # Custom setting
 .idea/
 *.iml
+*.ipr
