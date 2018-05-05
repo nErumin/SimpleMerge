@@ -21,4 +21,5 @@ dependencies {
     testCompile "org.testfx:testfx-core:4.0.13-alpha"
     testCompile "org.testfx:testfx-junit:4.0.13-alpha"
     testCompile "junit:junit:4.12"
+    compile "io.sentry:sentry:1.7.4"
 }
