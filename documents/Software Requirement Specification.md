@@ -48,6 +48,17 @@ Version 1.0
 - Alternative Flows
     - 없음.
 
+#### UC5. 텍스트의 저장
+- Preconditions
+    - 사용자가 수정을 원하는 파일이 정상적으로 로드되어 있음.
+- Main Flow
+    - Save 버튼을 누르면, Panel에 쓰여진 내용을 파일에 저장한다. [A1] [A2]
+- Subflows
+    - 없음.
+- Alternative Flows
+    - [A1] 새로 만들어진 파일이라 저장할 경로가 존재하지 않으면, 별도의 창을 통해 경로를 지정한다.
+    - [A2] 권한 문제로 파일에 저장할 수 없을 때는, 경고 창이 출력되고 작업이 즉시 종료된다.
+
 ### 5. Development and Target Platforms
 모든 개발은 Java 언어로 이루어지며, GUI 개발을 위해서는 JavaFX를 사용합니다.
 일반적인 유닛 테스트는 JUnit 프레임워크를 통해 이루어지며, GUI 테스트를 위해서는 TestFX 프레임워크를 사용합니다.
