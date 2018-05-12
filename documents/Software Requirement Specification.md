@@ -12,17 +12,17 @@ Version 1.0
     - 저장되지 않은 새로운 텍스트를 생성하고, Panel을 빈 문자열로 채운다.
 - Subflows
     - 없음.
-- Alternative flows
+- Alternative Flows
     - 없음.
 
 #### UC2. 텍스트 불러오기
 - Preconditions
     - 없음.
-- Main flow
+- Main Flow
     - 버튼을 누르면, 불러오기 창이 나타나고 사용자는 불러오고 싶은 파일을 선택할 수 있다. [A1] [A2] [A3] [S1]
 - Subflows
     - [S1] 파일을 불러온 후에는, 파일의 내용을 읽어 Panel에 보여준다.
-- Alternative flows
+- Alternative Flows
     - [A1] 존재하지 않는 파일을 선택하려고 하면, 경고 창을 출력하고 작업을 종료한다.
     - [A2] 빈 파일 이름이나 허용되지 않는 이름의 파일을 선택하려고 하면, 경고 창을 출력하고 작업을 종료한다.
     - [A3] 파일 선택 중 '취소'를 누르면, 불러오기 작업이 즉시 종료된다.
@@ -34,7 +34,7 @@ Version 1.0
     - 갱신(Refresh) 버튼을 클릭하면, 불러왔던 파일의 내용을 시스템에서 다시 가져온다. [A1] [S1]
 - Subflows
     - [S1] 새롭게 내용을 불러온 후에는 Panel에 새 내용을 기록한다.
-- Alternative flows
+- Alternative Flows
     - [A1] 기존 파일을 불러온 것이 아니라, 저장되지 않은 새로운 파일을 생성한 것일땐 경고 창이 출력되고 갱신(Refresh) 작업이 즉시 종료된다.
 
 #### UC4. 텍스트의 편집
@@ -45,7 +45,7 @@ Version 1.0
     - 사용자는 Panel에 있는 파일 내용을 수정할 수 있다. [S1]
 - Subflows
     - [S1] 현재 Compare 기능이 동작 중일 경우, 수정이 이루어진 후에는 변경된 내용에 맞춰서 비교 사항이 갱신되어야 한다.
-- Alternative flows
+- Alternative Flows
     - 없음.
 
 ### 5. Development and Target Platforms
