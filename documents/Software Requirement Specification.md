@@ -59,6 +59,39 @@ Version 1.0
     - [A1] 새로 만들어진 파일이라 저장할 경로가 존재하지 않으면, 별도의 창을 통해 경로를 지정한다.
     - [A2] 권한 문제로 파일에 저장할 수 없을 때는, 경고 창이 출력되고 작업이 즉시 종료된다.
 
+### 4. Nonfunctional Requirements
+
+#### NR2. Usability
+- NR2.1 단축키 지원
+    - Cmd-S, Cmd-N, cmd-O 같이 주로 사용하는 단축키를 지원한다.
+ 
+- NR2.2 User Interface
+    - 전체적인 디자인은 요즘 유행하는 material design 으로 한다.
+    - https://material.io/design/
+    - diff 표현을 하는 highlight 색상은 Github 스타일로 한다.
+        -  수정 전의 문장은 빨간색 highlight 로, 수정 후 문장은 초록색 highlight로 한다.
+
+#### NR3. Reliability
+- NR3.1 임시저장
+    - 사용하던 프로그램이 갑자기 종료되는 경우를 대비한 임시 저장 기능이 필요하다.
+        - 컴퓨터의 이상 종료, 프로그램의 이상 등을 대비하여, Microsoft Word와 같은 임시저장 파일을 특정 interval 에 만들어, 임시 저장 파일이 남아있을 시 프로그램이 이상 종료한거로 판단, 임시저장본을 로드한다.
+
+#### NR4. Performance
+#### NR5. Supportability
+
+- NR5.1 Encoding Problem 
+    - i18n 지원을 위해, cjk, utf-8, utf-16 ANSI encoding 을 지원한다.
+- NR5.2 Cross-Platform
+    - 여러 운영체제 지원을 위해, 프로그램은 Windows, macOS, Debian and derivatives 를 지원한다.
+
+#### Constraint
+- 모든 개발은 Java 언어로 개발한다.
+- Testing tool 로 JUnit, TestFX를 사용한다.
+
+#### Security
+- exploit 방지를 위해 internal artifacts 는 시스템 밖에서 수정/삭제/추가 할 수 없어야 한다.
+
+
 ### 5. Development and Target Platforms
 모든 개발은 Java 언어로 이루어지며, GUI 개발을 위해서는 JavaFX를 사용합니다.
 일반적인 유닛 테스트는 JUnit 프레임워크를 통해 이루어지며, GUI 테스트를 위해서는 TestFX 프레임워크를 사용합니다.
