@@ -59,7 +59,22 @@ Version 1.0
     - [A1] 새로 만들어진 파일이라 저장할 경로가 존재하지 않으면, 별도의 창을 통해 경로를 지정한다.
     - [A2] 권한 문제로 파일에 저장할 수 없을 때는, 경고 창이 출력되고 작업이 즉시 종료된다.
 
+### 4. Constraints
+- 모든 개발은 Java 언어로 이루어집니다.
+- GUI 개발을 위해서는 JavaFX를 사용합니다.
+- 일반적인 유닛 테스트는 JUnit 프레임워크를 통해 이루어집니다.
+- GUI 테스트를 위해서는 TestFX 프레임워크를 사용합니다.
+- 프로그램 실행을 위해서는 컴퓨터에 Java 환경이 준비되어 있어야 합니다.
+
 ### 5. Development and Target Platforms
-모든 개발은 Java 언어로 이루어지며, GUI 개발을 위해서는 JavaFX를 사용합니다.
-일반적인 유닛 테스트는 JUnit 프레임워크를 통해 이루어지며, GUI 테스트를 위해서는 TestFX 프레임워크를 사용합니다.
-프로그램 실행을 위해서는 컴퓨터에 Java 환경이 준비되어 있어야 합니다.
+- Windows 10
+- MacOS High Sierra 10.13
+- Java
+- Eclipse IDE
+- IntelliJ IDEA
+- Travis
+- Sentry
+- Gradle
+
+### 6. Project Glossary
+- Panel : 텍스트 내용이 표시되는 영역으로, Panel 내에서 사용자는 텍스트를 수정할 수 있다. 또한, 사용자는 여러 Panel의 텍스트를 비교해볼 수 있다.
