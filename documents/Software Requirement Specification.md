@@ -1,5 +1,6 @@
 ## SimpleMerge Requirements Specification
 Version 1.0
+
 //수정내용 : 각 usecase에 UC 연관관계 추가 파일과 텍스트 용어 변환, Traceability Table 추가(UC만)
 
 ### 1. Introduction
@@ -121,7 +122,7 @@ Version 1.0
 |uc3|   | x |   |   |   |   |   |   |   |   |   |   |   |   |
 |uc4| x | x |   |   |   |   |   |   |   |   |   |   |   |   |
 |uc5|   |   |   | x |   |   |   |   |   |   |   |   |   |   |
-|uc6|   | x | x | x |   |   |   |   |   |   |   |   |   |   |
+|uc6| x | x |   |   |   |   |   |   |   |   |   |   |   |   |
 |uc7|   |   |   |   |   | x |   |   |   |   |   |   |   |   |
 |uc8| x | x | x | x |   |   |   |   |   |   |   |   |   |   |
 |uc9|   |   |   |   |   | x |   |   |   |   |   |   |   |   |
