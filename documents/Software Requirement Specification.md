@@ -107,6 +107,7 @@ Version 1.0
 ### 4. Requirements Dependency Traceability Table
 
 |   |uc1|uc2|uc3|uc4|uc5|uc6|uc7|uc8|uc9|NR1|NR2|NR3|NR4|NR5|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |uc1|   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 |uc2|   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 |uc3|   | x |   |   |   |   |   |   |   |   |   |   |   |   |
