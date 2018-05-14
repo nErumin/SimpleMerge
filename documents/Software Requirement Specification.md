@@ -1,8 +1,6 @@
 ## SimpleMerge Requirements Specification
 Version 1.0
 
-//수정내용 : 각 usecase에 UC 연관관계 추가 파일과 텍스트 용어 변환, Traceability Table 추가(UC만)
-
 ### 1. Introduction
 이 프로젝트는 Java 환경에서의 Diff 유틸리티 프로그램 구현을 목표로 합니다. 'SimpleMerge'라는 이름을 가진 이 프로그램은, 사용자가 Diff 유틸리티를 통해 수행하고자 하는 기능과 사용자의 편의성을 증가시키는 기능들을 제공합니다. 해당 SRS 문서에는 프로그램 구현 시 고려해야 할 기능들과 제한 사항들이 명시되어 있습니다.
 
@@ -174,3 +172,10 @@ Version 1.0
 
 ### 7. Project Glossary
 - Panel : 텍스트 내용이 표시되는 영역으로, Panel 내에서 사용자는 텍스트를 수정할 수 있다. 또한, 사용자는 여러 Panel의 텍스트를 비교해볼 수 있다.
+
+### 8. Document Revision History
+Item               | Description                         |
+-------------------|-------------------------------------| 
+Version            | 1.0                                 |
+Date               | May 14, 2018                        |
+Change Description | Original creation of the SRS.       |
