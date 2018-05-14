@@ -1,7 +1,7 @@
 ## SimpleMerge Requirements Specification
 Version 1.0
-May 14, 2018
 
+May 14, 2018
 
 ### 1. Introduction
 이 프로젝트는 Java 환경에서의 Diff 유틸리티 프로그램 구현을 목표로 합니다. 'SimpleMerge'라는 이름을 가진 이 프로그램은, 사용자가 Diff 유틸리티를 통해 수행하고자 하는 기능과 사용자의 편의성을 증가시키는 기능들을 제공합니다. 해당 SRS 문서에는 프로그램 구현 시 고려해야 할 기능들과 제한 사항들이 명시되어 있습니다.
@@ -96,33 +96,33 @@ May 14, 2018
     - search 버튼이 활성화되어 있다.
 - Main Flows
     - 사용자가 텍스트를 생성하거나[UC1], 파일에서 불러와서[UC2] 갱신[UC3], 편집[UC4]한다.
-    - 사용자가 한 쪽 Panel에 커서를 위치시키고 search버튼을 클릭하면 새로운 윈도우가 뜬다. 여기에 검색하고 싶은 내용을 적으면, 일치하는 부분이 음영으로 보여지며, 해당 부분의 맨 앞으로 커서가 이동한다. [A1]
+    - 사용자가 한 쪽 Panel에 커서를 위치시키고 Search 버튼을 클릭하면 새로운 창이 나타난다. 여기에 검색하고 싶은 내용을 적으면, 일치하는 부분이 음영으로 보여지며, 해당 부분의 맨 앞으로 커서가 이동한다. [A1]
 - Subflows
 - Alternative Flows
     - [A1] 검색한 내용이 Panel안에 없을 경우 해당하는 내용이 없다는 윈도우를 띄우고 작업을 종료한다.
 
 #### UC9. 서로 다른 부분만 모아서 출력(View)
 - Preconditions
-    - 두 문장의 compare가 끝난 상태이다.
-    - view 버튼이 활성화되어 있다.
+    - 두 문장의 Compare가 끝난 상태이다.
+    - View 버튼이 활성화되어 있다.
 - Main Flows
     - 사용자가 두 개의 텍스트를 비교[UC6] 한다.
-    - 사용자가 view 버튼을 누르면, 양쪽 Panel에서 서로 차이가 있는 문장들만 모아서 또 다른 두 개의 Panel로 보여준다. [S1][A1]
+    - 사용자가 View 버튼을 누르면, 양쪽 Panel에서 서로 차이가 있는 문장들만 모아서 또 다른 두 개의 Panel로 보여준다. [S1][A1]
 - Subflows
-    - [S1] 음영처리되었던 부분은 그대로 유지되어 재출력되어야 한다.
+    - [S1] 음영 처리된 부분은 그대로 유지되어 재출력되어야 한다.
 - Alternative Flows
     - [A1] 두 파일이 모두 같아 출력될 내용이 없을 경우, 해당 메세지를 출력하는 윈도우를 띄우고 작업을 종료한다.
 
 ### 3. Non-Functional Requirements
 #### NR1. Usability
 - NR1.1 단축키 지원
-    - Cmd-S, Cmd-N, cmd-O 같이 주로 사용하는 단축키를 지원한다.
+    - Cmd-S, Cmd-N, Cmd-O 같이 주로 사용하는 단축키를 지원한다.
  
 - NR1.2 User Interface
     - 전체적인 디자인은 요즘 유행하는 material design 으로 한다.
     - https://material.io/design/
-    - diff 표현을 하는 highlight 색상은 Github 스타일로 한다.
-        -  수정 전의 문장은 빨간색 highlight 로, 수정 후 문장은 초록색 highlight로 한다.
+    - diff 표현을 하는 Highlight 색상은 Github 스타일로 한다.
+        -  수정 전의 문장은 빨간색 highlight 로, 수정 후 문장은 초록색 Highlight로 한다.
 
 #### NR2. Reliability
 - NR2.1 임시저장
@@ -132,9 +132,9 @@ May 14, 2018
 - NR3.1 Encoding Problem 
     - i18n 지원을 위해, cjk, utf-8, utf-16 ANSI encoding 을 지원한다.
 - NR3.2 Cross-Platform
-    - 여러 운영체제 지원을 위해, 프로그램은 Windows, macOS, Debian and derivatives 를 지원한다.
+    - 여러 운영체제 지원을 위해, 프로그램은 Windows, MacOS, Debian and derivatives 를 지원한다.
 #### NR4. Security
-- exploit 방지를 위해 internal artifacts 는 시스템 밖에서 수정/삭제/추가 할 수 없어야 한다.
+- Exploit 방지를 위해 Internal artifacts 는 시스템 밖에서 수정/삭제/추가 할 수 없어야 한다.
 
 ### 4. Constraints
 - 모든 개발은 Java 언어로 이루어집니다.
