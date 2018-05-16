@@ -10,6 +10,9 @@ May 14, 2018
 
 해당 SRS 문서에는 프로그램 구현 시 고려해야 할 기능들과 제한 사항들이 명시되어 있다.
 
+- Use case Diagram
+[Use Case Diagram](./documents/diagram/Use\ digram.png)
+
 ### 2. Use cases
 #### UC1. 새 텍스트 생성
 - Preconditions
