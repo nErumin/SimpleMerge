@@ -8,6 +8,9 @@
 - 개발과 관련된 Convention 규칙과 회의록 등은 [Wiki](https://github.com/nErumin/SimpleMerge/wiki)를 참고해주세요.
 - 이슈 사항들은 [Issue](https://github.com/nErumin/SimpleMerge/issues)를 참고해주세요.
 
+## Documents
+- Software Requirement Specification은 [documents/2018 SE Team#3 Software Requirements Specification.pdf](https://github.com/nErumin/SimpleMerge/blob/master/documents/2018%20SE%20Team%233%20Software%20Requirements%20Specification.pdf) 파일을 참고해주세요.
+
 ## Team Member (Team #3)
 Role   | Github ID                                     |
 -------|-----------------------------------------------| 
