@@ -1,6 +1,7 @@
 package model;
 
 import utility.StreamUtility;
+import utility.StringUtility;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +24,7 @@ public final class Line {
      * 빈 내용을 가지는 문장을 생성합니다.
      */
     public Line() {
-        this("");
+        this(StringUtility.EMPTY_STRING);
     }
 
     /**
@@ -35,7 +36,7 @@ public final class Line {
     public Line(String text) {
         if (text == null) {
             throw new NullPointerException();
-        } else if (text.split("\n").length > 1) {
+        } else if (text.split(StringUtility.LINE_SEPARATOR).length > 1) {
             throw new IllegalArgumentException();
         }
 

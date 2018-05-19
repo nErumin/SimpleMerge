@@ -22,7 +22,7 @@ public class LineTest {
 
     @Test
     public void emptyLineLengthTest() {
-        final String originalContent = "";
+        final String originalContent = StringUtility.EMPTY_STRING;
         final Line line = new Line();
 
         Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
@@ -30,7 +30,7 @@ public class LineTest {
 
     @Test
     public void emptyLineConvertTest() {
-        final String originalContent = "";
+        final String originalContent = StringUtility.EMPTY_STRING;
         final Line line = new Line();
         final String lineContent = line.toString();
 
