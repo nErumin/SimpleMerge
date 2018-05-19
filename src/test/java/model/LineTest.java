@@ -306,6 +306,30 @@ public class LineTest {
             is(equalTo(originalContent + "Wor  ld  \t!")));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void nullReplacingTest() {
+        final String originalContent = "Hello \t";
+        final Line line = new Line(originalContent);
+
+        line.replace(0, null);
+    }
+
+    @Test(expected = StringIndexOutOfBoundsException.class)
+    public void negativePosReplacingTest() {
+        final String originalContent = "Hello \t";
+        final Line line = new Line(originalContent);
+
+        line.replace(-1, "World!");
+    }
+
+    @Test(expected = StringIndexOutOfBoundsException.class)
+    public void overLengthPosReplacingTest() {
+        final String originalContent = "Hello \t";
+        final Line line = new Line(originalContent);
+
+        line.replace(100, "Hello!");
+    }
+
     @Test
     public void emptyReplacingTest() {
         final String originalContent = "Hello \t";
