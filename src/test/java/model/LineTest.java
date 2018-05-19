@@ -56,7 +56,7 @@ public class LineTest {
     }
 
     @Test
-    public void singleWordLineConvertedTest() {
+    public void singleWordLineWordTest() {
         final String originalContent = "Hello \t\n \r\t \n\n\n \t\r \r\n";
         final Line line = new Line(originalContent);
 
@@ -65,5 +65,38 @@ public class LineTest {
 
         Assert.assertThat(words.size(), is(equalTo(1)));
         Assert.assertThat(words.get(0), is(equalTo("Hello")));
+    }
+
+    @Test
+    public void singleWordLineConvertTest() {
+        final String originalContent = "Hello \t\n \r\t \n\n\n \t\r \r\n";
+        final Line line = new Line(originalContent);
+        final String lineContent = line.toString();
+
+        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+    }
+
+    @Test
+    public void emptyLineLengthTest() {
+        final String originalContent = "";
+        final Line line = new Line();
+
+        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
+    }
+
+    @Test
+    public void multiWordsLineLengthTest() {
+        final String originalContent = "Hello, \t World!\n \r\t \n\n \t\r\n";
+        final Line line = new Line(originalContent);
+
+        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
+    }
+
+    @Test
+    public void singleWordLineLengthTest() {
+        final String originalContent = "Hello \t\n \r\t \n\n\n \t\r \r\n";
+        final Line line = new Line(originalContent);
+
+        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
     }
 }

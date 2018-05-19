@@ -64,6 +64,14 @@ public final class Line {
     }
 
     /**
+     * 문장의 길이를 반환합니다.
+     * @return 문장의 길이입니다.
+     */
+    public int length() {
+        return buffer.length();
+    }
+
+    /**
      * 문장 전체를 문자열로 반환합니다.
      * @return 문장 전체의 정보입니다.
      */
