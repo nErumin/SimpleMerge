@@ -360,4 +360,48 @@ public class LineTest {
         Assert.assertThat(words.get(1), is(equalTo("X")));
         Assert.assertThat(words.get(2), is(equalTo("EFGH")));
     }
+
+    @Test
+    public void emptyInsertionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.insert(0, StringUtility.EMPTY_STRING);
+        Assert.assertThat(line.toString(), is(equalTo(originalContent)));
+    }
+
+    @Test
+    public void wordInsertionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        // index 6 = start point of ' '
+        line.insert(6, " this is");
+        Assert.assertThat(line.toString(),
+            is(equalTo("Hello, this is World")));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void nullInsertionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.insert(0, null);
+    }
+
+    @Test(expected = StringIndexOutOfBoundsException.class)
+    public void negativePosInsertionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.insert(-1, "Hello!");
+    }
+
+    @Test(expected = StringIndexOutOfBoundsException.class)
+    public void overLengthPosInsertionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.insert(15, "Hello!");
+    }
 }

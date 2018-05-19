@@ -77,6 +77,25 @@ public final class Line {
     }
 
     /**
+     * 문장의 특정 위치에 문자열을 삽입합니다.
+     * @param insertionPos 문자열을 삽입할 위치입니다.
+     * @param insertedString 삽입할 문자열입니다.
+     * @throws StringIndexOutOfBoundsException 위치가 유효하지 않으면 발생합니다.
+     * @throws NullPointerException 문자열이 null이면 발생합니다.
+     */
+    public void insert(int insertionPos, String insertedString) {
+        if (insertionPos < 0 || insertionPos >= length()) {
+            throw new StringIndexOutOfBoundsException();
+        }
+
+        if (insertedString == null) {
+            throw new NullPointerException();
+        }
+
+        buffer.insert(insertionPos, insertedString);
+    }
+
+    /**
      * 문장의 특정 영역을 교체합니다.
      * @param startIndex 교체를 시작할 문장 내 위치입니다.
      * @param replacingString 해당 위치부터 교체할 문자열입니다.
