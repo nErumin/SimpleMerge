@@ -4,6 +4,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.Assert;
 import org.junit.Test;
+import utility.StringUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,5 +141,36 @@ public class LineTest {
         Assert.assertThat(words.size(), is(equalTo(1)));
         Assert.assertThat(words.get(0),
             is(equalTo("Hello \t \r\t \r\r \t \n\n\n")));
+    }
+
+    @Test
+    public void emptyAppendTest() {
+        final String originalContent = "Hello \t";
+        final Line line = new Line(originalContent);
+
+        line.append(StringUtility.EMPTY_STRING);
+        Assert.assertThat(line.toString(), is(equalTo(originalContent)));
+    }
+
+    @Test
+    public void singleAppendTest() {
+        final String originalContent = " Hello \t";
+        final Line line = new Line(originalContent);
+
+        line.append("World!");
+
+        Assert.assertThat(line.toString(),
+            is(equalTo(originalContent + "World!")));
+    }
+
+    @Test
+    public void multipleWordAppendTest() {
+        final String originalContent = "Hello \t";
+        final Line line = new Line(originalContent);
+
+        line.append("Wor  ld  \t!");
+
+        Assert.assertThat(line.toString(),
+            is(equalTo(originalContent + "Wor  ld  \t!")));
     }
 }

@@ -75,6 +75,14 @@ public final class Line {
     }
 
     /**
+     * 이 문장의 끝에 새로운 내용을 추가합니다.
+     * @param addedString 새롭게 추가할 내용입니다.
+     */
+    public void append(String addedString) {
+        buffer.append(addedString);
+    }
+
+    /**
      * 문장의 길이를 반환합니다.
      * @return 문장의 길이입니다.
      */
