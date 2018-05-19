@@ -58,6 +58,45 @@ public class LineTest {
     }
 
     @Test
+    public void onlySpaceLineLengthTest() {
+        final String originalContent = "    \t    ";
+        final Line line = new Line(originalContent);
+
+        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
+    }
+
+    @Test
+    public void onlySpaceLineConvertTest() {
+        final String originalContent = "    \t    ";
+        final Line line = new Line(originalContent);
+        final String lineContent = line.toString();
+
+        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+    }
+
+    @Test
+    public void onlySpaceLineWordTest() {
+        final String originalContent = "    \t    ";
+        final Line line = new Line(originalContent);
+
+        final List<String> words = new ArrayList<>();
+        line.words().forEach(words::add);
+
+        Assert.assertThat(words.size(), is(equalTo(0)));
+    }
+
+    @Test
+    public void onlySpaceLineSpaceWordTest() {
+        final String originalContent = "    \t    ";
+        final Line line = new Line(originalContent);
+
+        final List<String> words = new ArrayList<>();
+        line.spaceIncludingWords().forEach(words::add);
+
+        Assert.assertThat(words.size(), is(equalTo(0)));
+    }
+
+    @Test
     public void multiWordsLineLengthTest() {
         final String originalContent = "Hello, \t World!\r\t \t\r \n\n\n\n";
         final Line line = new Line(originalContent);
@@ -97,6 +136,57 @@ public class LineTest {
 
         Assert.assertThat(words.size(), is(equalTo(2)));
         Assert.assertThat(words.get(0), is(equalTo("Hello, \t ")));
+        Assert.assertThat(words.get(1),
+            is(equalTo("World!\r\t \t\r \n\n\n\n")));
+    }
+
+
+    @Test
+    public void spacePrefixedMultiWordsLineLengthTest() {
+        final String originalContent =
+            " \t Hello, \t World!\r\t \t\r \n\n\n\n";
+        final Line line = new Line(originalContent);
+
+        Assert.assertThat(line.length(),
+            is(equalTo(originalContent.length())));
+    }
+
+    @Test
+    public void spacePrefixedMultiWordsLineConvertTest() {
+        final String originalContent =
+            " \r Hello, \t World!\r\t \t\r \n\n\n\n";
+        final Line line = new Line(originalContent);
+        final String lineContent = line.toString();
+
+        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+    }
+
+    @Test
+    public void spacePrefixedMultiWordsLineWordTest() {
+        final String originalContent =
+            " \r\t Hello, \t World!\r\t \t\r \n\n\n\n";
+        final Line line = new Line(originalContent);
+
+        final List<String> words = new ArrayList<>();
+        line.words().forEach(words::add);
+
+        Assert.assertThat(words.size(), is(equalTo(2)));
+        Assert.assertThat(words.get(0), is(equalTo("Hello,")));
+        Assert.assertThat(words.get(1), is(equalTo("World!")));
+    }
+
+    @Test
+    public void spacePrefixedMultiWordsLineSpaceWordTest() {
+        final String originalContent =
+            " \r\t Hello, \t World!\r\t \t\r \n\n\n\n";
+        final Line line = new Line(originalContent);
+
+        final List<String> words = new ArrayList<>();
+        line.spaceIncludingWords().forEach(words::add);
+
+        Assert.assertThat(words.size(), is(equalTo(2)));
+        Assert.assertThat(words.get(0),
+            is(equalTo(" \r\t Hello, \t ")));
         Assert.assertThat(words.get(1),
             is(equalTo("World!\r\t \t\r \n\n\n\n")));
     }
@@ -141,6 +231,48 @@ public class LineTest {
         Assert.assertThat(words.size(), is(equalTo(1)));
         Assert.assertThat(words.get(0),
             is(equalTo("Hello \t \r\t \r\r \t \n\n\n")));
+    }
+
+    @Test
+    public void spacePrefixedSingleWordLineLengthTest() {
+        final String originalContent = "\r  \tHello \t \r\t \r\r \t \n\n\n";
+        final Line line = new Line(originalContent);
+
+        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
+    }
+
+    @Test
+    public void spacePrefixedSingleWordLineConvertTest() {
+        final String originalContent = "\r \tHello \t \r\t \r\r \t \n\n\n";
+        final Line line = new Line(originalContent);
+        final String lineContent = line.toString();
+
+        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+    }
+
+    @Test
+    public void spacePrefixedSingleWordLineWordTest() {
+        final String originalContent = "\r \tHello \t \r\t \r\r \t \n\n\n";
+        final Line line = new Line(originalContent);
+
+        final List<String> words = new ArrayList<>();
+        line.words().forEach(words::add);
+
+        Assert.assertThat(words.size(), is(equalTo(1)));
+        Assert.assertThat(words.get(0), is(equalTo("Hello")));
+    }
+
+    @Test
+    public void spacePrefixedSingleWordLineSpaceWordTest() {
+        final String originalContent = "\r \tHello \t \r\t \r\r \t \n\n\n";
+        final Line line = new Line(originalContent);
+
+        final List<String> words = new ArrayList<>();
+        line.spaceIncludingWords().forEach(words::add);
+
+        Assert.assertThat(words.size(), is(equalTo(1)));
+        Assert.assertThat(words.get(0),
+            is(equalTo("\r \tHello \t \r\t \r\r \t \n\n\n")));
     }
 
     @Test

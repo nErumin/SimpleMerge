@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  * 텍스트의 한 문장을 나타내는 클래스입니다.
  */
 public final class Line {
-    private static final String SPLIT_REGEX = "\\S+\\s*";
+    private static final String SPLIT_REGEX = "\\s*\\S+\\s*";
     private static final String PURE_REGEX = "\\s+";
     private static final Pattern splitPattern = Pattern.compile(SPLIT_REGEX);
 
