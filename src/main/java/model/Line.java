@@ -1,9 +1,12 @@
 package model;
 
-import java.util.*;
+import utility.StreamUtility;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -41,10 +44,7 @@ public final class Line {
      * @return 문장에 존재하는 단어에 대한 열거자입니다.
      */
     public Iterable<String> words() {
-        final List<String> wordCollection =
-            wordStream().collect(Collectors.toList());
-
-        return Collections.unmodifiableCollection(wordCollection);
+        return StreamUtility.toIterable(wordStream());
     }
 
     private Stream<String> wordStream() {
