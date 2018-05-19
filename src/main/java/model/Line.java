@@ -30,10 +30,13 @@ public final class Line {
      * 초기 내용을 가지는 문장을 생성합니다.
      * @param text 초기 내용으로 설정할 문자열입니다.
      * @throws NullPointerException 매개변수가 null이면 발생합니다.
+     * @throws IllegalArgumentException 매개변수가 두 문장으로 구성되어 있으면 발생합니다.
      */
     public Line(String text) {
         if (text == null) {
             throw new NullPointerException();
+        } else if (text.split("\n").length > 1) {
+            throw new IllegalArgumentException();
         }
 
         buffer = new StringBuffer(text);

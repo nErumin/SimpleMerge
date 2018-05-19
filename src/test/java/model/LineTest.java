@@ -14,6 +14,11 @@ public class LineTest {
         final Line line = new Line(null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lineCreationWithMultiSentenceTest() {
+        final Line line = new Line("Hello. \n Hello. ");
+    }
+
     @Test
     public void emptyLineLengthTest() {
         final String originalContent = "";
@@ -53,7 +58,7 @@ public class LineTest {
 
     @Test
     public void multiWordsLineLengthTest() {
-        final String originalContent = "Hello, \t World!\n \r\t \n\n \t\r\n";
+        final String originalContent = "Hello, \t World!\r\t \t\r \n\n\n\n";
         final Line line = new Line(originalContent);
 
         Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
@@ -61,7 +66,7 @@ public class LineTest {
 
     @Test
     public void multiWordsLineConvertTest() {
-        final String originalContent = "Hello, \t \t World!";
+        final String originalContent = "Hello, \t World!\r\t \t\r \n\n\n\n";
         final Line line = new Line(originalContent);
         final String lineContent = line.toString();
 
@@ -70,7 +75,7 @@ public class LineTest {
 
     @Test
     public void multiWordsLineWordTest() {
-        final String originalContent = "Hello, \t World!\n \r\t \n\n \t\r\n";
+        final String originalContent = "Hello, \t World!\r\t \t\r \n\n\n\n";
         final Line line = new Line(originalContent);
 
         final List<String> words = new ArrayList<>();
@@ -83,7 +88,7 @@ public class LineTest {
 
     @Test
     public void multiWordsLineSpaceWordTest() {
-        final String originalContent = "Hello, \t World!\n \r\t \n\n \t\r\n";
+        final String originalContent = "Hello, \t World!\r\t \t\r \n\n\n\n";
         final Line line = new Line(originalContent);
 
         final List<String> words = new ArrayList<>();
@@ -92,12 +97,12 @@ public class LineTest {
         Assert.assertThat(words.size(), is(equalTo(2)));
         Assert.assertThat(words.get(0), is(equalTo("Hello, \t ")));
         Assert.assertThat(words.get(1),
-            is(equalTo("World!\n \r\t \n\n \t\r\n")));
+            is(equalTo("World!\r\t \t\r \n\n\n\n")));
     }
 
     @Test
     public void singleWordLineLengthTest() {
-        final String originalContent = "Hello \t\n \r\t \n\n\n \t\r \r\n";
+        final String originalContent = "Hello \t \r\t \r\r \t \n\n\n";
         final Line line = new Line(originalContent);
 
         Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
@@ -105,7 +110,7 @@ public class LineTest {
 
     @Test
     public void singleWordLineConvertTest() {
-        final String originalContent = "Hello \t\n \r\t \n\n\n \t\r \r\n";
+        final String originalContent = "Hello \t \r\t \r\r \t \n\n\n";
         final Line line = new Line(originalContent);
         final String lineContent = line.toString();
 
@@ -114,7 +119,7 @@ public class LineTest {
 
     @Test
     public void singleWordLineWordTest() {
-        final String originalContent = "Hello \t\n \r\t \n\n\n \t\r \r\n";
+        final String originalContent = "Hello \t \r\t \r\r \t \n\n\n";
         final Line line = new Line(originalContent);
 
         final List<String> words = new ArrayList<>();
@@ -126,7 +131,7 @@ public class LineTest {
 
     @Test
     public void singleWordLineSpaceWordTest() {
-        final String originalContent = "Hello \t\n \r\t \n\n\n \t\r \r\n";
+        final String originalContent = "Hello \t \r\t \r\r \t \n\n\n";
         final Line line = new Line(originalContent);
 
         final List<String> words = new ArrayList<>();
@@ -134,6 +139,6 @@ public class LineTest {
 
         Assert.assertThat(words.size(), is(equalTo(1)));
         Assert.assertThat(words.get(0),
-            is(equalTo("Hello \t\n \r\t \n\n\n \t\r \r\n")));
+            is(equalTo("Hello \t \r\t \r\r \t \n\n\n")));
     }
 }
