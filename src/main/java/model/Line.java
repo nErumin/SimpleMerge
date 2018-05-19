@@ -53,7 +53,8 @@ public final class Line {
 
     private Stream<String> wordStream() {
         return spaceIncludingWordStream()
-            .flatMap(word -> Arrays.stream(word.split(PURE_REGEX)));
+            .flatMap(word -> Arrays.stream(word.split(PURE_REGEX)))
+            .filter(word -> !word.equals(StringUtility.EMPTY_STRING));
     }
 
     /**
