@@ -52,6 +52,14 @@ public final class Line {
             .flatMap(word -> Arrays.stream(word.split(PURE_REGEX)));
     }
 
+    /**
+     * 이 문장에서 공백 문자를 포함하는 단어에 대한 열거자를 가져옵니다.
+     * @return 문장에 존재하는 공백 문자 포함 단어들의 열거자입니다.
+     */
+    public Iterable<String> spaceIncludingWords() {
+        return StreamUtility.toIterable(spaceIncludingWordStream());
+    }
+
     private Stream<String> spaceIncludingWordStream() {
         final Matcher wordMatcher = splitPattern.matcher(toString());
         final List<String> words = new ArrayList<>();
