@@ -305,4 +305,59 @@ public class LineTest {
         Assert.assertThat(line.toString(),
             is(equalTo(originalContent + "Wor  ld  \t!")));
     }
+
+    @Test
+    public void emptyReplacingTest() {
+        final String originalContent = "Hello \t";
+        final Line line = new Line(originalContent);
+
+        line.replace(0, StringUtility.EMPTY_STRING);
+        Assert.assertThat(line.toString(), is(equalTo("Hello \t")));
+    }
+
+    @Test
+    public void singleWordReplacingTest() {
+        final String originalContent = "Hello \tWorld!";
+        final Line line = new Line(originalContent);
+
+        // index 7 = start point of 'World!'
+        line.replace(7, "Universe!");
+        Assert.assertThat(line.toString(), is(equalTo("Hello \tUniverse!")));
+    }
+
+    @Test
+    public void multipleWordReplacingTest() {
+        final String originalContent = "Hello \tWorld!";
+        final Line line = new Line(originalContent);
+
+        // index 5 = start point of ' '
+        line.replace(5, "!, this is a pencil!");
+        Assert.assertThat(line.toString(), is(equalTo("Hello!, this is a pencil!")));
+    }
+
+    @Test
+    public void spaceReplacingTest() {
+        final String originalContent = "Hello,\tWorld!";
+        final Line line = new Line(originalContent);
+
+        // index 6 = start point of '\t'
+        line.replace(6, " ");
+        Assert.assertThat(line.toString(), is(equalTo("Hello, World!")));
+    }
+
+    @Test
+    public void spaceToWordReplacedTest() {
+        final String originalContent = "\tABCD   EFGH\n";
+        final Line line = new Line(originalContent);
+
+        line.replace(6, "X");
+
+        final List<String> words = new ArrayList<>();
+        line.words().forEach(words::add);
+
+        Assert.assertThat(words.size(), is(equalTo(3)));
+        Assert.assertThat(words.get(0), is(equalTo("ABCD")));
+        Assert.assertThat(words.get(1), is(equalTo("X")));
+        Assert.assertThat(words.get(2), is(equalTo("EFGH")));
+    }
 }

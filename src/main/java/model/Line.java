@@ -77,6 +77,24 @@ public final class Line {
     }
 
     /**
+     * 문장의 특정 영역을 교체합니다.
+     * @param startIndex 교체를 시작할 문장 내 위치입니다.
+     * @param replacingString 해당 위치부터 교체할 문자열입니다.
+     * @throws StringIndexOutOfBoundsException startIndex가 음수거나, 문장의 길이를 벗어나면 발생합니다.
+     */
+    public void replace(int startIndex, String replacingString) {
+        if (startIndex < 0 || startIndex >= length()) {
+            throw new StringIndexOutOfBoundsException();
+        }
+
+        // startIndex = inclusive, endIndex = exclusive
+        int endIndex = startIndex + replacingString.length();
+
+        buffer.ensureCapacity(endIndex);
+        buffer.replace(startIndex, endIndex, replacingString);
+    }
+
+    /**
      * 이 문장의 끝에 새로운 내용을 추가합니다.
      * @param addedString 새롭게 추가할 내용입니다.
      */
