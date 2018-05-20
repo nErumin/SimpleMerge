@@ -216,6 +216,48 @@ public final class Text {
     }
 
     /**
+     * 주어진 위치에서 가장 가까운 문장을 가져옵니다.
+     * @param position 검색할 위치를 나타냅니다.
+     * @return 주어진 위치에서 가장 가까운 문장입니다.
+     * @throws IllegalArgumentException 위치가 음수면 발생합니다.
+     */
+    public String findNearestLine(int position) {
+        return findNearestString(newLineIncludingLines(), position);
+    }
+
+    /**
+     * 주어진 위치에서 가장 가까운 단어를 가져옵니다.
+     * @param position 검색할 위치를 나타냅니다.
+     * @return 주어진 위치에서 가장 가까운 단어입니다.
+     * @throws IllegalArgumentException 위치가 음수면 발생합니다.
+     */
+    public String findNearestWord(int position) {
+        return findNearestString(spaceIncludingWords(), position);
+    }
+
+    private String findNearestString(Iterable<String> iterableString,
+                                     int position) {
+        if (position < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        int remainPosition = position;
+        String nearestString = StringUtility.EMPTY_STRING;
+
+        for (String string : iterableString) {
+            nearestString = string;
+
+            if (remainPosition - string.length() < 0) {
+                break;
+            }
+
+            remainPosition -= string.length();
+        }
+
+        return nearestString;
+    }
+
+    /**
      * 두 텍스트의 동일 여부에 대해 질의합니다.
      * @param obj 질의할 객체를 나타냅니다.
      * @return 두 텍스트의 동일 여부입니다.

@@ -732,4 +732,54 @@ public class TextTest {
         Assert.assertThat(lines.get(2),
             is(equalTo(" ")));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void negativePosNearestLineTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        text.findNearestLine(-4);
+    }
+
+    @Test
+    public void nearestLineTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        Assert.assertThat(text.findNearestLine(0),
+            is(equalTo("Hello, World!\n\n")));
+
+        Assert.assertThat(text.findNearestLine(5),
+            is(equalTo("Hello, World!\n\n")));
+
+        Assert.assertThat(text.findNearestLine(14),
+            is(equalTo("Hello, World!\n\n")));
+
+        Assert.assertThat(text.findNearestLine(15),
+            is(equalTo("Hello, Universe!")));
+
+        Assert.assertThat(text.findNearestLine(100),
+            is(equalTo("Hello, Universe!")));
+    }
+
+    @Test
+    public void nearestWordTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        Assert.assertThat(text.findNearestWord(0),
+            is(equalTo("Hello, ")));
+
+        Assert.assertThat(text.findNearestWord(7),
+            is(equalTo("World!\n\n")));
+
+        Assert.assertThat(text.findNearestWord(10),
+            is(equalTo("World!\n\n")));
+
+        Assert.assertThat(text.findNearestWord(15),
+            is(equalTo("Hello, ")));
+
+        Assert.assertThat(text.findNearestWord(21),
+            is(equalTo("Hello, ")));
+
+        Assert.assertThat(text.findNearestWord(22),
+            is(equalTo("Universe!")));
+    }
 }
