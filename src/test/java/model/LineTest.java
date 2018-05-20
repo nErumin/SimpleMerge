@@ -428,4 +428,68 @@ public class LineTest {
 
         line.insert(15, "Hello!");
     }
+
+    @Test
+    public void emptyDeletionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.delete(0, 0);
+        Assert.assertThat(line.toString(), is(equalTo(originalContent)));
+    }
+
+    @Test
+    public void singleCharDeletionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.delete(5, 1);
+        Assert.assertThat(line.toString(), is(equalTo("Hello World")));
+    }
+
+    @Test
+    public void wordDeletionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.delete(5, 7);
+        Assert.assertThat(line.toString(), is(equalTo("Hello")));
+    }
+
+    @Test
+    public void overLengthDeletionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.delete(5, 100);
+        Assert.assertThat(line.toString(), is(equalTo("Hello")));
+    }
+
+    @Test
+    public void deleteAllTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.delete(0, 100);
+        Assert.assertThat(line.toString(),
+            is(equalTo(StringUtility.EMPTY_STRING)));
+    }
+
+    @Test(expected = StringIndexOutOfBoundsException.class)
+    public void negativePosDeletionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.delete(-1, 10);
+    }
+
+    @Test(expected = StringIndexOutOfBoundsException.class)
+    public void overLengthPosDeletionTest() {
+        final String originalContent = "Hello, World";
+        final Line line = new Line(originalContent);
+
+        line.delete(15, 10);
+    }
+
+
 }

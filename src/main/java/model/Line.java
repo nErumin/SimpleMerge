@@ -96,6 +96,25 @@ public final class Line {
     }
 
     /**
+     * 문장의 특정 영역을 지웁니다.
+     * @param startIndex 삭제를 시작할 위치입니다.
+     * @param length 삭제할 영역의 길이를 나타냅니다.
+     * @throws StringIndexOutOfBoundsException startIndex가 음수거나, 문장의 길이를 벗어나면 발생합니다.
+     * @throws IllegalArgumentException length가 음수면 발생합니다.
+     */
+    public void delete(int startIndex, int length) {
+        if (startIndex < 0 || startIndex > length()) {
+            throw new StringIndexOutOfBoundsException();
+        }
+
+        if (length < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        buffer.delete(startIndex, startIndex + length);
+    }
+
+    /**
      * 문장의 특정 영역을 교체합니다.
      * @param startIndex 교체를 시작할 문장 내 위치입니다.
      * @param replacingString 해당 위치부터 교체할 문자열입니다.
