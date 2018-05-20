@@ -14,9 +14,18 @@ import java.util.stream.Stream;
  * 텍스트의 한 문장을 나타내는 클래스입니다.
  */
 public final class Text {
-    private static final String SPLIT_REGEX = "\\s*\\S+\\s*";
-    private static final String PURE_REGEX = "\\s+";
-    private static final Pattern splitPattern = Pattern.compile(SPLIT_REGEX);
+    private static final String WORD_SPLIT_REGEX = "\\s*\\S+\\s*";
+    private static final String EXTRACT_PURE_WORD_REGEX = "\\s+";
+    private static final String LINE_SPLIT_REGEX =
+        String.format("%s*[^%s]+%s*", StringUtility.LINE_SEPARATOR
+                                    , StringUtility.LINE_SEPARATOR
+                                    , StringUtility.LINE_SEPARATOR);
+    private static final String EXTRACT_PURE_LINE_REGEX =
+        String.format("[%s]+", StringUtility.LINE_SEPARATOR);
+    private static final Pattern wordSplitPattern =
+        Pattern.compile(WORD_SPLIT_REGEX);
+    private static final Pattern lineSplitPattern =
+        Pattern.compile(LINE_SPLIT_REGEX);
 
     private StringBuffer buffer;
 
@@ -31,13 +40,10 @@ public final class Text {
      * 초기 내용을 가지는 문장을 생성합니다.
      * @param text 초기 내용으로 설정할 문자열입니다.
      * @throws NullPointerException 매개변수가 null이면 발생합니다.
-     * @throws IllegalArgumentException 매개변수가 두 문장으로 구성되어 있으면 발생합니다.
      */
     public Text(String text) {
         if (text == null) {
             throw new NullPointerException();
-        } else if (text.split(StringUtility.LINE_SEPARATOR).length > 1) {
-            throw new IllegalArgumentException();
         }
 
         buffer = new StringBuffer(text);
@@ -53,7 +59,7 @@ public final class Text {
 
     private Stream<String> wordStream() {
         return spaceIncludingWordStream()
-            .flatMap(word -> Arrays.stream(word.split(PURE_REGEX)))
+            .flatMap(word -> Arrays.stream(word.split(EXTRACT_PURE_WORD_REGEX)))
             .filter(word -> !word.equals(StringUtility.EMPTY_STRING));
     }
 
@@ -66,7 +72,7 @@ public final class Text {
     }
 
     private Stream<String> spaceIncludingWordStream() {
-        final Matcher wordMatcher = splitPattern.matcher(toString());
+        final Matcher wordMatcher = wordSplitPattern.matcher(toString());
         final List<String> words = new ArrayList<>();
 
         while (wordMatcher.find()) {
@@ -75,6 +81,7 @@ public final class Text {
 
         return words.stream();
     }
+
 
     /**
      * 문장의 특정 위치에 문자열을 삽입합니다.
@@ -135,8 +142,13 @@ public final class Text {
     /**
      * 이 문장의 끝에 새로운 내용을 추가합니다.
      * @param addedString 새롭게 추가할 내용입니다.
+     * @throws NullPointerException 매개변수가 null이면 발생합니다.
      */
     public void append(String addedString) {
+        if (addedString == null) {
+            throw new NullPointerException();
+        }
+
         buffer.append(addedString);
     }
 

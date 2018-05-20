@@ -121,7 +121,7 @@ public class TextTest {
         final List<String> words = new ArrayList<>();
         text.words().forEach(words::add);
 
-        Assert.assertThat(words.size(), is(equalTo(2)));
+        Assert.assertThat(words.size(), is(equalTo(3)));
         Assert.assertThat(words.get(0), is(equalTo("Hello,")));
         Assert.assertThat(words.get(1), is(equalTo("World!")));
     }
@@ -273,6 +273,12 @@ public class TextTest {
         Assert.assertThat(words.size(), is(equalTo(1)));
         Assert.assertThat(words.get(0),
             is(equalTo("\r \tHello \t \r\t \r\r \t \n\n\n")));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void nullAppendTest() {
+        final Text text = new Text();
+        text.append(null);
     }
 
     @Test
