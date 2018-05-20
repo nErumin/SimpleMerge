@@ -9,117 +9,117 @@ import utility.StringUtility;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineTest {
+public class TextTest {
     @Test(expected = NullPointerException.class)
-    public void lineCreationWithNullTest() {
-        final Line line = new Line(null);
+    public void textCreationWithNullTest() {
+        final Text text = new Text(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void lineCreationWithMultiSentenceTest() {
-        final Line line = new Line("Hello. \n Hello. ");
+    public void textCreationWithMultiSentenceTest() {
+        final Text text = new Text("Hello. \n Hello. ");
     }
 
     @Test
-    public void emptyLineLengthTest() {
+    public void emptyTextLengthTest() {
         final String originalContent = StringUtility.EMPTY_STRING;
-        final Line line = new Line();
+        final Text text = new Text();
 
-        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
+        Assert.assertThat(text.length(), is(equalTo(originalContent.length())));
     }
 
     @Test
-    public void emptyLineConvertTest() {
+    public void emptyTextConvertTest() {
         final String originalContent = StringUtility.EMPTY_STRING;
-        final Line line = new Line();
-        final String lineContent = line.toString();
+        final Text text = new Text();
+        final String textContent = text.toString();
 
-        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+        Assert.assertThat(textContent, is(equalTo(originalContent)));
     }
 
     @Test
-    public void emptyLineWordTest() {
-        final Line line = new Line();
+    public void emptyTextWordTest() {
+        final Text text = new Text();
 
         final List<String> words = new ArrayList<>();
-        line.words().forEach(words::add);
+        text.words().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(0)));
     }
 
     @Test
-    public void emptyLineSpaceWordTest() {
-        final Line line = new Line();
+    public void emptyTextSpaceWordTest() {
+        final Text text = new Text();
 
         final List<String> words = new ArrayList<>();
-        line.spaceIncludingWords().forEach(words::add);
+        text.spaceIncludingWords().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(0)));
     }
 
     @Test
-    public void onlySpaceLineLengthTest() {
+    public void onlySpaceTextLengthTest() {
         final String originalContent = "    \t    ";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
+        Assert.assertThat(text.length(), is(equalTo(originalContent.length())));
     }
 
     @Test
-    public void onlySpaceLineConvertTest() {
+    public void onlySpaceTextConvertTest() {
         final String originalContent = "    \t    ";
-        final Line line = new Line(originalContent);
-        final String lineContent = line.toString();
+        final Text text = new Text(originalContent);
+        final String textContent = text.toString();
 
-        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+        Assert.assertThat(textContent, is(equalTo(originalContent)));
     }
 
     @Test
-    public void onlySpaceLineWordTest() {
+    public void onlySpaceTextWordTest() {
         final String originalContent = "    \t    ";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.words().forEach(words::add);
+        text.words().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(0)));
     }
 
     @Test
-    public void onlySpaceLineSpaceWordTest() {
+    public void onlySpaceTextSpaceWordTest() {
         final String originalContent = "    \t    ";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.spaceIncludingWords().forEach(words::add);
+        text.spaceIncludingWords().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(0)));
     }
 
     @Test
-    public void multiWordsLineLengthTest() {
+    public void multiWordsTextLengthTest() {
         final String originalContent = "Hello, \t World!\r\t \t\r \n\n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
+        Assert.assertThat(text.length(), is(equalTo(originalContent.length())));
     }
 
     @Test
-    public void multiWordsLineConvertTest() {
+    public void multiWordsTextConvertTest() {
         final String originalContent = "Hello, \t World!\r\t \t\r \n\n\n\n";
-        final Line line = new Line(originalContent);
-        final String lineContent = line.toString();
+        final Text text = new Text(originalContent);
+        final String textContent = text.toString();
 
-        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+        Assert.assertThat(textContent, is(equalTo(originalContent)));
     }
 
     @Test
-    public void multiWordsLineWordTest() {
+    public void multiWordsTextWordTest() {
         final String originalContent = "Hello, \t World!\r\t \t\r \n\n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.words().forEach(words::add);
+        text.words().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(2)));
         Assert.assertThat(words.get(0), is(equalTo("Hello,")));
@@ -127,12 +127,12 @@ public class LineTest {
     }
 
     @Test
-    public void multiWordsLineSpaceWordTest() {
+    public void multiWordsTextSpaceWordTest() {
         final String originalContent = "Hello, \t World!\r\t \t\r \n\n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.spaceIncludingWords().forEach(words::add);
+        text.spaceIncludingWords().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(2)));
         Assert.assertThat(words.get(0), is(equalTo("Hello, \t ")));
@@ -142,33 +142,33 @@ public class LineTest {
 
 
     @Test
-    public void spacePrefixedMultiWordsLineLengthTest() {
+    public void spacePrefixedMultiWordsTextLengthTest() {
         final String originalContent =
             " \t Hello, \t World!\r\t \t\r \n\n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        Assert.assertThat(line.length(),
+        Assert.assertThat(text.length(),
             is(equalTo(originalContent.length())));
     }
 
     @Test
-    public void spacePrefixedMultiWordsLineConvertTest() {
+    public void spacePrefixedMultiWordsTextConvertTest() {
         final String originalContent =
             " \r Hello, \t World!\r\t \t\r \n\n\n\n";
-        final Line line = new Line(originalContent);
-        final String lineContent = line.toString();
+        final Text text = new Text(originalContent);
+        final String textContent = text.toString();
 
-        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+        Assert.assertThat(textContent, is(equalTo(originalContent)));
     }
 
     @Test
-    public void spacePrefixedMultiWordsLineWordTest() {
+    public void spacePrefixedMultiWordsTextWordTest() {
         final String originalContent =
             " \r\t Hello, \t World!\r\t \t\r \n\n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.words().forEach(words::add);
+        text.words().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(2)));
         Assert.assertThat(words.get(0), is(equalTo("Hello,")));
@@ -176,13 +176,13 @@ public class LineTest {
     }
 
     @Test
-    public void spacePrefixedMultiWordsLineSpaceWordTest() {
+    public void spacePrefixedMultiWordsTextSpaceWordTest() {
         final String originalContent =
             " \r\t Hello, \t World!\r\t \t\r \n\n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.spaceIncludingWords().forEach(words::add);
+        text.spaceIncludingWords().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(2)));
         Assert.assertThat(words.get(0),
@@ -192,41 +192,41 @@ public class LineTest {
     }
 
     @Test
-    public void singleWordLineLengthTest() {
+    public void singleWordTextLengthTest() {
         final String originalContent = "Hello \t \r\t \r\r \t \n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
+        Assert.assertThat(text.length(), is(equalTo(originalContent.length())));
     }
 
     @Test
-    public void singleWordLineConvertTest() {
+    public void singleWordTextConvertTest() {
         final String originalContent = "Hello \t \r\t \r\r \t \n\n\n";
-        final Line line = new Line(originalContent);
-        final String lineContent = line.toString();
+        final Text text = new Text(originalContent);
+        final String textContent = text.toString();
 
-        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+        Assert.assertThat(textContent, is(equalTo(originalContent)));
     }
 
     @Test
-    public void singleWordLineWordTest() {
+    public void singleWordTextWordTest() {
         final String originalContent = "Hello \t \r\t \r\r \t \n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.words().forEach(words::add);
+        text.words().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(1)));
         Assert.assertThat(words.get(0), is(equalTo("Hello")));
     }
 
     @Test
-    public void singleWordLineSpaceWordTest() {
+    public void singleWordTextSpaceWordTest() {
         final String originalContent = "Hello \t \r\t \r\r \t \n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.spaceIncludingWords().forEach(words::add);
+        text.spaceIncludingWords().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(1)));
         Assert.assertThat(words.get(0),
@@ -234,41 +234,41 @@ public class LineTest {
     }
 
     @Test
-    public void spacePrefixedSingleWordLineLengthTest() {
+    public void spacePrefixedSingleWordTextLengthTest() {
         final String originalContent = "\r  \tHello \t \r\t \r\r \t \n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        Assert.assertThat(line.length(), is(equalTo(originalContent.length())));
+        Assert.assertThat(text.length(), is(equalTo(originalContent.length())));
     }
 
     @Test
-    public void spacePrefixedSingleWordLineConvertTest() {
+    public void spacePrefixedSingleWordTextConvertTest() {
         final String originalContent = "\r \tHello \t \r\t \r\r \t \n\n\n";
-        final Line line = new Line(originalContent);
-        final String lineContent = line.toString();
+        final Text text = new Text(originalContent);
+        final String textContent = text.toString();
 
-        Assert.assertThat(lineContent, is(equalTo(originalContent)));
+        Assert.assertThat(textContent, is(equalTo(originalContent)));
     }
 
     @Test
-    public void spacePrefixedSingleWordLineWordTest() {
+    public void spacePrefixedSingleWordTextWordTest() {
         final String originalContent = "\r \tHello \t \r\t \r\r \t \n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.words().forEach(words::add);
+        text.words().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(1)));
         Assert.assertThat(words.get(0), is(equalTo("Hello")));
     }
 
     @Test
-    public void spacePrefixedSingleWordLineSpaceWordTest() {
+    public void spacePrefixedSingleWordTextSpaceWordTest() {
         final String originalContent = "\r \tHello \t \r\t \r\r \t \n\n\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         final List<String> words = new ArrayList<>();
-        line.spaceIncludingWords().forEach(words::add);
+        text.spaceIncludingWords().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(1)));
         Assert.assertThat(words.get(0),
@@ -278,106 +278,106 @@ public class LineTest {
     @Test
     public void emptyAppendTest() {
         final String originalContent = "Hello \t";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.append(StringUtility.EMPTY_STRING);
-        Assert.assertThat(line.toString(), is(equalTo(originalContent)));
+        text.append(StringUtility.EMPTY_STRING);
+        Assert.assertThat(text.toString(), is(equalTo(originalContent)));
     }
 
     @Test
     public void singleAppendTest() {
         final String originalContent = " Hello \t";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.append("World!");
+        text.append("World!");
 
-        Assert.assertThat(line.toString(),
+        Assert.assertThat(text.toString(),
             is(equalTo(originalContent + "World!")));
     }
 
     @Test
     public void multipleWordAppendTest() {
         final String originalContent = "Hello \t";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.append("Wor  ld  \t!");
+        text.append("Wor  ld  \t!");
 
-        Assert.assertThat(line.toString(),
+        Assert.assertThat(text.toString(),
             is(equalTo(originalContent + "Wor  ld  \t!")));
     }
 
     @Test(expected = NullPointerException.class)
     public void nullReplacingTest() {
         final String originalContent = "Hello \t";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.replace(0, null);
+        text.replace(0, null);
     }
 
     @Test(expected = StringIndexOutOfBoundsException.class)
     public void negativePosReplacingTest() {
         final String originalContent = "Hello \t";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.replace(-1, "World!");
+        text.replace(-1, "World!");
     }
 
     @Test(expected = StringIndexOutOfBoundsException.class)
     public void overLengthPosReplacingTest() {
         final String originalContent = "Hello \t";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.replace(100, "Hello!");
+        text.replace(100, "Hello!");
     }
 
     @Test
     public void emptyReplacingTest() {
         final String originalContent = "Hello \t";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.replace(0, StringUtility.EMPTY_STRING);
-        Assert.assertThat(line.toString(), is(equalTo("Hello \t")));
+        text.replace(0, StringUtility.EMPTY_STRING);
+        Assert.assertThat(text.toString(), is(equalTo("Hello \t")));
     }
 
     @Test
     public void singleWordReplacingTest() {
         final String originalContent = "Hello \tWorld!";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         // index 7 = start point of 'World!'
-        line.replace(7, "Universe!");
-        Assert.assertThat(line.toString(), is(equalTo("Hello \tUniverse!")));
+        text.replace(7, "Universe!");
+        Assert.assertThat(text.toString(), is(equalTo("Hello \tUniverse!")));
     }
 
     @Test
     public void multipleWordReplacingTest() {
         final String originalContent = "Hello \tWorld!";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         // index 5 = start point of ' '
-        line.replace(5, "!, this is a pencil!");
-        Assert.assertThat(line.toString(), is(equalTo("Hello!, this is a pencil!")));
+        text.replace(5, "!, this is a pencil!");
+        Assert.assertThat(text.toString(), is(equalTo("Hello!, this is a pencil!")));
     }
 
     @Test
     public void spaceReplacingTest() {
         final String originalContent = "Hello,\tWorld!";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         // index 6 = start point of '\t'
-        line.replace(6, " ");
-        Assert.assertThat(line.toString(), is(equalTo("Hello, World!")));
+        text.replace(6, " ");
+        Assert.assertThat(text.toString(), is(equalTo("Hello, World!")));
     }
 
     @Test
     public void spaceToWordReplacedTest() {
         final String originalContent = "\tABCD   EFGH\n";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.replace(6, "X");
+        text.replace(6, "X");
 
         final List<String> words = new ArrayList<>();
-        line.words().forEach(words::add);
+        text.words().forEach(words::add);
 
         Assert.assertThat(words.size(), is(equalTo(3)));
         Assert.assertThat(words.get(0), is(equalTo("ABCD")));
@@ -388,107 +388,107 @@ public class LineTest {
     @Test
     public void emptyInsertionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.insert(0, StringUtility.EMPTY_STRING);
-        Assert.assertThat(line.toString(), is(equalTo(originalContent)));
+        text.insert(0, StringUtility.EMPTY_STRING);
+        Assert.assertThat(text.toString(), is(equalTo(originalContent)));
     }
 
     @Test
     public void wordInsertionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
         // index 6 = start point of ' '
-        line.insert(6, " this is");
-        Assert.assertThat(line.toString(),
+        text.insert(6, " this is");
+        Assert.assertThat(text.toString(),
             is(equalTo("Hello, this is World")));
     }
 
     @Test(expected = NullPointerException.class)
     public void nullInsertionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.insert(0, null);
+        text.insert(0, null);
     }
 
     @Test(expected = StringIndexOutOfBoundsException.class)
     public void negativePosInsertionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.insert(-1, "Hello!");
+        text.insert(-1, "Hello!");
     }
 
     @Test(expected = StringIndexOutOfBoundsException.class)
     public void overLengthPosInsertionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.insert(15, "Hello!");
+        text.insert(15, "Hello!");
     }
 
     @Test
     public void emptyDeletionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.delete(0, 0);
-        Assert.assertThat(line.toString(), is(equalTo(originalContent)));
+        text.delete(0, 0);
+        Assert.assertThat(text.toString(), is(equalTo(originalContent)));
     }
 
     @Test
     public void singleCharDeletionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.delete(5, 1);
-        Assert.assertThat(line.toString(), is(equalTo("Hello World")));
+        text.delete(5, 1);
+        Assert.assertThat(text.toString(), is(equalTo("Hello World")));
     }
 
     @Test
     public void wordDeletionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.delete(5, 7);
-        Assert.assertThat(line.toString(), is(equalTo("Hello")));
+        text.delete(5, 7);
+        Assert.assertThat(text.toString(), is(equalTo("Hello")));
     }
 
     @Test
     public void overLengthDeletionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.delete(5, 100);
-        Assert.assertThat(line.toString(), is(equalTo("Hello")));
+        text.delete(5, 100);
+        Assert.assertThat(text.toString(), is(equalTo("Hello")));
     }
 
     @Test
     public void deleteAllTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.delete(0, 100);
-        Assert.assertThat(line.toString(),
+        text.delete(0, 100);
+        Assert.assertThat(text.toString(),
             is(equalTo(StringUtility.EMPTY_STRING)));
     }
 
     @Test(expected = StringIndexOutOfBoundsException.class)
     public void negativePosDeletionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.delete(-1, 10);
+        text.delete(-1, 10);
     }
 
     @Test(expected = StringIndexOutOfBoundsException.class)
     public void overLengthPosDeletionTest() {
         final String originalContent = "Hello, World";
-        final Line line = new Line(originalContent);
+        final Text text = new Text(originalContent);
 
-        line.delete(15, 10);
+        text.delete(15, 10);
     }
 
 

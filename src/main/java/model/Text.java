@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 /**
  * 텍스트의 한 문장을 나타내는 클래스입니다.
  */
-public final class Line {
+public final class Text {
     private static final String SPLIT_REGEX = "\\s*\\S+\\s*";
     private static final String PURE_REGEX = "\\s+";
     private static final Pattern splitPattern = Pattern.compile(SPLIT_REGEX);
@@ -23,7 +23,7 @@ public final class Line {
     /**
      * 빈 내용을 가지는 문장을 생성합니다.
      */
-    public Line() {
+    public Text() {
         this(StringUtility.EMPTY_STRING);
     }
 
@@ -33,7 +33,7 @@ public final class Line {
      * @throws NullPointerException 매개변수가 null이면 발생합니다.
      * @throws IllegalArgumentException 매개변수가 두 문장으로 구성되어 있으면 발생합니다.
      */
-    public Line(String text) {
+    public Text(String text) {
         if (text == null) {
             throw new NullPointerException();
         } else if (text.split(StringUtility.LINE_SEPARATOR).length > 1) {
