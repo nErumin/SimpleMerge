@@ -595,4 +595,141 @@ public class TextTest {
             is(equalTo("Hello, World!\n\nHello, Universe!")));
 
     }
+
+    @Test
+    public void emptyTextDecomposeTest() {
+        final Text text = new Text();
+
+        final List<String> lines = new ArrayList<>();
+        text.lines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(0)));
+    }
+
+    @Test
+    public void onlySpaceTextDecomposeTest() {
+        final Text text = new Text(" \t \n \r\t \n \t");
+
+        final List<String> lines = new ArrayList<>();
+        text.lines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(3)));
+        Assert.assertThat(lines.get(0), is(equalTo(" \t ")));
+        Assert.assertThat(lines.get(1), is(equalTo(" \r\t ")));
+        Assert.assertThat(lines.get(2), is(equalTo(" \t")));
+    }
+
+    @Test
+    public void onlySpaceTextSpaceDecomposeTest() {
+        final Text text = new Text(" \t \n \r\t \n \t");
+
+        final List<String> lines = new ArrayList<>();
+        text.newLineIncludingLines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(3)));
+        Assert.assertThat(lines.get(0), is(equalTo(" \t \n")));
+        Assert.assertThat(lines.get(1), is(equalTo(" \r\t \n")));
+        Assert.assertThat(lines.get(2), is(equalTo(" \t")));
+    }
+
+    @Test
+    public void singleLineTextDecomposeTest() {
+        final Text text = new Text("Hello, World!\n");
+
+        final List<String> lines = new ArrayList<>();
+        text.lines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(1)));
+        Assert.assertThat(lines.get(0), is(equalTo("Hello, World!")));
+    }
+
+    @Test
+    public void singleLineTextSpaceDecomposeTest() {
+        final Text text = new Text("Hello, World!\n");
+
+        final List<String> lines = new ArrayList<>();
+        text.newLineIncludingLines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(1)));
+        Assert.assertThat(lines.get(0), is(equalTo("Hello, World!\n")));
+    }
+
+    @Test
+    public void spacePrefixedSingleLineTextDecomposeTest() {
+        final Text text = new Text("\n\n  Hello, World!\n");
+
+        final List<String> lines = new ArrayList<>();
+        text.lines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(1)));
+        Assert.assertThat(lines.get(0),
+            is(equalTo("  Hello, World!")));
+    }
+
+    @Test
+    public void spacePrefixedSingleLineTextSpaceDecomposeTest() {
+        final Text text = new Text("\n\n  Hello, World!\n");
+
+        final List<String> lines = new ArrayList<>();
+        text.newLineIncludingLines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(1)));
+        Assert.assertThat(lines.get(0),
+            is(equalTo("\n\n  Hello, World!\n")));
+    }
+
+    @Test
+    public void multiLineTextDecomposeTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        final List<String> lines = new ArrayList<>();
+        text.lines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(2)));
+        Assert.assertThat(lines.get(0), is(equalTo("Hello, World!")));
+        Assert.assertThat(lines.get(1), is(equalTo("Hello, Universe!")));
+    }
+
+    @Test
+    public void multiLineTextSpaceDecomposeTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!\n\n ");
+
+        final List<String> lines = new ArrayList<>();
+        text.newLineIncludingLines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(3)));
+        Assert.assertThat(lines.get(0), is(equalTo("Hello, World!\n\n")));
+        Assert.assertThat(lines.get(1), is(equalTo("Hello, Universe!\n\n")));
+        Assert.assertThat(lines.get(2), is(equalTo(" ")));
+    }
+
+    @Test
+    public void spacePrefixedMultiLineTextDecomposeTest() {
+        final Text text = new Text("\n\n Hello, World!\n\nHello, Universe!");
+
+        final List<String> lines = new ArrayList<>();
+        text.lines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(2)));
+        Assert.assertThat(lines.get(0),
+            is(equalTo(" Hello, World!")));
+        Assert.assertThat(lines.get(1),
+            is(equalTo("Hello, Universe!")));
+    }
+
+    @Test
+    public void spacePrefixedMultiLineTextSpaceDecomposeTest() {
+        final Text text = new Text("\n\n Hello, World!\n\nHello, Universe!\n\n ");
+
+        final List<String> lines = new ArrayList<>();
+        text.newLineIncludingLines().forEach(lines::add);
+
+        Assert.assertThat(lines.size(), is(equalTo(3)));
+        Assert.assertThat(lines.get(0),
+            is(equalTo("\n\n Hello, World!\n\n")));
+        Assert.assertThat(lines.get(1),
+            is(equalTo("Hello, Universe!\n\n")));
+        Assert.assertThat(lines.get(2),
+            is(equalTo(" ")));
+    }
 }

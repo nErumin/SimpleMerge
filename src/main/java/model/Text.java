@@ -22,10 +22,6 @@ public final class Text {
                                     , StringUtility.LINE_SEPARATOR);
     private static final String EXTRACT_PURE_LINE_REGEX =
         String.format("[%s]+", StringUtility.LINE_SEPARATOR);
-    private static final Pattern wordSplitPattern =
-        Pattern.compile(WORD_SPLIT_REGEX);
-    private static final Pattern lineSplitPattern =
-        Pattern.compile(LINE_SPLIT_REGEX);
 
     private StringBuffer buffer;
 
@@ -47,6 +43,44 @@ public final class Text {
         }
 
         buffer = new StringBuffer(text);
+    }
+
+    /**
+     * 이 텍스트에 존재하는 문장에 대한 열거자를 가져옵니다.
+     * @return 텍스트에 존재하는 문장에 대한 열거자입니다.
+     */
+    public Iterable<String> lines() {
+        return StreamUtility.toIterable(lineStream());
+    }
+
+    private Stream<String> lineStream() {
+        return newLineIncludingStream()
+            .flatMap(word -> Arrays.stream(word.split(EXTRACT_PURE_LINE_REGEX)))
+            .filter(word -> !word.equals(StringUtility.EMPTY_STRING));
+    }
+
+    /**
+     * 이 텍스트에서 줄 분리자를 포함하는 문장에 대한 열거자를 가져옵니다.
+     * @return 텍스트에 존재하는 분리자 포함 문장들의 열거자입니다.
+     */
+    public Iterable<String> newLineIncludingLines() {
+        return StreamUtility.toIterable(newLineIncludingStream());
+    }
+
+    private Stream<String> newLineIncludingStream() {
+        return decomposeText(LINE_SPLIT_REGEX);
+    }
+
+    private Stream<String> decomposeText(String regex) {
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(toString());
+        final List<String> decomposedParts = new ArrayList<>();
+
+        while (matcher.find()) {
+            decomposedParts.add(matcher.group());
+        }
+
+        return decomposedParts.stream();
     }
 
     /**
@@ -72,14 +106,7 @@ public final class Text {
     }
 
     private Stream<String> spaceIncludingWordStream() {
-        final Matcher wordMatcher = wordSplitPattern.matcher(toString());
-        final List<String> words = new ArrayList<>();
-
-        while (wordMatcher.find()) {
-            words.add(wordMatcher.group());
-        }
-
-        return words.stream();
+        return decomposeText(WORD_SPLIT_REGEX);
     }
 
     /**
