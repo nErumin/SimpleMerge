@@ -485,6 +485,14 @@ public class TextTest {
         text.delete(-1, 10);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void negativeLengthDeletionTest() {
+        final String originalContent = "Hello, World";
+        final Text text = new Text(originalContent);
+
+        text.delete(1, -1);
+    }
+
     @Test(expected = StringIndexOutOfBoundsException.class)
     public void overLengthPosDeletionTest() {
         final String originalContent = "Hello, World";
@@ -502,6 +510,14 @@ public class TextTest {
             is(equalTo(true)));
         Assert.assertThat(text.hashCode(),
             is(equalTo(anotherText.hashCode())));
+    }
+
+    @Test
+    public void nullEqualTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        Assert.assertThat(text.equals(null),
+            is(equalTo(false)));
     }
 
     @Test
@@ -524,5 +540,59 @@ public class TextTest {
             is(equalTo(false)));
         Assert.assertThat(text.hashCode(),
             is(not(equalTo(anotherText.hashCode()))));
+    }
+
+    @Test(expected = StringIndexOutOfBoundsException.class)
+    public void negativePosSubTextTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        text.subText(-1, 1000);
+    }
+
+    @Test(expected = StringIndexOutOfBoundsException.class)
+    public void overLengthPosSubTextTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        text.subText(100, 1000);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void negativeLengthSubTextTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        text.subText(3, -1);
+    }
+
+    @Test
+    public void emptySubTextTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        Assert.assertThat(text.subText(7, 0).toString(),
+            is(equalTo(StringUtility.EMPTY_STRING)));
+    }
+
+    @Test
+    public void lineSubTextTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        Assert.assertThat(text.subText(7, 14).toString(),
+            is(equalTo("World!\n\nHello,")));
+    }
+
+    @Test
+    public void overLengthSubTextTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        Assert.assertThat(text.subText(7, 100).toString(),
+            is(equalTo("World!\n\nHello, Universe!")));
+    }
+
+    @Test
+    public void allSubTextTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+
+        Assert.assertThat(text.subText(0, 100).toString(),
+            is(equalTo("Hello, World!\n\nHello, Universe!")));
+
     }
 }

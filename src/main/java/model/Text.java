@@ -82,6 +82,32 @@ public final class Text {
         return words.stream();
     }
 
+    /**
+     * 주어진 범위의 부분 텍스트를 가져옵니다.
+     * @param startIndex 부분 텍스트를 가져올 시작 위치입니다.
+     * @param length 시작 위치에서 가져올 길이를 나타냅니다.
+     * @return 주어진 범위의 부분 텍스트를 나타냅니다.
+     * @throws StringIndexOutOfBoundsException
+     * startIndex가 음수거나, 문장의 길이를 벗어나면 발생합니다.
+     * @throws IllegalArgumentException length가 음수면 발생합니다.
+     */
+    public Text subText(int startIndex, int length) {
+        if (startIndex < 0 || startIndex > length()) {
+            throw new StringIndexOutOfBoundsException();
+        }
+
+        if (length < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        int endIndex = startIndex + length;
+
+        // clamp length.
+        endIndex = endIndex >= length() ? length() : endIndex;
+
+        // startIndex = Inclusive, endIndex = Exclusive
+        return new Text(buffer.substring(startIndex, endIndex));
+    }
 
     /**
      * 문장의 특정 위치에 문자열을 삽입합니다.
