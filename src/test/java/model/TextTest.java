@@ -1,6 +1,7 @@
 package model;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,11 +14,6 @@ public class TextTest {
     @Test(expected = NullPointerException.class)
     public void textCreationWithNullTest() {
         final Text text = new Text(null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void textCreationWithMultiSentenceTest() {
-        final Text text = new Text("Hello. \n Hello. ");
     }
 
     @Test
@@ -121,7 +117,7 @@ public class TextTest {
         final List<String> words = new ArrayList<>();
         text.words().forEach(words::add);
 
-        Assert.assertThat(words.size(), is(equalTo(3)));
+        Assert.assertThat(words.size(), is(equalTo(2)));
         Assert.assertThat(words.get(0), is(equalTo("Hello,")));
         Assert.assertThat(words.get(1), is(equalTo("World!")));
     }
@@ -497,5 +493,36 @@ public class TextTest {
         text.delete(15, 10);
     }
 
+    @Test
+    public void emptyEqualTest() {
+        final Text text = new Text(StringUtility.EMPTY_STRING);
+        final Text anotherText = new Text(StringUtility.EMPTY_STRING);
 
+        Assert.assertThat(text.equals(anotherText),
+            is(equalTo(true)));
+        Assert.assertThat(text.hashCode(),
+            is(equalTo(anotherText.hashCode())));
+    }
+
+    @Test
+    public void textEqualTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+        final Text anotherText = new Text("Hello, World!\n\nHello, Universe!");
+
+        Assert.assertThat(text.equals(anotherText),
+            is(equalTo(true)));
+        Assert.assertThat(text.hashCode(),
+            is(equalTo(anotherText.hashCode())));
+    }
+
+    @Test
+    public void textNotEqualTest() {
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+        final Text anotherText = new Text("Hello. World!\n\nHello. Universe!");
+
+        Assert.assertThat(text.equals(anotherText),
+            is(equalTo(false)));
+        Assert.assertThat(text.hashCode(),
+            is(not(equalTo(anotherText.hashCode()))));
+    }
 }

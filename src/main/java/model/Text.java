@@ -106,7 +106,8 @@ public final class Text {
      * 문장의 특정 영역을 지웁니다.
      * @param startIndex 삭제를 시작할 위치입니다.
      * @param length 삭제할 영역의 길이를 나타냅니다.
-     * @throws StringIndexOutOfBoundsException startIndex가 음수거나, 문장의 길이를 벗어나면 발생합니다.
+     * @throws StringIndexOutOfBoundsException
+     *  startIndex가 음수거나, 문장의 길이를 벗어나면 발생합니다.
      * @throws IllegalArgumentException length가 음수면 발생합니다.
      */
     public void delete(int startIndex, int length) {
@@ -125,7 +126,8 @@ public final class Text {
      * 문장의 특정 영역을 교체합니다.
      * @param startIndex 교체를 시작할 문장 내 위치입니다.
      * @param replacingString 해당 위치부터 교체할 문자열입니다.
-     * @throws StringIndexOutOfBoundsException startIndex가 음수거나, 문장의 길이를 벗어나면 발생합니다.
+     * @throws StringIndexOutOfBoundsException
+     *  startIndex가 음수거나, 문장의 길이를 벗어나면 발생합니다.
      */
     public void replace(int startIndex, String replacingString) {
         if (startIndex < 0 || startIndex >= length()) {
@@ -158,6 +160,31 @@ public final class Text {
      */
     public int length() {
         return buffer.length();
+    }
+
+    /**
+     * 두 텍스트의 동일 여부에 대해 질의합니다.
+     * @param obj 질의할 객체를 나타냅니다.
+     * @return 두 텍스트의 동일 여부입니다.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Text comparedText = (Text) obj;
+        return this.toString().equals(comparedText.toString());
+    }
+
+    /**
+     * 해당 텍스트에 대한 해쉬 코드 값을 가져옵니다.
+     * @return
+     * 텍스트에 대한 해쉬 코드 값입니다. 내용이 변할 경우 해쉬 값은 변할 수 있습니다.
+     */
+    @Override
+    public int hashCode() {
+        return toString().hashCode();
     }
 
     /**
