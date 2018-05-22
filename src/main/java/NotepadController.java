@@ -40,6 +40,8 @@ public class NotepadController{
             stage.setTitle(file.getName() + " - Notepad");
             BufferedReader br = null;
             try {
+                textpane.clear();
+
                 String sCurrentLine;
                 br = new BufferedReader(new FileReader(file));
                 while ((sCurrentLine = br.readLine()) != null) {
@@ -129,6 +131,8 @@ public class NotepadController{
             stage.setTitle(fileRight.getName() + " - Notepad");
             BufferedReader br = null;
             try {
+                textpaneRight.clear();
+
                 String sCurrentLine;
                 br = new BufferedReader(new FileReader(fileRight));
                 while ((sCurrentLine = br.readLine()) != null) {
