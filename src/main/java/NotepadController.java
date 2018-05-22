@@ -16,8 +16,13 @@ public class NotepadController{
 
     private FileChooser fileChooser = new FileChooser();
     private File file;
+
+    private FileChooser fileChooserRight = new FileChooser();
+    private File fileRight;
     @FXML
     private TextArea textpane;
+    @FXML
+    private TextArea textpaneRight;
 
     @FXML
     protected void newFile(ActionEvent event) {
@@ -105,6 +110,98 @@ public class NotepadController{
             }
         }
     }
+
+    //////RIGHT
+
+    @FXML
+    protected void newFileRight(ActionEvent event) {
+        textpaneRight.clear();
+        Stage stage = (Stage) textpaneRight.getScene().getWindow();
+        stage.setTitle("Untitled - Notepad");
+        fileRight = null;
+    }
+
+    @FXML
+    protected void openFileRight(ActionEvent event) {
+        fileRight = fileChooserRight.showOpenDialog(null);
+        if (fileRight != null) {
+            Stage stage = (Stage) textpaneRight.getScene().getWindow();
+            stage.setTitle(fileRight.getName() + " - Notepad");
+            BufferedReader br = null;
+            try {
+                String sCurrentLine;
+                br = new BufferedReader(new FileReader(fileRight));
+                while ((sCurrentLine = br.readLine()) != null) {
+                    textpaneRight.appendText(sCurrentLine + "\n");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    @FXML
+    protected void saveFileRight(ActionEvent event) {
+        String content = textpaneRight.getText();
+        if (fileRight != null) {
+            try {
+                // if file doesnt exists, then create it
+                if (!fileRight.exists()) {
+                    fileRight.createNewFile();
+                }
+                FileWriter fw = new FileWriter(fileRight.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(content);
+                bw.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            // open a file dialog box
+            fileRight = fileChooserRight.showSaveDialog(null);
+            if (fileRight != null) {
+                Stage stage = (Stage) textpaneRight.getScene().getWindow();
+                stage.setTitle(fileRight.getName() + " - Notepad");
+                try {
+                    // if file doesnt exists, then create it
+                    if (!fileRight.exists()) {
+                        fileRight.createNewFile();
+                    }
+                    FileWriter fw = new FileWriter(fileRight.getAbsoluteFile());
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write(content);
+                    bw.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @FXML
+    protected void saveasFileRight(ActionEvent event) {
+        fileRight = fileChooserRight.showSaveDialog(null);
+
+        String content = textpaneRight.getText();
+        if (fileRight != null) {
+            Stage stage = (Stage) textpaneRight.getScene().getWindow();
+            stage.setTitle(fileRight.getName() + " - Notepad");
+            try {
+                // if file doesnt exists, then create it
+                if (!fileRight.exists()) {
+                    fileRight.createNewFile();
+                }
+                FileWriter fw = new FileWriter(fileRight.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(content);
+                bw.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
     @FXML
     protected void exitApp(ActionEvent event) {
         Platform.exit();

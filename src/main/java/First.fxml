@@ -20,10 +20,10 @@
                         <MenuItem onAction="#saveFile" text="Save-left" />
                         <MenuItem onAction="#saveasFile" text="Save As...-left" />
                   <SeparatorMenuItem />
-                  <MenuItem fx:id="newItem1" onAction="#newFile" text="New-right" />
-                  <MenuItem onAction="#openFile" text="Open...-right" />
-                  <MenuItem onAction="#saveFile" text="Save-right" />
-                  <MenuItem onAction="#saveasFile" text="Save As...-right" />
+                  <MenuItem fx:id="newItemRight" onAction="#newFile" text="New-right" />
+                  <MenuItem onAction="#openFileRight" text="Open...-right" />
+                  <MenuItem onAction="#saveFileRight" text="Save-right" />
+                  <MenuItem onAction="#saveasFileRight" text="Save As...-right" />
                         <SeparatorMenuItem />
                         <MenuItem text="Page Setup..." />
                         <MenuItem text="Print" />
@@ -82,9 +82,9 @@
    <center>
       <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
         <items>
-            <TextArea prefHeight="450.0" prefWidth="320.0" />
-      
-              <TextArea fx:id="textpane" prefHeight="450.0" prefWidth="320.0">
+            <TextArea fx:id="textpane" prefHeight="450.0" prefWidth="320.0" />
+
+              <TextArea fx:id="textpaneRight"  prefHeight="450.0" prefWidth="320.0">
         </TextArea>
         </items>
       </SplitPane>
