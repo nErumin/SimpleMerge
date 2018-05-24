@@ -1,7 +1,7 @@
 ## SimpleMerge Requirements Specification
-Version 1.0
+Version 1.1
 
-May 17, 2018
+May 24, 2018
 
 ### 1. Introduction
 이 프로젝트는 Java 환경에서의 Diff 유틸리티 프로그램 구현을 목표로 한다.
@@ -140,7 +140,7 @@ May 17, 2018
 #### NR5. Constraints
 - Java 언어를 사용하여 모든 개발이 이루어진다.
 - GUI 개발을 위해서 JavaFX를 사용한다.
-- 범용 유닛 테스트는 JUnit 프레임워크를 통해 수행된다.
+- 범용 유닛 테스트는 JUnit 프레임워크와 EasyMock을 통해 수행한다.
 - GUI 테스트를 위해서 TestFX 프레임워크를 사용한다.
 - 프로그램 실행을 위해서 반드시 컴퓨터에 Java가 설치되어 있어야 한다.
 
@@ -177,6 +177,14 @@ May 17, 2018
 - Panel : 텍스트 내용이 표시되는 영역으로, Panel 내에서 사용자는 텍스트를 수정할 수 있다. 또한, 사용자는 여러 Panel의 텍스트를 비교해볼 수 있다.
 
 ### 8. Document Revision History
+
+Item               | Description                         |
+-------------------|-------------------------------------| 
+Version            | 1.1                                 |
+Date               | May 24, 2018                        |
+Change Description | Add EasyMock in the 'Constraint' section.|
+
+
 Item               | Description                         |
 -------------------|-------------------------------------| 
 Version            | 1.0                                 |
