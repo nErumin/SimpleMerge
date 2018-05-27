@@ -2,6 +2,8 @@ public class Comparison {
 	Integer[][] C;
 	String[] Origin;
 	String[] Compared;
+	int[][] sameLineIndex = new int [2][];
+	int partition;
 
     Comparison() {
     	Origin[0] = "0" + "MAJSIEJX";
@@ -9,6 +11,7 @@ public class Comparison {
     	String X = Origin[0];
         String Y = Compared[0];
         C = new Integer[X.length()][Y.length()];
+        partition = 0;
 
     }
 
@@ -16,7 +19,7 @@ public class Comparison {
      *
      * @param X
      * @param Y
-     * @return
+     * @return LCS Length
      */
     public int lcsLength(Integer C[][], String X, String Y) {
         int i, j;
@@ -41,12 +44,30 @@ public class Comparison {
         return C[X.length() - 1][Y.length() - 1];
     }
 
+    /*
+     *
+     * @param X
+     * @param Y
+     * @return Whether the two line are same
+     */
     public boolean lineIsEqual(String X, String Y) {
     	if(lcsLength(C,X,Y)==X.length()) {
     		return true;
     	} else return false;
     }
 
+    public void figureSameIndex(int nowOriginPos, int nowComparedPos, String[] X, String[] Y) {
+    	int i=nowOriginPos,j=nowComparedPos;
+    	if(this.lineIsEqual(X[i], Y[j])) {
+    		sameLineIndex[0][partition] =  nowOriginPos;
+        	while(this.lineIsEqual(X[i], Y[j])) {
+        		i++;
+        		j++;
+        	}
+        	sameLineIndex[1][partition] = i;
+        	partition++;
+    	}
+    }
     public static void main(String[] args) {
 
         Comparison comp = new Comparison();
