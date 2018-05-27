@@ -11,9 +11,9 @@ public class Comparison {
      * @param Y
      * @return
      */
-    public int lscLength(String X, String Y) {
+    public int lscLength(Integer C[][], String X, String Y) {
         int i, j;
-        Integer[][] C = new Integer[X.length()][Y.length()];
+        //Integer[][] C = new Integer[X.length()][Y.length()];
 
         for (i = 0; i < X.length(); i++) {
             C[i][0] = 0;
@@ -44,13 +44,13 @@ public class Comparison {
     public void printDiff(Integer C[][], String X, String Y, int i, int j) {
         if (i > 0 && j > 0 && X.charAt(i) == Y.charAt(j)) {
             printDiff(C, X, Y, i - 1, j - 1);
-            System.out.print(" " + X.charAt(i));
+            System.out.println(" " + X.charAt(i));
         } else if (j > 0 && (i == 0 || C[0][i - 1] >= C[i - 1][j])) {
             printDiff(C, X, Y, i, j - 1);
-            System.out.print("+ " + Y.charAt(j));
+            System.out.println("+ " + Y.charAt(j));
         } else if (i > 0 && (j == 0 || C[i][j - 1] < C[i - 1][j])) {
             printDiff(C, X, Y, i - 1, j);
-            System.out.print("- " + X.charAt(i));
+            System.out.println("- " + X.charAt(i));
         } else {
             System.out.println("");
         }
@@ -83,11 +83,15 @@ public class Comparison {
 
     public static void main(String[] args) {
 
-        String X = "0" + "ACAYKP";
-        String Y = "0" + "CAPCAK";
+        String X = "0" + "XMJYAUZ";
+        String Y = "0" + "MZJAWXU";
+        Integer[][] C = new Integer[X.length()][Y.length()];
 
         Comparison comp = new Comparison();
+        int a = comp.lscLength(C, X,Y);
+        System.out.println(a);
+        comp.printDiff(C,X,Y,1,1);
 
-        System.out.println(comp.lscLength(X,Y));
+        //System.out.println();
     }
 }
