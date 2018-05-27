@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'idea'
 
-mainClassName = 'Main'
+mainClassName = 'MainApplication'
 
 sourceCompatibility = "1.9"
 targetCompatibility = "1.9"
@@ -21,5 +21,6 @@ dependencies {
     testCompile "org.testfx:testfx-core:4.0.13-alpha"
     testCompile "org.testfx:testfx-junit:4.0.13-alpha"
     testCompile "junit:junit:4.12"
+    testCompile 'org.easymock:easymock:3.4'
     compile "io.sentry:sentry:1.7.4"
 }
