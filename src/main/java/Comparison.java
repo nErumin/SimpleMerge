@@ -1,52 +1,93 @@
 public class Comparison {
 
-    private String X, Y;
-    private int i_for, j_for;
-    private Integer[][] c;
 
-    Comparison(){
-        X = "0" + "ACAYKP";
-        Y = "0" + "CAPCAK";
-        c = new Integer[X.length()][Y.length()];
+    Comparison() {
 
     }
-    public int lscLength(){
-        for(i_for = 0; i_for < X.length(); i_for++){
-            c[i_for][0] = 0;
+
+    /**
+     *
+     * @param X
+     * @param Y
+     * @return
+     */
+    public int lscLength(String X, String Y) {
+        int i, j;
+        Integer[][] C = new Integer[X.length()][Y.length()];
+
+        for (i = 0; i < X.length(); i++) {
+            C[i][0] = 0;
         }
-        for(j_for = 0; j_for < Y.length(); j_for++){
-            c[0][j_for] = 0;
+        for (j = 0; j < Y.length(); j++) {
+            C[0][j] = 0;
         }
 
-        for(i_for = 1; i_for < X.length(); i_for++){
-            for(j_for = 1; j_for < Y.length(); j_for++){
-                if(X.charAt(i_for) == Y.charAt(j_for)){
-                    c[i_for][j_for] = c[i_for-1][j_for-1] + 1;
-                }
-                else {
-                c[i_for][j_for] = ((c[i_for][j_for - 1] > c[i_for - 1][j_for]) ? c[i_for][j_for - 1] : c[i_for - 1][j_for]);
+        for (i = 1; i < X.length(); i++) {
+            for (j = 1; j < Y.length(); j++) {
+                if (X.charAt(i) == Y.charAt(j)) {
+                    C[i][j] = C[i - 1][j - 1] + 1;
+                } else {
+                    C[i][j] = ((C[i][j - 1] > C[i - 1][j]) ? C[i][j - 1] : C[i - 1][j]);
                 }
             }
         }
-        return c[X.length() - 1][Y.length() - 1];
+        return C[X.length() - 1][Y.length() - 1];
     }
 
-    public void printDiff(Integer c[][], String X, String Y, int i, int j){
-        if(i > 0 && j > 0 && X.charAt(i) == Y.charAt(j)){
-            printDiff(c, X, Y, i-1, j-1);
+    /**
+     * @param C
+     * @param X
+     * @param Y
+     * @param i
+     * @param j
+     */
+    public void printDiff(Integer C[][], String X, String Y, int i, int j) {
+        if (i > 0 && j > 0 && X.charAt(i) == Y.charAt(j)) {
+            printDiff(C, X, Y, i - 1, j - 1);
             System.out.print(" " + X.charAt(i));
-        }
-        else if(j > 0 && (i == 0 || c[0][i-1] >= c[i-1][j])){
-            printDiff(c, X, Y, i, j-1);
+        } else if (j > 0 && (i == 0 || C[0][i - 1] >= C[i - 1][j])) {
+            printDiff(C, X, Y, i, j - 1);
             System.out.print("+ " + Y.charAt(j));
-        }
-        else if(i > 0 && (j ==0 || c[i][j-1] < c[i-1][j])) {
-            printDiff(c, X, Y, i-1, j);
+        } else if (i > 0 && (j == 0 || C[i][j - 1] < C[i - 1][j])) {
+            printDiff(C, X, Y, i - 1, j);
             System.out.print("- " + X.charAt(i));
-        }
-        else{
+        } else {
             System.out.println("");
         }
     }
-}
 
+    /**
+     * @param C: C[0..m,0..n]
+     * @param X: X[1..m]
+     * @param Y: Y[1..n]
+     * @param i: location
+     * @param j: location
+     * @return
+     */
+    public String backTrackAll(Integer C[][], String X, String Y, int i, int j) {
+        if (i == 0 || j == 0) {
+            return "";
+        } else if (X.charAt(i) == Y.charAt(j)) {
+            return ""; ////
+        } else {
+            String R = "";
+            if (C[i][j - 1] >= C[i - 1][j]) {
+                R += backTrackAll(C, X, Y, i, j - 1).toString();
+            }
+            if (C[i - 1][j] >= C[i][j - 1]) {
+                R += backTrackAll(C, X, Y, i - 1, j).toString();
+            }
+            return R;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        String X = "0" + "ACAYKP";
+        String Y = "0" + "CAPCAK";
+
+        Comparison comp = new Comparison();
+
+        System.out.println(comp.lscLength(X,Y));
+    }
+}

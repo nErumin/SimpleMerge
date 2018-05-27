@@ -5,10 +5,6 @@ import javafx.stage.Stage;
 public class MainApplication extends Application {
 
     public static void main(String[] args) {
-        Comparison c = new Comparison();
-
-       int a =  c.lscLength();
-        /*
         final String sentryDSN =
             "https://dfa5eedd277d47658bbc691394bef7e8@sentry.io/1201571";
         Sentry.init(sentryDSN);
@@ -17,7 +13,7 @@ public class MainApplication extends Application {
             launch(args);
         } catch (Exception exception) {
             Sentry.capture(exception);
-        }*/
+        }
     }
 
     @Override
