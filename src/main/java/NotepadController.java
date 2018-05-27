@@ -45,7 +45,7 @@ public class NotepadController{
                 String sCurrentLine;
                 br = new BufferedReader(new FileReader(file));
                 while ((sCurrentLine = br.readLine()) != null) {
-                    textpane.appendText(sCurrentLine + "\n");
+                    textpane.appendText(sCurrentLine );
                 }
             } catch (Exception e) {
                 e.printStackTrace();
