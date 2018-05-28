@@ -1,5 +1,6 @@
 public class Comparison {
 
+    private int a;
 
     Comparison() {
 
@@ -82,7 +83,7 @@ public class Comparison {
     }
 
     public static void main(String[] args) {
-/*
+
         String X = "0" + "XMJYAUZ";
         String Y = "0" + "MZJAWXU";
         Integer[][] C = new Integer[X.length()][Y.length()];
@@ -91,12 +92,7 @@ public class Comparison {
         int a = comp.lscLength(C, X,Y);
         System.out.println(a);
         comp.printDiff(C,X,Y,1,1);
-*/
-        Comparison c = new Comparison();
-        String X = "0123456789";
-        String Y = "0321456789";
-        Integer[][] C = new Integer[X.length()][Y.length()];
-        int result = c.lscLength(C,X,Y);
+
 
         //System.out.println();
     }
