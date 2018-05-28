@@ -84,8 +84,8 @@ public class Comparison {
 
     public static void main(String[] args) {
         Comparison c = new Comparison();
-        String X = "";
-        String Y = "321456789";
+        String X = "컴퓨터공학부전공";
+        String Y = "Computer";
         boolean result = c.lineIsEqual(X, Y);
 
         //System.out.println();

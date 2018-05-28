@@ -122,16 +122,16 @@ public class ComparisonTest {
 
     @Test
     public void korShortRStrTest(){
-        X = "허나우군은";
-        Y = "걱정";
+        X = "컴퓨터공학";
+        Y = "컴공";
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }
 
     @Test
     public void korShortLStrTest(){
-        X = "걱정";
-        Y = "허나우군은";
+        X = "컴공";
+        Y = "컴퓨터공";
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }
@@ -249,12 +249,34 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
-    
+    @Test
+    public void engKorStringTest(){
+        X = "Computer";
+        Y = "컴퓨터공학부전공";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
 
     @Test
     public void korEngStringTest(){
-        X = "허나우군은";
-        Y = "Worried";
+        X = "컴퓨터공학부전공";
+        Y = "Computer";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenEngKorTest(){
+        X = "Computer";
+        Y = "컴퓨터";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenKorEngTest(){
+        X = "컴퓨터";
+        Y = "Computer";
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }
