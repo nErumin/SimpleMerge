@@ -200,9 +200,56 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    @Test
+    public void sameEngStringTest(){
+        X = "CompEngScien";
+        Y = "CompEngScien";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertTrue(result);
+    }
+
+    @Test
+    public void nomalCaseEngTest(){
+        X = "SoftWare";
+        Y = "Computer";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
 
 
+    @Test
+    public void engShortRStrTest(){
+        X = "ComputerEngineering";
+        Y = "CE";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
 
+    @Test
+    public void engShortLStrTest(){
+        X = "CE";
+        Y = "ComputerEngineering";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void nullLeftEngTest(){
+        X = "ABCDE";
+        Y = "";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void nullRightEngTest(){
+        X = "ABCDE";
+        Y = "";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    
 
     @Test
     public void korEngStringTest(){
