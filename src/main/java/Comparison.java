@@ -1,29 +1,29 @@
 public class Comparison {
-	Integer[][] C;
-	String[] Origin;
-	String[] Compared;
-	int[][] sameLineIndex = new int [2][];
-	int partition;
+	private Integer[][] C;
+    private String[] Origin;
+    private String[] Compared;
+    private int[][] sameLineIndex = new int [2][];
+    private int partition;
 
     Comparison() {
-    	Origin[0] = "0" + "MAJSIEJX";
-    	Compared[0] = "0" + "MAJZZEDI";
-    	String X = Origin[0];
-        String Y = Compared[0];
-        C = new Integer[X.length()][Y.length()];
+    	//Origin[0] = "MAJSIEJX";
+    	//Compared[0] = "MAJZZEDI";
         partition = 0;
 
     }
 
     /**
      *
-     * @param X
-     * @param Y
+     * @param X: Left Panel
+     * @param Y: Right Panel
      * @return LCS Length
      */
-    public int lcsLength(Integer C[][], String X, String Y) {
+    public int lcsLength(String X, String Y) {
         int i, j;
-        //Integer[][] C = new Integer[X.length()][Y.length()];
+
+        X = "0" + X;
+        Y = "0" + Y;
+        this.C = new Integer[X.length()][Y.length()];
 
         for (i = 0; i < X.length(); i++) {
             C[i][0] = 0;
@@ -44,18 +44,26 @@ public class Comparison {
         return C[X.length() - 1][Y.length() - 1];
     }
 
-    /*
+    /**
      *
      * @param X
      * @param Y
      * @return Whether the two line are same
      */
     public boolean lineIsEqual(String X, String Y) {
-    	if(lcsLength(C,X,Y)==X.length()) {
+    	if((X.length() == Y.length()) && (lcsLength(X,Y)==X.length())) {
     		return true;
     	} else return false;
     }
 
+    /**
+     * Don't Care right now
+     * It is not finished
+     * @param nowOriginPos
+     * @param nowComparedPos
+     * @param X
+     * @param Y
+     */
     public void figureSameIndex(int nowOriginPos, int nowComparedPos, String[] X, String[] Y) {
     	int i=nowOriginPos,j=nowComparedPos;
     	if(this.lineIsEqual(X[i], Y[j])) {
@@ -68,10 +76,14 @@ public class Comparison {
         	partition++;
     	}
     }
-    public static void main(String[] args) {
 
-        Comparison comp = new Comparison();
-        
+
+
+    public static void main(String[] args) {
+        Comparison c = new Comparison();
+        String X = "";
+        String Y = "321456789";
+        boolean result = c.lineIsEqual(X, Y);
 
         //System.out.println();
     }
