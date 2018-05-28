@@ -312,4 +312,37 @@ public class ComparisonTest {
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }
+
+    /////
+    @Test
+    public void symKorStringTest(){
+        X = "!@#$%^&*";
+        Y = "컴퓨터공학부전공";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void korSymStringTest(){
+        X = "컴퓨터공학부전공";
+        Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenSymKorTest(){
+        X = "!@#$%^&*";
+        Y = "컴퓨터";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenKorSymTest(){
+        X = "컴퓨터";
+        Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
 }
