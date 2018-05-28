@@ -38,8 +38,8 @@ public class ComparisonTest {
 
     @Test
     public void nullRightStringTest() {
-        X = "0123456789";
-        Y = "0";
+        X = "123456789";
+        Y = "";
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }
@@ -67,6 +67,22 @@ public class ComparisonTest {
     public void shortRightStringTest() {
         X = "2345";
         Y = "123456789";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void differentStringTest(){
+        X = "123456789";
+        Y = "abcdefghi";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void difLenStringTest(){
+        X = "123456789";
+        Y = "abcd";
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }

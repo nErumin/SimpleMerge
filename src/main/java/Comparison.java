@@ -13,7 +13,7 @@ public class Comparison {
     }
 
     /**
-     *
+     * Calculate LCS length
      * @param X: Left Panel String
      * @param Y: Right Panel String
      * @return LCS Length
@@ -21,6 +21,7 @@ public class Comparison {
     public int lcsLength(String X, String Y) {
         int i, j;
 
+        // Add 0(null) string for counting
         X = "0" + X;
         Y = "0" + Y;
         this.C = new Integer[X.length()][Y.length()];
@@ -51,9 +52,11 @@ public class Comparison {
      * @return Whether the two line are same
      */
     public boolean lineIsEqual(String X, String Y) {
+        // Check two strings using a lcsLength function
+        // Two strings length should be same.
     	if((X.length() == Y.length()) && (lcsLength(X,Y) == X.length())) {
     		return true;
-    	} else return false;
+    	} else return false; // The other case, false
     }
 
     /**
