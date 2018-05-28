@@ -280,4 +280,36 @@ public class ComparisonTest {
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }
+
+    @Test
+    public void numKorStringTest(){
+        X = "12345678";
+        Y = "컴퓨터공학부전공";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void korNumStringTest(){
+        X = "컴퓨터공학부전공";
+        Y = "12345678";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenNumKorTest(){
+        X = "12345678";
+        Y = "컴퓨터";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenKorNumTest(){
+        X = "컴퓨터";
+        Y = "12345678";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
 }
