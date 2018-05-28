@@ -153,6 +153,58 @@ public class ComparisonTest {
     }
 
     @Test
+    public void sameSymbolTest(){
+        X = "!@#$%^&*";
+        Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertTrue(result);
+    }
+
+    @Test
+    public void normalSymbolTest(){
+        X = "!@#$%^&*";
+        Y = "+}:{?><)";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void nullLeftSymbolTest(){
+        X = "";
+        Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void nullRightSymbolTest(){
+        X = "!@#$%^&*";
+        Y = "";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void shortLeftSymbolTest(){
+        X = "!@#$";
+        Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void shortRightSymbolTest(){
+        X = "!@#$%^&*";
+        Y = "!@#$";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+
+
+
+
+    @Test
     public void korEngStringTest(){
         X = "허나우군은";
         Y = "Worried";
