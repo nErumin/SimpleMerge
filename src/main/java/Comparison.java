@@ -14,8 +14,8 @@ public class Comparison {
 
     /**
      *
-     * @param X: Left Panel
-     * @param Y: Right Panel
+     * @param X: Left Panel String
+     * @param Y: Right Panel String
      * @return LCS Length
      */
     public int lcsLength(String X, String Y) {
@@ -45,13 +45,13 @@ public class Comparison {
     }
 
     /**
-     *
-     * @param X
-     * @param Y
+     * After checking string, return True / False
+     * @param X: Left Panel String
+     * @param Y: Right Panel String
      * @return Whether the two line are same
      */
     public boolean lineIsEqual(String X, String Y) {
-    	if((X.length() == Y.length()) && (lcsLength(X,Y)==X.length())) {
+    	if((X.length() == Y.length()) && (lcsLength(X,Y) == X.length())) {
     		return true;
     	} else return false;
     }
