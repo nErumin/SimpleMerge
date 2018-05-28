@@ -313,7 +313,6 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
-    /////
     @Test
     public void symKorStringTest(){
         X = "!@#$%^&*";
@@ -341,6 +340,38 @@ public class ComparisonTest {
     @Test
     public void diffLenKorSymTest(){
         X = "컴퓨터";
+        Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void symNumStringTest(){
+        X = "!@#$%^&*";
+        Y = "12345678";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void numSymStringTest(){
+        X = "12345678";
+        Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenSymNumTest(){
+        X = "!@#$%^&*";
+        Y = "123";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenNumSymTest(){
+        X = "123";
         Y = "!@#$%^&*";
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
