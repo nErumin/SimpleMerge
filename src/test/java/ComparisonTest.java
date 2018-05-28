@@ -80,9 +80,82 @@ public class ComparisonTest {
     }
 
     @Test
+    public void differentStringSwapTest(){
+        X = "abcdefghi";
+        Y = "123456789";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
     public void difLenStringTest(){
         X = "123456789";
         Y = "abcd";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void difLenStringSwapTest(){
+        X = "abcd";
+        Y = "123456789";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void sameKorStringTest(){
+        X = "컴퓨터공학부";
+        Y = "컴퓨터공학부";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertTrue(result);
+    }
+
+    @Test
+    public void nomalCaseKorTest(){
+        X = "컴퓨터공학";
+        Y = "소프트웨어";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+
+    @Test
+    public void korShortRStrTest(){
+        X = "허나우군은";
+        Y = "걱정";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void korShortLStrTest(){
+        X = "걱정";
+        Y = "허나우군은";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void nullLeftKorTest(){
+        X = "가나다라마";
+        Y = "";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void nullRightKorTest(){
+        X = "가나다라마";
+        Y = "";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void korEngStringTest(){
+        X = "허나우군은";
+        Y = "Worried";
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }
