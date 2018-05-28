@@ -72,38 +72,6 @@ public class ComparisonTest {
     }
 
     @Test
-    public void differentStringTest(){
-        X = "123456789";
-        Y = "abcdefghi";
-        boolean result = c.lineIsEqual(X, Y);
-        Assert.assertFalse(result);
-    }
-
-    @Test
-    public void differentStringSwapTest(){
-        X = "abcdefghi";
-        Y = "123456789";
-        boolean result = c.lineIsEqual(X, Y);
-        Assert.assertFalse(result);
-    }
-
-    @Test
-    public void difLenStringTest(){
-        X = "123456789";
-        Y = "abcd";
-        boolean result = c.lineIsEqual(X, Y);
-        Assert.assertFalse(result);
-    }
-
-    @Test
-    public void difLenStringSwapTest(){
-        X = "abcd";
-        Y = "123456789";
-        boolean result = c.lineIsEqual(X, Y);
-        Assert.assertFalse(result);
-    }
-
-    @Test
     public void sameKorStringTest(){
         X = "컴퓨터공학부";
         Y = "컴퓨터공학부";
@@ -373,6 +341,70 @@ public class ComparisonTest {
     public void diffLenNumSymTest(){
         X = "123";
         Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+    
+    @Test
+    public void symEngStringTest(){
+        X = "!@#$%^&*";
+        Y = "ABCDEFGH";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void engSymStringTest(){
+        X = "ABCDEFGH";
+        Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenSymEngTest(){
+        X = "!@#$%^&*";
+        Y = "ABC";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenEngSymTest(){
+        X = "ABC";
+        Y = "!@#$%^&*";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void numEngStringTest(){
+        X = "12345678";
+        Y = "ABCDEFGH";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void engNumStringTest(){
+        X = "ABCDEFGH";
+        Y = "12345678";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenNumEngTest(){
+        X = "12345678";
+        Y = "ABC";
+        boolean result = c.lineIsEqual(X, Y);
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void diffLenEngNumTest(){
+        X = "ABC";
+        Y = "12345678";
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }
