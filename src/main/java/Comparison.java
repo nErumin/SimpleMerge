@@ -1,9 +1,14 @@
 public class Comparison {
+<<<<<<< HEAD
 	Integer[][] C;
 	String[] Origin;
 	String[] Compared;
 	int[][] sameLineIndex = new int [2][];
 	int partition;
+=======
+
+    private int a;
+>>>>>>> srs_requirement_wjh
 
     Comparison() {
     	Origin[0] = "0" + "MAJSIEJX";
@@ -72,6 +77,7 @@ public class Comparison {
 
         Comparison comp = new Comparison();
         
+
 
         //System.out.println();
     }
