@@ -7,7 +7,9 @@ public class Merge {
 	Merge(){
 		
 	}
-	 
+	 /**
+	  * 
+	  * */
 	void changeLine(int changeIndex) {
 		Origin[changeIndex] = Compare[changeIndex];
 	}

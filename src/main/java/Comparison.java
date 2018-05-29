@@ -14,6 +14,11 @@ public class Comparison {
         partition = 0;
 
     }
+    Comparison(int orgLength, int compLength) {
+    	Origin = new String[orgLength];
+        Compared = new String[compLength];
+        
+    }
 
     /**
      * Calculate LCS length
@@ -88,11 +93,12 @@ public class Comparison {
      * */
     public int lcsPanelLength(String[] X, String[] Y) {
         // Add 0(null) string for counting
-    	for(int i=X.length; i>=0; i++) {
+    	for(int i=X.length-2; i>=0; i--) {
+    		System.out.println(i);
     		X[i+1] = X[i];
     	}
     	X[0] = "0";
-    	for(int i=X.length; i>=0; i++) {
+    	for(int i=X.length-2; i>=0; i--) {
     		Y[i+1] = Y[i];
     	}
     	Y[0] = "0";
@@ -118,9 +124,25 @@ public class Comparison {
     }
 
     public static void main(String[] args) {
-        Comparison c = new Comparison();
+        Comparison c = new Comparison(8,8);
         String X = "asdf";
         String Y = "Computer";
+        c.Compared[0] = "Something";
+        c.Origin[0] = "Something";
+        c.Compared[1] = "Anything";
+        c.Origin[1] = "Something";
+        c.Compared[2] = "Something1";
+        c.Origin[2] = "Something";
+        c.Compared[3] = "Something";
+        c.Origin[3] = "Something";
+        c.Compared[4] = "Something3";
+        c.Origin[4] = "Something3";
+        c.Compared[5] = "Something1";
+        c.Origin[5] = "Something2";
+        System.out.println(c.Compared[6]);
+        System.out.println(c.Compared.length);
+        int b = c.lcsPanelLength(c.Compared, c.Origin);
+        System.out.println(b);
         boolean result = c.lineIsEqual(X, Y);
 
 
