@@ -344,7 +344,7 @@ public class ComparisonTest {
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
     }
-    
+
     @Test
     public void symEngStringTest(){
         X = "!@#$%^&*";
