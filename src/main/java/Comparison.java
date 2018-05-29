@@ -1,5 +1,6 @@
 public class Comparison {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Integer[][] C;
 	String[] Origin;
 	String[] Compared;
@@ -9,26 +10,34 @@ public class Comparison {
 
     private int a;
 >>>>>>> srs_requirement_wjh
+=======
+	private Integer[][] C;
+    private String[] Origin;
+    private String[] Compared;
+    private int[][] sameLineIndex = new int [2][];
+    private int partition;
+>>>>>>> master
 
     Comparison() {
-    	Origin[0] = "0" + "MAJSIEJX";
-    	Compared[0] = "0" + "MAJZZEDI";
-    	String X = Origin[0];
-        String Y = Compared[0];
-        C = new Integer[X.length()][Y.length()];
+    	//Origin[0] = "MAJSIEJX";
+    	//Compared[0] = "MAJZZEDI";
         partition = 0;
 
     }
 
     /**
-     *
-     * @param X
-     * @param Y
+     * Calculate LCS length
+     * @param X: Left Panel String
+     * @param Y: Right Panel String
      * @return LCS Length
      */
-    public int lcsLength(Integer C[][], String X, String Y) {
+    public int lcsLength(String X, String Y) {
         int i, j;
-        //Integer[][] C = new Integer[X.length()][Y.length()];
+
+        // Add 0(null) string for counting
+        X = "0" + X;
+        Y = "0" + Y;
+        this.C = new Integer[X.length()][Y.length()];
 
         for (i = 0; i < X.length(); i++) {
             C[i][0] = 0;
@@ -49,18 +58,28 @@ public class Comparison {
         return C[X.length() - 1][Y.length() - 1];
     }
 
-    /*
-     *
-     * @param X
-     * @param Y
+    /**
+     * After checking string, return True / False
+     * @param X: Left Panel String
+     * @param Y: Right Panel String
      * @return Whether the two line are same
      */
     public boolean lineIsEqual(String X, String Y) {
-    	if(lcsLength(C,X,Y)==X.length()) {
+        // Check two strings using a lcsLength function
+        // Two strings length should be same.
+    	if((X.length() == Y.length()) && (lcsLength(X,Y) == X.length())) {
     		return true;
-    	} else return false;
+    	} else return false; // The other case, false
     }
 
+    /**
+     * Don't Care right now
+     * It is not finished
+     * @param nowOriginPos
+     * @param nowComparedPos
+     * @param X
+     * @param Y
+     */
     public void figureSameIndex(int nowOriginPos, int nowComparedPos, String[] X, String[] Y) {
     	int i=nowOriginPos,j=nowComparedPos;
     	if(this.lineIsEqual(X[i], Y[j])) {
@@ -73,10 +92,14 @@ public class Comparison {
         	partition++;
     	}
     }
-    public static void main(String[] args) {
 
-        Comparison comp = new Comparison();
-        
+
+
+    public static void main(String[] args) {
+        Comparison c = new Comparison();
+        String X = "컴퓨터공학부전공";
+        String Y = "Computer";
+        boolean result = c.lineIsEqual(X, Y);
 
 
         //System.out.println();
