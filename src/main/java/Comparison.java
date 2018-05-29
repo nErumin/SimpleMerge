@@ -5,7 +5,6 @@ public class Comparison {
 	int[][] sameLineIndex = new int [2][];
 	int partition;
 
-    private int a;
 
 
     Comparison() {
@@ -125,8 +124,6 @@ public class Comparison {
 
     public static void main(String[] args) {
         Comparison c = new Comparison(8,8);
-        String x = "asdf";
-        String y = "computer";
         c.compared[0] = "Something";
         c.origin[0] = "Something";
         c.compared[1] = "Anything";
@@ -141,7 +138,6 @@ public class Comparison {
         c.origin[5] = "Something2";
         int b = c.lcsPanelLength(c.compared, c.origin);
         System.out.println(b);
-        boolean result = c.lineIsEqual(x, y);
 
 
         //System.out.println();
