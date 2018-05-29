@@ -1,22 +1,12 @@
 public class Comparison {
-<<<<<<< HEAD
-<<<<<<< HEAD
 	Integer[][] C;
 	String[] Origin;
 	String[] Compared;
 	int[][] sameLineIndex = new int [2][];
 	int partition;
-=======
 
     private int a;
->>>>>>> srs_requirement_wjh
-=======
-	private Integer[][] C;
-    private String[] Origin;
-    private String[] Compared;
-    private int[][] sameLineIndex = new int [2][];
-    private int partition;
->>>>>>> master
+
 
     Comparison() {
     	//Origin[0] = "MAJSIEJX";
@@ -93,11 +83,43 @@ public class Comparison {
     	}
     }
 
+    /**
+     * test for LCS by strings
+     * */
+    public int lcsPanelLength(String[] X, String[] Y) {
+        // Add 0(null) string for counting
+    	for(int i=X.length; i>=0; i++) {
+    		X[i+1] = X[i];
+    	}
+    	X[0] = "0";
+    	for(int i=X.length; i>=0; i++) {
+    		Y[i+1] = Y[i];
+    	}
+    	Y[0] = "0";
+        this.C = new Integer[X.length][Y.length];
 
+        for (int i = 0; i < X.length; i++) {
+            C[i][0] = 0;
+        }
+        for (int j = 0; j < Y.length; j++) {
+            C[0][j] = 0;
+        }
+
+        for (int i = 1; i < X.length; i++) {
+            for (int j = 1; j < Y.length; j++) {
+                if (X[i] == Y[j]) {
+                    C[i][j] = C[i - 1][j - 1] + 1;
+                } else {
+                    C[i][j] = ((C[i][j - 1] > C[i - 1][j]) ? C[i][j - 1] : C[i - 1][j]);
+                }
+            }
+        }
+    	return C[X.length - 1][Y.length - 1];
+    }
 
     public static void main(String[] args) {
         Comparison c = new Comparison();
-        String X = "컴퓨터공학부전공";
+        String X = "asdf";
         String Y = "Computer";
         boolean result = c.lineIsEqual(X, Y);
 
