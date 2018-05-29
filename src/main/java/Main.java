@@ -14,7 +14,7 @@ public class Main extends Application {
         try {
             // loading the fxml
             Pane pane = FXMLLoader.load(getClass().getResource(
-                "First.fxml"));
+                "src/main/resources/First.fxml"));
 
             // creating and initializing the scene.
             Scene scene = new Scene(pane);
@@ -26,7 +26,7 @@ public class Main extends Application {
 
             // setting the App title
             primaryStage.setTitle("Simplemerge");
-            scene.getStylesheets().add(getClass().getResource("notepad.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("src/main/resources/notepad.css").toExternalForm());
 
 
             // display the stage
