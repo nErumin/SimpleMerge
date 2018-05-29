@@ -207,9 +207,23 @@ public class NotepadController{
             }
         }
     }
+
+    /**
+     * Highlight left panel
+     * @param from start location for highlighting
+     * @param to end location for highlighting
+     */
     public void highlightLine(int from, int to) {
+
         textpane.setStyle(from,to,"-rtfx-background-color: lightgreen; ");
+
     }
+
+    /**
+     * Highlight right panel
+     * @param from start location for highlighting
+     * @param to end location for highlighting
+     */
     public void highlightLineRight(int from, int to) {
         textpaneRight.setStyle(from,to,"-rtfx-background-color: lightgreen; ");
     }
