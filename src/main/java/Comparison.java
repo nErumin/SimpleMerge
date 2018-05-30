@@ -1,10 +1,10 @@
 public class Comparison {
-	Integer[][] c;
+	Integer[][] board;
 	String[] origin;
 	String[] compared;
 	int[][] sameLineIndex = new int [2][];
 	int partition;
-
+	String[][] solution;
 
 
     Comparison() {
@@ -31,25 +31,25 @@ public class Comparison {
         // Add 0(null) string for counting
         x = "0" + x;
         y = "0" + y;
-        this.c = new Integer[x.length()][y.length()];
+        this.board = new Integer[x.length()][y.length()];
 
         for (i = 0; i < x.length(); i++) {
-            c[i][0] = 0;
+            board[i][0] = 0;
         }
         for (j = 0; j < y.length(); j++) {
-            c[0][j] = 0;
+            board[0][j] = 0;
         }
 
         for (i = 1; i < x.length(); i++) {
             for (j = 1; j < y.length(); j++) {
                 if (x.charAt(i) == y.charAt(j)) {
-                    c[i][j] = c[i - 1][j - 1] + 1;
+                    board[i][j] = board[i - 1][j - 1] + 1;
                 } else {
-                    c[i][j] = ((c[i][j - 1] > c[i - 1][j]) ? c[i][j - 1] : c[i - 1][j]);
+                    board[i][j] = ((board[i][j - 1] > board[i - 1][j]) ? board[i][j - 1] : board[i - 1][j]);
                 }
             }
         }
-        return c[x.length() - 1][y.length() - 1];
+        return board[x.length() - 1][y.length() - 1];
     }
 
     /**
@@ -90,54 +90,94 @@ public class Comparison {
     /**
      * test for LcS by strings
      * */
-    public int lcsPanelLength(String[] x, String[] y) {
+    public int[][] lcsPanelLength(String[] x, String[] y) {
         // Add 0(null) string for counting
     	for (int i = x.length-2; i >= 0; i--) {
     		x[i+1] = x[i];
     	}
     	x[0] = "0";
-    	for (int i = x.length-2; i >= 0; i--) {
+    	for (int i = y.length-2; i >= 0; i--) {
     		y[i+1] = y[i];
     	}
     	y[0] = "0";
-        this.c = new Integer[x.length][y.length];
+        this.board = new Integer[x.length][y.length];
+        this.solution = new String[x.length][y.length];
 
         for (int i = 0; i < x.length; i++) {
-            c[i][0] = 0;
+            board[i][0] = 0;
         }
         for (int j = 0; j < y.length; j++) {
-            c[0][j] = 0;
+            board[0][j] = 0;
         }
 
-        for ( int i = 1; i < x.length; i++) {
+        for (int i = 1; i < x.length; i++) {
             for (int j = 1; j < y.length; j++) {
                 if (x[i] == y[j]) {
-                    c[i][j] = c[i - 1][j - 1] + 1;
-                    System.out.println(i + "&");
+                	solution[i][j] = "diagonal";
+                    board[i][j] = board[i - 1][j - 1] + 1;
                 } else {
-                    c[i][j] = ((c[i][j - 1] > c[i - 1][j]) ? c[i][j - 1] : c[i - 1][j]);
+                	if((board[i][j - 1] > board[i - 1][j])) {
+                		solution[i][j] = "left";
+                		board[i][j] = board[i][j - 1];
+                	}
+                	else {
+                		solution[i][j] = "up";
+                		board[i][j] = board[i - 1][j];
+                	}
                 }
             }
         }
-    	return c[x.length - 1][y.length - 1];
+        int[][] solPair = new int[x.length][2];
+        int i = x.length-1;
+        int j = y.length-1;
+        int k = 0;
+        while(board[i][j] != 0) {
+        	if(solution[i][j] == "diagonal") {
+		    	solPair[k][0] = i - 1;
+		    	solPair[k][1] = j - 1;
+		    	i--;
+		    	j--;
+		    	k++;
+        	} else {
+        		if(solution[i][j] == "up") {
+            		i--;	
+        		} else {
+        			j--;
+        		}
+        	}
+        }
+        for(i = 0; i < k; i++) {
+            System.out.println(solPair[i][0] + " " + solPair[i][1]);
+        }
+    	return solPair;
+    }
+    
+    public void stringFix(int[][] pair) {
+    	int leftBtwStart;
+    	int leftBtwEnd;
+    	int rightBtwStart;
+    	int rightBtwEnd;
+    	
+    	
     }
 
     public static void main(String[] args) {
-        Comparison c = new Comparison(8,8);
-        c.compared[0] = "Something";
-        c.origin[0] = "Something";
-        c.compared[1] = "Anything";
-        c.origin[1] = "Something";
-        c.compared[2] = "Somethingasdf";
-        c.origin[2] = "Something";
-        c.compared[3] = "Something";
-        c.origin[3] = "Something";
-        c.compared[4] = "Something3";
-        c.origin[4] = "Something3";
-        c.compared[5] = "Something1";
-        c.origin[5] = "Something2";
-        int b = c.lcsPanelLength(c.compared, c.origin);
-        System.out.println(b);
+        Comparison board = new Comparison(9,7);
+        board.origin[0] = "1";
+        board.origin[1] = null;
+        board.origin[2] = "2";
+        board.origin[3] = "3";
+        board.origin[4] = " ";
+        board.origin[5] = "4";
+        board.origin[6] = "5";
+        board.origin[7] = "6";
+        board.compared[0] = "1";
+        board.compared[1] = "2";
+        board.compared[2] = "3";
+        board.compared[3] = "4";
+        board.compared[4] = "5";
+        board.compared[5] = "6";
+        board.stringFix(board.lcsPanelLength(board.origin, board.compared));
 
 
         //System.out.println();
