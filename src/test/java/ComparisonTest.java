@@ -412,4 +412,9 @@ public class ComparisonTest {
         Assert.assertFalse(result);
 
     }
+
+    @Test
+    public void samePanelTest(){
+        
+    }
 }
