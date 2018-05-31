@@ -3,27 +3,19 @@ import java.util.ArrayList;
 public class Comparison {
     //private static ArrayList<String> leftPanelList;
     //private static ArrayList<String> rightPanelList;
-    private Integer[][] board;
-    private String[] origin;
-    private String[] compared;
-    private int[][] sameLineIndex = new int [2][];
+    private int pairNum;
     private int partition;
-    private String[][] solution;
     private int[] leftShadowLine;
     private int[] rightShadowLine;
     private int[][] solPair;
-    private int pairNum;
+    private int[][] sameLineIndex = new int [2][];
+    private Integer[][] board;
+    private String[][] solution;
     private ArrayList<String> sameLine = new ArrayList<String>();
 
 
     Comparison() {
         partition = 0;
-
-    }
-    Comparison(int orgLength, int compLength) {
-        //leftPanelList = new ArrayList<String>();
-        //rightPanelList = new ArrayList<String>();
-
     }
 
     /**
@@ -118,6 +110,8 @@ public class Comparison {
                 if ((x.get(i) == y.get(j)) && (x.get(i) != null && y.get(j) != null)) {
                     solution[i][j] = "diagonal";
                     board[i][j] = board[i - 1][j - 1] + 1;
+
+                    // If Two string is same then add line number in array
                     sameLine.add("" + (i - 1));
                 } else {
                     if((board[i][j - 1] > board[i - 1][j])) {

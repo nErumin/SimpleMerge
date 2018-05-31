@@ -451,4 +451,18 @@ public class ComparisonTest {
         array = c.panelFix(left, right);
         Assert.assertEquals(0, array.size());
     }
+
+    @Test
+    public void rightNullPanelTest() {
+        left.add("Hello world!");
+        left.add(null);
+        left.add("안녕하세요.");
+        left.add(null);
+        left.add("123456");
+        left.add(null);
+        left.add("!@#$%^");
+
+        array = c.panelFix(left, right);
+        Assert.assertEquals(0, array.size());
+    }
 }
