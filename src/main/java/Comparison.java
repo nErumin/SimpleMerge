@@ -165,9 +165,10 @@ public class Comparison {
      * @param leftPanelList
      * @param rightPanelList
      */
-    public void panelFix(ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
+    public ArrayList<String> panelFix(ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
         int howMany; lcsPanelLength(leftPanelList, rightPanelList);
         int[][] pair = solPair;
+        ArrayList<String> sameLine = new ArrayList<String>();
         if(pair.length == 0) {
             rightShadowLine = new int[rightPanelList.size()];
             for(int i = 0;i < rightPanelList.size(); i++) {
@@ -184,6 +185,9 @@ public class Comparison {
                     System.out.println(howMany);
                     rightPanelList.add(pair[i][1],null);
                     howMany--;
+                    if(howMany == 0){
+                        sameLine.add("" + pair[i][0]);
+                    }
                 }
             } else {
                 howMany = pair[i][1] - pair[i][0];
@@ -198,6 +202,7 @@ public class Comparison {
                 }
             }
         }
+        return sameLine;
     }
 
     public static void main(String[] args) {
@@ -208,27 +213,25 @@ public class Comparison {
         leftPanelList.add("hello");
         leftPanelList.add(null);
         leftPanelList.add(null);
-        leftPanelList.add("World");
+        leftPanelList.add("World here is korea");
         leftPanelList.add(null);
         leftPanelList.add(null);
         leftPanelList.add(null);
         leftPanelList.add(null);
         leftPanelList.add("4");
-        leftPanelList.add("bye~");
+        leftPanelList.add("bye!");
         leftPanelList.add("6");
-        rightPanelList.add("World");
+        rightPanelList.add("World here is korea");
         rightPanelList.add(null);
         rightPanelList.add(null);
-        rightPanelList.add("bye!");
+        rightPanelList.add("bye");
         rightPanelList.add("9");
         rightPanelList.add("010");
 
 
         board.panelFix(leftPanelList, rightPanelList);
 
-        for(int i = 0; i < leftPanelList.size(); i++)
+        for(int i = 0; i < 5; i++)
             System.out.println(leftPanelList.get(i) + " " + rightPanelList.get(i));
-
-        //System.out.println();
     }
 }

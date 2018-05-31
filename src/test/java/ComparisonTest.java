@@ -418,6 +418,22 @@ public class ComparisonTest {
 
     @Test
     public void samePanelTest(){
+        left.add("Hello world!");
+        left.add(null);
+        left.add("안녕하세요.");
+        left.add(null);
+        left.add("123456");
+        left.add(null);
+        left.add("!@#$%^");
 
+        right.add("Hello world!");
+        right.add(null);
+        right.add("안녕하세요.");
+        right.add(null);
+        right.add("123456");
+        right.add(null);
+        right.add("!@#$%^");
+
+        c.panelFix(left, right);
     }
 }
