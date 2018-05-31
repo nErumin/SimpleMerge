@@ -195,10 +195,12 @@ public class Comparison {
                     pair[j][0] += howMany;
                 }
                 while(howMany > 0) {
-
                     System.out.println(howMany);
                     leftPanelList.add(pair[i][0],null);
                     howMany--;
+                    if(howMany == 0){
+                        sameLine.add("" + pair[i][0]);
+                    }
                 }
             }
         }
