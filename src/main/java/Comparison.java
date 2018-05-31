@@ -60,7 +60,7 @@ public class Comparison {
     public boolean lineIsEqual(String x, String y) {
         // check two strings using a lcsLength function
         // Two strings length should be same.
-        if((x.length() == y.length()) && (lcsLength(x,y) == x.length())) {
+        if ((x.length() == y.length()) && (lcsLength(x,y) == x.length())) {
             return true;
         } else return false; // The other case, false
     }
@@ -126,15 +126,15 @@ public class Comparison {
         int i = x.size()-1;
         int j = y.size()-1;
         int k = 0;
-        while(board[i][j] != 0) {
-            if(solution[i][j] == "diagonal") {
+        while (board[i][j] != 0) {
+            if (solution[i][j] == "diagonal") {
                 mirrorSolPair[k][0] = i - 1;
                 mirrorSolPair[k][1] = j - 1;
                 i--;
                 j--;
                 k++;
             } else {
-                if(solution[i][j] == "up") {
+                if (solution[i][j] == "up") {
                     i--;
                 } else {
                     j--;
@@ -143,7 +143,7 @@ public class Comparison {
         }
         pairNum = k;
         solPair = new int[k][2];
-        for(j = k - 1, i = 0; i < k; i++ ,j--) {
+        for (j = k - 1, i = 0; i < k; i++ ,j--) {
             solPair[i][0] = mirrorSolPair[j][0];
             solPair[i][1] = mirrorSolPair[j][1];
             System.out.println(solPair[i][0] + " " + solPair[i][1]);
@@ -162,34 +162,34 @@ public class Comparison {
         int howMany; lcsPanelLength(leftPanelList, rightPanelList);
         int[][] pair = solPair;
 
-        if(pair.length == 0 || rightPanelList.size() == 0 || leftPanelList.size() == 0) {
+        if (pair.length == 0 || rightPanelList.size() == 0 || leftPanelList.size() == 0) {
             rightShadowLine = new int[rightPanelList.size()];
-            for(int i = 0; i < rightPanelList.size(); i++) {
+            for (int i = 0; i < rightPanelList.size(); i++) {
                 rightShadowLine[i] = i;
                 diffLine.add("" + i);
             }
-            for(int i = 0; i < leftPanelList.size(); i++) {
+            for (int i = 0; i < leftPanelList.size(); i++) {
                 leftShadowLine[i] = i;
                 diffLine.add("" + i);
             }
         }
-        for(int i = 0; i < pairNum; i++) {
-            if(pair[i][0] > pair[i][1]) {
+        for (int i = 0; i < pairNum; i++) {
+            if (pair[i][0] > pair[i][1]) {
                 howMany = pair[i][0] - pair[i][1];
-                for(int j = i + 1; j < pairNum; j++) {
+                for (int j = i + 1; j < pairNum; j++) {
                     pair[j][1] += howMany;
                 }
-                while(howMany > 0) {
+                while (howMany > 0) {
                     System.out.println(howMany);
                     rightPanelList.add(pair[i][1],null);
                     howMany--;
                 }
             } else {
                 howMany = pair[i][1] - pair[i][0];
-                for(int j = i + 1; j < pairNum; j++) {
+                for (int j = i + 1; j < pairNum; j++) {
                     pair[j][0] += howMany;
                 }
-                while(howMany > 0) {
+                while (howMany > 0) {
                     System.out.println(howMany);
                     leftPanelList.add(pair[i][0],null);
                     howMany--;
