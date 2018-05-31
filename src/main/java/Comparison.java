@@ -161,18 +161,17 @@ public class Comparison {
     public ArrayList<String> panelFix(ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
         int howMany; lcsPanelLength(leftPanelList, rightPanelList);
         int[][] pair = solPair;
-
+/*
         if (pair.length == 0 || rightPanelList.size() == 0 || leftPanelList.size() == 0) {
             rightShadowLine = new int[rightPanelList.size()];
             for (int i = 0; i < rightPanelList.size(); i++) {
                 rightShadowLine[i] = i;
-                diffLine.add("" + i);
             }
             for (int i = 0; i < leftPanelList.size(); i++) {
                 leftShadowLine[i] = i;
-                diffLine.add("" + i);
             }
         }
+        */
         for (int i = 0; i < pairNum; i++) {
             if (pair[i][0] > pair[i][1]) {
                 howMany = pair[i][0] - pair[i][1];
@@ -196,6 +195,24 @@ public class Comparison {
                 }
             }
         }
+
+        int buf = leftPanelList.size() - rightPanelList.size();
+        int gap = Math.abs(buf);
+
+        while (gap > 0) {
+            if (buf < 0) {
+                leftPanelList.add(null);
+            } else {
+                rightPanelList.add(null);
+            }
+            gap--;
+        }
+
+        for (int i = 0; i < Math.max(leftPanelList.size(), rightPanelList.size()); i++) {
+            if (leftPanelList.get(i) != rightPanelList.get(i)) {
+                diffLine.add("" + i);
+            }
+        }
         return diffLine;
     }
 
@@ -211,7 +228,7 @@ public class Comparison {
         leftPanelList.add("123456");
         leftPanelList.add(null);
         leftPanelList.add("!@#$%^");
-
+/*
         rightPanelList.add("Hello world!");
         rightPanelList.add(null);
         rightPanelList.add("안녕하세요.");
@@ -219,10 +236,10 @@ public class Comparison {
         rightPanelList.add("123456");
         rightPanelList.add(null);
         rightPanelList.add("!@#$%^");
-
+*/
         board.panelFix(leftPanelList, rightPanelList);
 
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < leftPanelList.size(); i++)
             System.out.println(leftPanelList.get(i) + " " + rightPanelList.get(i));
     }
 }

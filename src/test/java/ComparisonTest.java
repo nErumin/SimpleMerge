@@ -488,7 +488,6 @@ public class ComparisonTest {
         right.add(null);
 
         array = c.panelFix(left, right);
-        Assert.assertEquals(1, array.size());
-        //Assert.assertEquals("2", array.get(0));
+        Assert.assertEquals(2, array.size());
     }
 }
