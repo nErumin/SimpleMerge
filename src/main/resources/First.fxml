@@ -5,10 +5,10 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
+<?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NotepadController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NotepadController">
     <top>
         <MenuBar fx:id="menubar" prefHeight="30.0" prefWidth="640.0">
         <menus>
@@ -20,33 +20,14 @@
                         <MenuItem onAction="#saveFile" text="Save-left" />
                         <MenuItem onAction="#saveasFile" text="Save As...-left" />
                   <SeparatorMenuItem />
-                  <MenuItem fx:id="newItemRight" onAction="#newFile" text="New-right" />
+                  <MenuItem fx:id="newItemRight" onAction="#newFileRight" text="New-right" />
                   <MenuItem onAction="#openFileRight" text="Open...-right" />
                   <MenuItem onAction="#saveFileRight" text="Save-right" />
                   <MenuItem onAction="#saveasFileRight" text="Save As...-right" />
                         <SeparatorMenuItem />
-                        <MenuItem text="Page Setup..." />
-                        <MenuItem text="Print" />
-                        <SeparatorMenuItem />
                         <MenuItem onAction="#exitApp" text="Exit" />
-                    </items>
-                </Menu>
-            <Menu mnemonicParsing="true" text="_Edit">
-                    <items>
-                        <MenuItem text="Undo" />
                         <SeparatorMenuItem />
-                        <MenuItem text="Cut" />
-                        <MenuItem text="Copy" />
-                        <MenuItem text="Paste" />
-                        <MenuItem text="Delete" />
-                        <SeparatorMenuItem />
-                        <MenuItem text="Find..." />
-                        <MenuItem text="Find Next" />
-                        <MenuItem text="Replace..." />
-                        <MenuItem text="Go To..." />
-                        <SeparatorMenuItem />
-                        <MenuItem text="Select All" />
-                        <MenuItem text="Time/Date" />
+
                     </items>
                 </Menu>
             <Menu mnemonicParsing="true" text="DiffMerge">
@@ -58,34 +39,16 @@
                     <SeparatorMenuItem />
                 </items>
             </Menu>
-            <Menu mnemonicParsing="true" text="F_ormat">
-                    <items>
-                        <MenuItem text="Word Wrap" />
-                        <MenuItem text="Font..." />
-                    </items>
-                </Menu>
-            <Menu mnemonicParsing="true" text="_View">
-                    <items>
-                        <MenuItem text="Status Bar" />
-                    </items>
-                </Menu>
-            <Menu mnemonicParsing="true" text="_Help">
-                    <items>
-                        <MenuItem text="View Help" />
-                        <SeparatorMenuItem />
-                        <MenuItem text="About Notepad" />
-                    </items>
-                </Menu>
             </menus>
         </MenuBar>
     </top>
    <center>
       <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
         <items>
-            <TextArea fx:id="textpane" prefHeight="450.0" prefWidth="320.0" />
+            <InlineCssTextArea fx:id="textpane" prefHeight="450.0" prefWidth="320.0" />
 
-              <TextArea fx:id="textpaneRight"  prefHeight="450.0" prefWidth="320.0">
-        </TextArea>
+              <InlineCssTextArea fx:id="textpaneRight" prefHeight="448.0" prefWidth="409.0">
+        </InlineCssTextArea>
         </items>
       </SplitPane>
    </center>

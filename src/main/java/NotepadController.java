@@ -11,6 +11,8 @@ import java.io.*;
 import javafx.application.Platform;
 import javafx.event.*;
 import javafx.stage.*;
+import org.fxmisc.richtext.InlineCssTextArea;
+
 
 public class NotepadController{
 
@@ -20,9 +22,9 @@ public class NotepadController{
     private FileChooser fileChooserRight = new FileChooser();
     private File fileRight;
     @FXML
-    private TextArea textpane;
+    private InlineCssTextArea textpane;
     @FXML
-    private TextArea textpaneRight;
+    private InlineCssTextArea textpaneRight;
 
     @FXML
     protected void newFile(ActionEvent event) {
@@ -45,11 +47,12 @@ public class NotepadController{
                 String sCurrentLine;
                 br = new BufferedReader(new FileReader(file));
                 while ((sCurrentLine = br.readLine()) != null) {
-                    textpane.appendText(sCurrentLine );
+                    textpane.appendText(sCurrentLine + "\n" );
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            highlightLine(10,20);
         }
     }
     @FXML
@@ -141,6 +144,7 @@ public class NotepadController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            highlightLineRight(10,20);
         }
     }
     @FXML
@@ -164,7 +168,7 @@ public class NotepadController{
             fileRight = fileChooserRight.showSaveDialog(null);
             if (fileRight != null) {
                 Stage stage = (Stage) textpaneRight.getScene().getWindow();
-                stage.setTitle(fileRight.getName() + " - Notepad");
+                stage.setTitle(fileRight.getName() + " - SimpleMerge");
                 try {
                     // if file doesnt exists, then create it
                     if (!fileRight.exists()) {
@@ -188,7 +192,7 @@ public class NotepadController{
         String content = textpaneRight.getText();
         if (fileRight != null) {
             Stage stage = (Stage) textpaneRight.getScene().getWindow();
-            stage.setTitle(fileRight.getName() + " - Notepad");
+            stage.setTitle(fileRight.getName() + " - SimpleMerge");
             try {
                 // if file doesnt exists, then create it
                 if (!fileRight.exists()) {
@@ -204,6 +208,25 @@ public class NotepadController{
         }
     }
 
+    /**
+     * Highlight left panel
+     * @param from start location for highlighting
+     * @param to end location for highlighting
+     */
+    public void highlightLine(int from, int to) {
+
+        textpane.setStyle(from,to,"-rtfx-background-color: lightgreen; ");
+
+    }
+
+    /**
+     * Highlight right panel
+     * @param from start location for highlighting
+     * @param to end location for highlighting
+     */
+    public void highlightLineRight(int from, int to) {
+        textpaneRight.setStyle(from,to,"-rtfx-background-color: lightgreen; ");
+    }
 
 
     @FXML
