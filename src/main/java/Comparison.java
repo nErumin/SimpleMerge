@@ -166,7 +166,6 @@ public class Comparison {
      * */
     public void panelFix(int[][] pair) {
     	int howMany;
-    	int longer;
     	if(pair.length == 0) {
     		rightShadowLine = new int[rightPanelList.size()];
     		for(int i = 0;i < rightPanelList.size(); i++) {
@@ -197,12 +196,7 @@ public class Comparison {
     	    	}
     		}
     	}
-    	if(leftPanelList.size()<rightPanelList.size()) {
-    		longer = rightPanelList.size();
-    	} else longer = leftPanelList.size();
-    	
-    	System.out.println(longer);
-    	for(int i = 0; i < longer; i++) {
+    	for(int i = 0; i < leftPanelList.size(); i++) {
 
         	System.out.println(leftPanelList.get(i) + " " + rightPanelList.get(i));
     	}
