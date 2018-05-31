@@ -438,26 +438,11 @@ public class ComparisonTest {
         right.add("!@#$%^");
 
         array = c.panelFix(left, right);
-        Assert.assertEquals(4, array.size());
-        Assert.assertEquals("0", array.get(0));
-    }
-
-    @Test
-    public void leftNullPanelTest() {
-        right.add("Hello world!");
-        right.add(null);
-        right.add("안녕하세요.");
-        right.add(null);
-        right.add("123456");
-        right.add(null);
-        right.add("!@#$%^");
-
-        array = c.panelFix(left, right);
         Assert.assertEquals(0, array.size());
     }
 
     @Test
-    public void rightNullPanelTest() {
+    public void leftNullPanelTest() {
         left.add("Hello world!");
         left.add(null);
         left.add("안녕하세요.");
@@ -467,12 +452,43 @@ public class ComparisonTest {
         left.add("!@#$%^");
 
         array = c.panelFix(left, right);
-        Assert.assertEquals(0, array.size());
+        Assert.assertEquals(7, array.size());
     }
-    
+
+    @Test
+    public void rightNullPanelTest() {
+        right.add("Hello world!");
+        right.add(null);
+        right.add("안녕하세요.");
+        right.add(null);
+        right.add("123456");
+        right.add(null);
+        right.add("!@#$%^");
+
+        array = c.panelFix(left, right);
+        Assert.assertEquals(7, array.size());
+    }
+
     @Test
     public void bothNullPanelTest() {
         array = c.panelFix(left, right);
         Assert.assertEquals(0, array.size());
+    }
+
+    @Test
+    public void Test() {
+        left.add("안녕하세요.");
+        left.add(null);
+        left.add("Hello world!");
+        left.add(null);
+
+        right.add("Hello world!");
+        right.add(null);
+        right.add("안녕하세요.");
+        right.add(null);
+
+        array = c.panelFix(left, right);
+        Assert.assertEquals(1, array.size());
+        //Assert.assertEquals("2", array.get(0));
     }
 }

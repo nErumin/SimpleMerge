@@ -11,7 +11,7 @@ public class Comparison {
     private int[][] sameLineIndex = new int [2][];
     private Integer[][] board;
     private String[][] solution;
-    private ArrayList<String> sameLine = new ArrayList<String>();
+    private ArrayList<String> diffLine = new ArrayList<String>();
 
 
     Comparison() {
@@ -110,9 +110,6 @@ public class Comparison {
                 if ((x.get(i) == y.get(j)) && (x.get(i) != null && y.get(j) != null)) {
                     solution[i][j] = "diagonal";
                     board[i][j] = board[i - 1][j - 1] + 1;
-
-                    // If Two string is same then add line number in array
-                    sameLine.add("" + (i - 1));
                 } else {
                     if((board[i][j - 1] > board[i - 1][j])) {
                         solution[i][j] = "left";
@@ -165,10 +162,15 @@ public class Comparison {
         int howMany; lcsPanelLength(leftPanelList, rightPanelList);
         int[][] pair = solPair;
 
-        if(pair.length == 0) {
+        if(pair.length == 0 || rightPanelList.size() == 0 || leftPanelList.size() == 0) {
             rightShadowLine = new int[rightPanelList.size()];
-            for(int i = 0;i < rightPanelList.size(); i++) {
+            for(int i = 0; i < rightPanelList.size(); i++) {
                 rightShadowLine[i] = i;
+                diffLine.add("" + i);
+            }
+            for(int i = 0; i < leftPanelList.size(); i++) {
+                leftShadowLine[i] = i;
+                diffLine.add("" + i);
             }
         }
         for(int i = 0; i < pairNum; i++) {
@@ -181,9 +183,6 @@ public class Comparison {
                     System.out.println(howMany);
                     rightPanelList.add(pair[i][1],null);
                     howMany--;
-                    if(howMany == 0){
-                        sameLine.add("" + pair[i][0]);
-                    }
                 }
             } else {
                 howMany = pair[i][1] - pair[i][0];
@@ -194,13 +193,10 @@ public class Comparison {
                     System.out.println(howMany);
                     leftPanelList.add(pair[i][0],null);
                     howMany--;
-                    if(howMany == 0){
-                        sameLine.add("" + pair[i][0]);
-                    }
                 }
             }
         }
-        return sameLine;
+        return diffLine;
     }
 
     public static void main(String[] args) {
@@ -208,11 +204,9 @@ public class Comparison {
         ArrayList<String> leftPanelList = new ArrayList<String>();
         ArrayList<String> rightPanelList = new ArrayList<String>();
 
-
-
-        leftPanelList.add("Hello world!");
-        leftPanelList.add(null);
         leftPanelList.add("안녕하세요.");
+        leftPanelList.add(null);
+        leftPanelList.add("Hello world!");
         leftPanelList.add(null);
         leftPanelList.add("123456");
         leftPanelList.add(null);
@@ -228,7 +222,7 @@ public class Comparison {
 
         board.panelFix(leftPanelList, rightPanelList);
 
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 9; i++)
             System.out.println(leftPanelList.get(i) + " " + rightPanelList.get(i));
     }
 }
