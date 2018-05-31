@@ -1,16 +1,37 @@
-#menubar{
-    -fx-background-color: linear-gradient(#FFF, #D4DBED, #E1E6F6);
+
+.root{
+    -fx-background-color: #2D2E32;
 
 }
+
+#menubar{
+    -fx-background-color: #3E3F43; /*linear-gradient(#000, #D4DBED, #101010);*/
+
+}
+
+#splitpane {
+    -fx-border-style: none;
+    -fx-border-color: #2D2E32;
+    -fx-border-width:30;
+}
+
 .menu .label{
-    -fx-text-fill: black;
+    /*-fx-background-color: #2D2E32;*/
+    -fx-text-fill: white;
 }
-#textpane{
+
+
+
+#textpane {
+    -fx-background-color: white;
     -fx-background-insets: 0, 0, 1, 2;
+    -fx-font-size:15;
 }
+
 
 .context-menu {
-    -fx-background-color: #F1F1F1;
+    -fx-background-color: #3E3F43;
     -fx-border-color: black;
     -fx-border-width: 0.5;
 }
+
