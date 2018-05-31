@@ -416,6 +416,9 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * panelFix Method TestCase
+     */
     @Test
     public void samePanelTest() {
         left.add("Hello world!");
@@ -436,6 +439,7 @@ public class ComparisonTest {
 
         array = c.panelFix(left, right);
         Assert.assertEquals(4, array.size());
+        Assert.assertEquals("0", array.get(0));
     }
 
     @Test
@@ -462,6 +466,12 @@ public class ComparisonTest {
         left.add(null);
         left.add("!@#$%^");
 
+        array = c.panelFix(left, right);
+        Assert.assertEquals(0, array.size());
+    }
+    
+    @Test
+    public void bothNullPanelTest() {
         array = c.panelFix(left, right);
         Assert.assertEquals(0, array.size());
     }
