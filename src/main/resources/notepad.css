@@ -28,6 +28,11 @@
     -fx-font-size:15;
 }
 
+#textpaneRight{
+    -fx-background-color: white;
+    -fx-background-insets: 0, 0, 1, 2;
+    -fx-font-size:15;
+}
 
 .context-menu {
     -fx-background-color: #3E3F43;
