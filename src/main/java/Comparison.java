@@ -23,7 +23,7 @@ public class Comparison {
     Comparison(int orgLength, int compLength) {
         leftPanelList = new ArrayList<String>();
         rightPanelList = new ArrayList<String>();
-        
+
     }
 
     /**
@@ -143,7 +143,7 @@ public class Comparison {
 		    	k++;
         	} else {
         		if(solution[i][j] == "up") {
-            		i--;	
+            		i--;
         		} else {
         			j--;
         		}
