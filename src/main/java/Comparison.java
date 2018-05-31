@@ -11,7 +11,8 @@ public class Comparison {
 	String[][] solution;
 	int[] leftShadowLine;
 	int[] rightShadowLine;
-	int pairNum;
+    int[][] solPair;
+    int pairNum;
 
 
     Comparison() {
@@ -150,7 +151,7 @@ public class Comparison {
         	}
         }
         pairNum = k;
-        int[][] solPair = new int[k][2];
+        solPair = new int[k][2];
         for(j = k - 1, i = 0; i < k; i++ ,j--) {
             solPair[i][0] = mirrorSolPair[j][0];
             solPair[i][1] = mirrorSolPair[j][1];
@@ -160,13 +161,16 @@ public class Comparison {
         y.remove(0);
     	return solPair;
     }
+
     /**
      * Fix the panel with blank addition
-     * @param pair : Original solution pair's index
-     * */
-    public void panelFix(int[][] pair, ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
-    	int howMany;
-    	if(pair.length == 0) {
+     * @param leftPanelList
+     * @param rightPanelList
+     */
+    public void panelFix(ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
+    	int howMany; lcsPanelLength(leftPanelList, rightPanelList);
+        int[][] pair = solPair;
+        if(pair.length == 0) {
     		rightShadowLine = new int[rightPanelList.size()];
     		for(int i = 0;i < rightPanelList.size(); i++) {
     			rightShadowLine[i] = i;
@@ -219,7 +223,10 @@ public class Comparison {
         rightPanelList.add("010");
 
 
-        board.panelFix(board.lcsPanelLength(leftPanelList, rightPanelList), leftPanelList, rightPanelList);
+        board.panelFix(leftPanelList, rightPanelList);
+
+        for(int i = 0; i < leftPanelList.size(); i++)
+            System.out.println(leftPanelList.get(i) + " " + rightPanelList.get(i));
 
         //System.out.println();
     }
