@@ -6,7 +6,8 @@ public class ComparisonTest {
 
 
     private Comparison c = new Comparison();
-    private String X, Y;
+    private String x, y;
+    private
 
     /**
      * Case 1: Same length input String
@@ -14,16 +15,16 @@ public class ComparisonTest {
      */
     @Test
     public void sameStringTest() {
-        X = "123456789";
-        Y = "123456789";
-        boolean result = c.lineIsEqual(X, Y);
+        x = "123456789";
+        y = "123456789";
+        boolean result = c.lineIsEqual(x, y);
         Assert.assertTrue(result);
     }
 
 
     @Test
     public void nomalCaseTest() {
-        X = "123456789";
+        x = "123456789";
         Y = "321456789";
         boolean result = c.lineIsEqual(X, Y);
         Assert.assertFalse(result);
@@ -415,6 +416,6 @@ public class ComparisonTest {
 
     @Test
     public void samePanelTest(){
-        
+
     }
 }

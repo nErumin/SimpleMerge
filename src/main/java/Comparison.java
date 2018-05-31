@@ -196,10 +196,6 @@ public class Comparison {
     	    	}
     		}
     	}
-    	for(int i = 0; i < leftPanelList.size(); i++) {
-
-        	System.out.println(leftPanelList.get(i) + " " + rightPanelList.get(i));
-    	}
     }
 
     public static void main(String[] args) {
