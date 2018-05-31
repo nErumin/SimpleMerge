@@ -1,10 +1,17 @@
+import java.util.ArrayList;
+
 public class Comparison {
-	Integer[][] c;
+	private static ArrayList<String> leftPanelList;
+	private static ArrayList<String> rightPanelList;
+	Integer[][] board;
 	String[] origin;
 	String[] compared;
 	int[][] sameLineIndex = new int [2][];
 	int partition;
-
+	String[][] solution;
+	int[] leftShadowLine;
+	int[] rightShadowLine;
+	int pairNum;
 
 
     Comparison() {
@@ -14,9 +21,9 @@ public class Comparison {
 
     }
     Comparison(int orgLength, int compLength) {
-    	origin = new String[orgLength];
-        compared = new String[compLength];
-        
+        leftPanelList = new ArrayList<String>();
+        rightPanelList = new ArrayList<String>();
+
     }
 
     /**
@@ -31,25 +38,25 @@ public class Comparison {
         // Add 0(null) string for counting
         x = "0" + x;
         y = "0" + y;
-        this.c = new Integer[x.length()][y.length()];
+        this.board = new Integer[x.length()][y.length()];
 
         for (i = 0; i < x.length(); i++) {
-            c[i][0] = 0;
+            board[i][0] = 0;
         }
         for (j = 0; j < y.length(); j++) {
-            c[0][j] = 0;
+            board[0][j] = 0;
         }
 
         for (i = 1; i < x.length(); i++) {
             for (j = 1; j < y.length(); j++) {
                 if (x.charAt(i) == y.charAt(j)) {
-                    c[i][j] = c[i - 1][j - 1] + 1;
+                    board[i][j] = board[i - 1][j - 1] + 1;
                 } else {
-                    c[i][j] = ((c[i][j - 1] > c[i - 1][j]) ? c[i][j - 1] : c[i - 1][j]);
+                    board[i][j] = ((board[i][j - 1] > board[i - 1][j]) ? board[i][j - 1] : board[i - 1][j]);
                 }
             }
         }
-        return c[x.length() - 1][y.length() - 1];
+        return board[x.length() - 1][y.length() - 1];
     }
 
     /**
@@ -89,55 +96,129 @@ public class Comparison {
 
     /**
      * test for LcS by strings
+     * @param x : ArrayList for left panel
+     * @param y : ArrayList for right panel
      * */
-    public int lcsPanelLength(String[] x, String[] y) {
+    public int[][] lcsPanelLength(ArrayList<String> x, ArrayList<String> y) {
         // Add 0(null) string for counting
-    	for (int i = x.length-2; i >= 0; i--) {
-    		x[i+1] = x[i];
-    	}
-    	x[0] = "0";
-    	for (int i = x.length-2; i >= 0; i--) {
-    		y[i+1] = y[i];
-    	}
-    	y[0] = "0";
-        this.c = new Integer[x.length][y.length];
+    	x.add(0,"0");
+    	y.add(0,"0");
+        this.board = new Integer[x.size()][y.size()];
+        this.solution = new String[x.size()][y.size()];
 
-        for (int i = 0; i < x.length; i++) {
-            c[i][0] = 0;
+        for (int i = 0; i < x.size(); i++) {
+            board[i][0] = 0;
         }
-        for (int j = 0; j < y.length; j++) {
-            c[0][j] = 0;
+        for (int j = 0; j < y.size(); j++) {
+            board[0][j] = 0;
         }
 
-        for ( int i = 1; i < x.length; i++) {
-            for (int j = 1; j < y.length; j++) {
-                if (x[i] == y[j]) {
-                    c[i][j] = c[i - 1][j - 1] + 1;
-                    System.out.println(i + "&");
+        for (int i = 1; i < x.size(); i++) {
+            for (int j = 1; j < y.size(); j++) {
+                if ((x.get(i) == y.get(j)) && (x.get(i) != null && y.get(j) != null)) {
+                	solution[i][j] = "diagonal";
+                    board[i][j] = board[i - 1][j - 1] + 1;
                 } else {
-                    c[i][j] = ((c[i][j - 1] > c[i - 1][j]) ? c[i][j - 1] : c[i - 1][j]);
+                	if((board[i][j - 1] > board[i - 1][j])) {
+                		solution[i][j] = "left";
+                		board[i][j] = board[i][j - 1];
+                	}
+                	else {
+                		solution[i][j] = "up";
+                		board[i][j] = board[i - 1][j];
+                	}
                 }
             }
         }
-    	return c[x.length - 1][y.length - 1];
+        int[][] mirrorSolPair = new int[x.size()][2];
+        int i = x.size()-1;
+        int j = y.size()-1;
+        int k = 0;
+        while(board[i][j] != 0) {
+        	if(solution[i][j] == "diagonal") {
+        		mirrorSolPair[k][0] = i - 1;
+        		mirrorSolPair[k][1] = j - 1;
+		    	i--;
+		    	j--;
+		    	k++;
+        	} else {
+        		if(solution[i][j] == "up") {
+            		i--;
+        		} else {
+        			j--;
+        		}
+        	}
+        }
+        pairNum = k;
+        int[][] solPair = new int[k][2];
+        for(j = k - 1, i = 0; i < k; i++ ,j--) {
+            solPair[i][0] = mirrorSolPair[j][0];
+            solPair[i][1] = mirrorSolPair[j][1];
+            System.out.println(solPair[i][0] + " " + solPair[i][1]);
+        }
+        leftPanelList.remove(0);
+        rightPanelList.remove(0);
+    	return solPair;
+    }
+    /**
+     * Fix the panel with blank addition
+     * @param pair : Original solution pair's index
+     * */
+    public void panelFix(int[][] pair) {
+    	int howMany;
+    	if(pair.length == 0) {
+    		rightShadowLine = new int[rightPanelList.size()];
+    		for(int i = 0;i < rightPanelList.size(); i++) {
+    			rightShadowLine[i] = i;
+    		}
+    	}
+    	for(int i = 0; i < pairNum; i++) {
+    		if(pair[i][0] > pair[i][1]) {
+    			howMany = pair[i][0] - pair[i][1];
+    			for(int j = i + 1; j < pairNum; j++) {
+    				pair[j][1] += howMany;
+    			}
+    			while(howMany > 0) {
+    				System.out.println(howMany);
+    				rightPanelList.add(pair[i][1],null);
+    				howMany--;
+    	    	}
+    		} else {
+    			howMany = pair[i][1] - pair[i][0];
+    			for(int j = i + 1; j < pairNum; j++) {
+    				pair[j][0] += howMany;
+    			}
+    			while(howMany > 0) {
+
+    				System.out.println(howMany);
+    				leftPanelList.add(pair[i][0],null);
+    				howMany--;
+    	    	}
+    		}
+    	}
+    	for(int i = 0; i < leftPanelList.size(); i++) {
+
+        	System.out.println(leftPanelList.get(i) + " " + rightPanelList.get(i));
+    	}
     }
 
     public static void main(String[] args) {
-        Comparison c = new Comparison(8,8);
-        c.compared[0] = "Something";
-        c.origin[0] = "Something";
-        c.compared[1] = "Anything";
-        c.origin[1] = "Something";
-        c.compared[2] = "Somethingasdf";
-        c.origin[2] = "Something";
-        c.compared[3] = "Something";
-        c.origin[3] = "Something";
-        c.compared[4] = "Something3";
-        c.origin[4] = "Something3";
-        c.compared[5] = "Something1";
-        c.origin[5] = "Something2";
-        int b = c.lcsPanelLength(c.compared, c.origin);
-        System.out.println(b);
+        Comparison board = new Comparison(9,9);
+        leftPanelList.add("1");
+        leftPanelList.add(null);
+        leftPanelList.add(null);
+        leftPanelList.add("2");
+        leftPanelList.add(null);
+        leftPanelList.add("4");
+        leftPanelList.add("5");
+        leftPanelList.add("6");
+        rightPanelList.add("2");
+        rightPanelList.add(null);
+        rightPanelList.add(null);
+        rightPanelList.add("8");
+        rightPanelList.add("9");
+        rightPanelList.add("010");
+        board.panelFix(board.lcsPanelLength(leftPanelList, rightPanelList));
 
 
         //System.out.println();
