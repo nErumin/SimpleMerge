@@ -31,7 +31,7 @@ public class Comparison {
      * @param y: Right Panel String
      * @return LcS Length
      */
-    public int lcsLength(String x, String y) {
+    private int lcsLength(String x, String y) {
         int i, j;
 
         // Add 0(null) string for counting
