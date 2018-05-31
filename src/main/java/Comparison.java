@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Comparison {
-	private static ArrayList<String> leftPanelList;
-	private static ArrayList<String> rightPanelList;
+	//private static ArrayList<String> leftPanelList;
+	//private static ArrayList<String> rightPanelList;
 	Integer[][] board;
 	String[] origin;
 	String[] compared;
@@ -21,8 +21,8 @@ public class Comparison {
 
     }
     Comparison(int orgLength, int compLength) {
-        leftPanelList = new ArrayList<String>();
-        rightPanelList = new ArrayList<String>();
+        //leftPanelList = new ArrayList<String>();
+        //rightPanelList = new ArrayList<String>();
 
     }
 
@@ -156,15 +156,15 @@ public class Comparison {
             solPair[i][1] = mirrorSolPair[j][1];
             System.out.println(solPair[i][0] + " " + solPair[i][1]);
         }
-        leftPanelList.remove(0);
-        rightPanelList.remove(0);
+        x.remove(0);
+        y.remove(0);
     	return solPair;
     }
     /**
      * Fix the panel with blank addition
      * @param pair : Original solution pair's index
      * */
-    public void panelFix(int[][] pair) {
+    public void panelFix(int[][] pair, ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
     	int howMany;
     	if(pair.length == 0) {
     		rightShadowLine = new int[rightPanelList.size()];
@@ -199,7 +199,10 @@ public class Comparison {
     }
 
     public static void main(String[] args) {
-        Comparison board = new Comparison(9,9);
+        Comparison board = new Comparison();
+        ArrayList<String> leftPanelList = new ArrayList<String>();
+        ArrayList<String> rightPanelList = new ArrayList<String>();
+
         leftPanelList.add("1");
         leftPanelList.add(null);
         leftPanelList.add(null);
@@ -214,8 +217,9 @@ public class Comparison {
         rightPanelList.add("8");
         rightPanelList.add("9");
         rightPanelList.add("010");
-        board.panelFix(board.lcsPanelLength(leftPanelList, rightPanelList));
 
+
+        board.panelFix(board.lcsPanelLength(leftPanelList, rightPanelList), leftPanelList, rightPanelList);
 
         //System.out.println();
     }
