@@ -96,6 +96,8 @@ public class Comparison {
 
     /**
      * test for LcS by strings
+     * @param x : ArrayList for left panel
+     * @param y : ArrayList for right panel
      * */
     public int[][] lcsPanelLength(ArrayList<String> x, ArrayList<String> y) {
         // Add 0(null) string for counting
@@ -158,9 +160,13 @@ public class Comparison {
         rightPanelList.remove(0);
     	return solPair;
     }
-    
+    /**
+     * Fix the panel with blank addition
+     * @param pair : Original solution pair's index
+     * */
     public void panelFix(int[][] pair) {
     	int howMany;
+    	int longer;
     	if(pair.length == 0) {
     		rightShadowLine = new int[rightPanelList.size()];
     		for(int i = 0;i < rightPanelList.size(); i++) {
@@ -191,18 +197,23 @@ public class Comparison {
     	    	}
     		}
     	}
-    	for(int i = 0; i < leftPanelList.size(); i++) {
+    	if(leftPanelList.size()<rightPanelList.size()) {
+    		longer = rightPanelList.size();
+    	} else longer = leftPanelList.size();
+    	
+    	System.out.println(longer);
+    	for(int i = 0; i < longer; i++) {
 
         	System.out.println(leftPanelList.get(i) + " " + rightPanelList.get(i));
     	}
     }
 
     public static void main(String[] args) {
-        Comparison board = new Comparison(9,7);
+        Comparison board = new Comparison(9,9);
         leftPanelList.add("1");
         leftPanelList.add(null);
         leftPanelList.add(null);
-        leftPanelList.add("3");
+        leftPanelList.add("2");
         leftPanelList.add(null);
         leftPanelList.add("4");
         leftPanelList.add("5");
@@ -210,9 +221,9 @@ public class Comparison {
         rightPanelList.add("2");
         rightPanelList.add(null);
         rightPanelList.add(null);
-        rightPanelList.add("4");
-        rightPanelList.add("5");
-        rightPanelList.add("6");
+        rightPanelList.add("8");
+        rightPanelList.add("9");
+        rightPanelList.add("010");
         board.panelFix(board.lcsPanelLength(leftPanelList, rightPanelList));
 
 
