@@ -14,7 +14,7 @@ import javafx.stage.*;
 import org.fxmisc.richtext.InlineCssTextArea;
 
 
-public class NotepadController{
+public class FileController{
 
     private FileChooser fileChooser = new FileChooser();
     private File file;
@@ -25,6 +25,11 @@ public class NotepadController{
     private InlineCssTextArea textpane;
     @FXML
     private InlineCssTextArea textpaneRight;
+    @FXML
+    private javafx.scene.control.Button editButton;
+    @FXML
+    private javafx.scene.control.Button editButtonRight;
+
 
     @FXML
     protected void newFile(ActionEvent event) {
@@ -54,6 +59,14 @@ public class NotepadController{
             }
             highlightLine(10,20);
         }
+        textpane.setEditable(false);
+        //editButton.setDisable(true);
+    }
+    @FXML
+    protected void editFile(ActionEvent event) {
+        textpane.setEditable(true);
+        //editButton.setDisable(false);
+
     }
     @FXML
     protected void saveFile(ActionEvent event) {
@@ -146,6 +159,15 @@ public class NotepadController{
             }
             highlightLineRight(10,20);
         }
+        textpaneRight.setEditable(false);
+        //editButtonRight.setDisable(true);
+
+    }
+    @FXML
+    protected void editFileRight(ActionEvent event) {
+        textpaneRight.setEditable(true);
+        //editButtonRight.setDisable(false);
+
     }
     @FXML
     protected void saveFileRight(ActionEvent event) {
