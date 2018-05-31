@@ -113,7 +113,7 @@ public class Comparison {
 
         for (int i = 1; i < x.size(); i++) {
             for (int j = 1; j < y.size(); j++) {
-                if (x.get(i) == y.get(j)) {
+                if ((x.get(i) == y.get(j)) && (x.get(i) != null && y.get(j) != null)) {
                 	solution[i][j] = "diagonal";
                     board[i][j] = board[i - 1][j - 1] + 1;
                 } else {
@@ -152,7 +152,7 @@ public class Comparison {
         for(j = k - 1, i = 0; i < k; i++ ,j--) {
             solPair[i][0] = mirrorSolPair[j][0];
             solPair[i][1] = mirrorSolPair[j][1];
-//            System.out.println(solPair[i][0] + " " + solPair[i][1]);
+            System.out.println(solPair[i][0] + " " + solPair[i][1]);
         }
         leftPanelList.remove(0);
         rightPanelList.remove(0);
@@ -170,7 +170,9 @@ public class Comparison {
     	for(int i = 0; i < pairNum; i++) {
     		if(pair[i][0] > pair[i][1]) {
     			howMany = pair[i][0] - pair[i][1];
-    			
+    			for(int j = i + 1; j < pairNum; j++) {
+    				pair[j][1] += howMany;
+    			}
     			while(howMany > 0) {
     				System.out.println(howMany);
     				rightPanelList.add(pair[i][1],null);
@@ -178,7 +180,9 @@ public class Comparison {
     	    	}
     		} else {
     			howMany = pair[i][1] - pair[i][0];
-    			
+    			for(int j = i + 1; j < pairNum; j++) {
+    				pair[j][0] += howMany;
+    			}
     			while(howMany > 0) {
 
     				System.out.println(howMany);
@@ -197,15 +201,15 @@ public class Comparison {
         Comparison board = new Comparison(9,7);
         leftPanelList.add("1");
         leftPanelList.add(null);
-        leftPanelList.add("2");
+        leftPanelList.add(null);
         leftPanelList.add("3");
         leftPanelList.add(null);
         leftPanelList.add("4");
         leftPanelList.add("5");
         leftPanelList.add("6");
-        rightPanelList.add("1");
         rightPanelList.add("2");
-        rightPanelList.add("3");
+        rightPanelList.add(null);
+        rightPanelList.add(null);
         rightPanelList.add("4");
         rightPanelList.add("5");
         rightPanelList.add("6");
