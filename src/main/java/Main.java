@@ -29,6 +29,9 @@ public class Main extends Application {
             scene.getStylesheets().add(getClass().getResource("notepad.css").toExternalForm());
 
 
+
+
+            
             // display the stage
             primaryStage.show();
 
