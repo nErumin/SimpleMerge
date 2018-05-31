@@ -14,15 +14,16 @@ public class Main extends Application {
         try {
             // loading the fxml
             Pane pane = FXMLLoader.load(getClass().getResource(
-                "First.fxml"));
+                "second.fxml"));
 
             // creating and initializing the scene.
             Scene scene = new Scene(pane);
             primaryStage.setScene(scene);
 
+
             // setting the height and width of stage.
-            primaryStage.setWidth(1024);
-            primaryStage.setHeight(768);
+            primaryStage.setWidth(800);
+            primaryStage.setHeight(600);
 
             // setting the App title
             primaryStage.setTitle("Simplemerge");
@@ -31,7 +32,7 @@ public class Main extends Application {
 
 
 
-            
+
             // display the stage
             primaryStage.show();
 
