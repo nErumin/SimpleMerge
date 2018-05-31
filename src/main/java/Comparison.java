@@ -3,21 +3,19 @@ import java.util.ArrayList;
 public class Comparison {
 	//private static ArrayList<String> leftPanelList;
 	//private static ArrayList<String> rightPanelList;
-	Integer[][] board;
-	String[] origin;
-	String[] compared;
-	int[][] sameLineIndex = new int [2][];
-	int partition;
-	String[][] solution;
-	int[] leftShadowLine;
-	int[] rightShadowLine;
-    int[][] solPair;
-    int pairNum;
+	private Integer[][] board;
+    private String[] origin;
+    private String[] compared;
+    private int[][] sameLineIndex = new int [2][];
+    private int partition;
+    private String[][] solution;
+    private int[] leftShadowLine;
+    private int[] rightShadowLine;
+    private int[][] solPair;
+    private int pairNum;
 
 
     Comparison() {
-    	//origin[0] = "MAJSIEJx";
-    	//compared[0] = "MAJZZEDI";
         partition = 0;
 
     }
