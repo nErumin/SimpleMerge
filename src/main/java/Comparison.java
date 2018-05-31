@@ -13,6 +13,7 @@ public class Comparison {
     private int[] rightShadowLine;
     private int[][] solPair;
     private int pairNum;
+    private ArrayList<String> sameLine = new ArrayList<String>();
 
 
     Comparison() {
@@ -117,6 +118,7 @@ public class Comparison {
                 if ((x.get(i) == y.get(j)) && (x.get(i) != null && y.get(j) != null)) {
                     solution[i][j] = "diagonal";
                     board[i][j] = board[i - 1][j - 1] + 1;
+                    sameLine.add("" + (i - 1));
                 } else {
                     if((board[i][j - 1] > board[i - 1][j])) {
                         solution[i][j] = "left";
@@ -168,7 +170,7 @@ public class Comparison {
     public ArrayList<String> panelFix(ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
         int howMany; lcsPanelLength(leftPanelList, rightPanelList);
         int[][] pair = solPair;
-        ArrayList<String> sameLine = new ArrayList<String>();
+
         if(pair.length == 0) {
             rightShadowLine = new int[rightPanelList.size()];
             for(int i = 0;i < rightPanelList.size(); i++) {
@@ -212,24 +214,23 @@ public class Comparison {
         ArrayList<String> leftPanelList = new ArrayList<String>();
         ArrayList<String> rightPanelList = new ArrayList<String>();
 
-        leftPanelList.add("hello");
-        leftPanelList.add(null);
-        leftPanelList.add(null);
-        leftPanelList.add("World here is korea");
-        leftPanelList.add(null);
-        leftPanelList.add(null);
-        leftPanelList.add(null);
-        leftPanelList.add(null);
-        leftPanelList.add("4");
-        leftPanelList.add("bye!");
-        leftPanelList.add("6");
-        rightPanelList.add("World here is korea");
-        rightPanelList.add(null);
-        rightPanelList.add(null);
-        rightPanelList.add("bye");
-        rightPanelList.add("9");
-        rightPanelList.add("010");
 
+
+        leftPanelList.add("Hello world!");
+        leftPanelList.add(null);
+        leftPanelList.add("안녕하세요.");
+        leftPanelList.add(null);
+        leftPanelList.add("123456");
+        leftPanelList.add(null);
+        leftPanelList.add("!@#$%^");
+
+        rightPanelList.add("Hello world!");
+        rightPanelList.add(null);
+        rightPanelList.add("안녕하세요.");
+        rightPanelList.add(null);
+        rightPanelList.add("123456");
+        rightPanelList.add(null);
+        rightPanelList.add("!@#$%^");
 
         board.panelFix(leftPanelList, rightPanelList);
 

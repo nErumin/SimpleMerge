@@ -5,11 +5,12 @@ import java.util.ArrayList;
 
 public class ComparisonTest {
 
-
-
     private Comparison c = new Comparison();
     private String x, y;
-    private ArrayList<String> left, right;
+    private ArrayList<String>
+        left = new ArrayList<String>(),
+        right = new ArrayList<String>(),
+        array;
 
     /**
      * Case 1: Same length input String
@@ -78,7 +79,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void sameKorStringTest(){
+    public void sameKorStringTest() {
         x = "컴퓨터공학부";
         y = "컴퓨터공학부";
         boolean result = c.lineIsEqual(x, y);
@@ -86,7 +87,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void nomalCaseKorTest(){
+    public void nomalCaseKorTest() {
         x = "컴퓨터공학";
         y = "소프트웨어";
         boolean result = c.lineIsEqual(x, y);
@@ -95,7 +96,7 @@ public class ComparisonTest {
 
 
     @Test
-    public void korShortRStrTest(){
+    public void korShortRStrTest() {
         x = "컴퓨터공학";
         y = "컴공";
         boolean result = c.lineIsEqual(x, y);
@@ -103,7 +104,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void korShortLStrTest(){
+    public void korShortLStrTest() {
         x = "컴공";
         y = "컴퓨터공";
         boolean result = c.lineIsEqual(x, y);
@@ -111,7 +112,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void nullLeftKorTest(){
+    public void nullLeftKorTest() {
         x = "가나다라마";
         y = "";
         boolean result = c.lineIsEqual(x, y);
@@ -119,7 +120,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void nullRightKorTest(){
+    public void nullRightKorTest() {
         x = "가나다라마";
         y = "";
         boolean result = c.lineIsEqual(x, y);
@@ -127,7 +128,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void sameSymbolTest(){
+    public void sameSymbolTest() {
         x = "!@#$%^&*";
         y = "!@#$%^&*";
         boolean result = c.lineIsEqual(x, y);
@@ -135,7 +136,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void normalSymbolTest(){
+    public void normalSymbolTest() {
         x = "!@#$%^&*";
         y = "+}:{?><)";
         boolean result = c.lineIsEqual(x, y);
@@ -143,7 +144,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void nullLeftSymbolTest(){
+    public void nullLeftSymbolTest() {
         x = "";
         y = "!@#$%^&*";
         boolean result = c.lineIsEqual(x, y);
@@ -151,7 +152,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void nullRightSymbolTest(){
+    public void nullRightSymbolTest() {
         x = "!@#$%^&*";
         y = "";
         boolean result = c.lineIsEqual(x, y);
@@ -159,7 +160,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void shortLeftSymbolTest(){
+    public void shortLeftSymbolTest() {
         x = "!@#$";
         y = "!@#$%^&*";
         boolean result = c.lineIsEqual(x, y);
@@ -167,7 +168,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void shortRightSymbolTest(){
+    public void shortRightSymbolTest() {
         x = "!@#$%^&*";
         y = "!@#$";
         boolean result = c.lineIsEqual(x, y);
@@ -175,7 +176,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void sameEngStringTest(){
+    public void sameEngStringTest() {
         x = "CompEngScien";
         y = "CompEngScien";
         boolean result = c.lineIsEqual(x, y);
@@ -183,7 +184,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void nomalCaseEngTest(){
+    public void nomalCaseEngTest() {
         x = "SoftWare";
         y = "Computer";
         boolean result = c.lineIsEqual(x, y);
@@ -192,7 +193,7 @@ public class ComparisonTest {
 
 
     @Test
-    public void engShortRStrTest(){
+    public void engShortRStrTest() {
         x = "ComputerEngineering";
         y = "CE";
         boolean result = c.lineIsEqual(x, y);
@@ -200,7 +201,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void engShortLStrTest(){
+    public void engShortLStrTest() {
         x = "CE";
         y = "ComputerEngineering";
         boolean result = c.lineIsEqual(x, y);
@@ -208,7 +209,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void nullLeftEngTest(){
+    public void nullLeftEngTest() {
         x = "ABCDE";
         y = "";
         boolean result = c.lineIsEqual(x, y);
@@ -216,7 +217,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void nullRightEngTest(){
+    public void nullRightEngTest() {
         x = "ABCDE";
         y = "";
         boolean result = c.lineIsEqual(x, y);
@@ -224,7 +225,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void engKorStringTest(){
+    public void engKorStringTest() {
         x = "Computer";
         y = "컴퓨터공학부전공";
         boolean result = c.lineIsEqual(x, y);
@@ -232,7 +233,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void korEngStringTest(){
+    public void korEngStringTest() {
         x = "컴퓨터공학부전공";
         y = "Computer";
         boolean result = c.lineIsEqual(x, y);
@@ -240,7 +241,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenEngKorTest(){
+    public void diffLenEngKorTest() {
         x = "Computer";
         y = "컴퓨터";
         boolean result = c.lineIsEqual(x, y);
@@ -248,7 +249,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenKorEngTest(){
+    public void diffLenKorEngTest() {
         x = "컴퓨터";
         y = "Computer";
         boolean result = c.lineIsEqual(x, y);
@@ -256,7 +257,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void numKorStringTest(){
+    public void numKorStringTest() {
         x = "12345678";
         y = "컴퓨터공학부전공";
         boolean result = c.lineIsEqual(x, y);
@@ -264,7 +265,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void korNumStringTest(){
+    public void korNumStringTest() {
         x = "컴퓨터공학부전공";
         y = "12345678";
         boolean result = c.lineIsEqual(x, y);
@@ -272,7 +273,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenNumKorTest(){
+    public void diffLenNumKorTest() {
         x = "12345678";
         y = "컴퓨터";
         boolean result = c.lineIsEqual(x, y);
@@ -280,7 +281,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenKorNumTest(){
+    public void diffLenKorNumTest() {
         x = "컴퓨터";
         y = "12345678";
         boolean result = c.lineIsEqual(x, y);
@@ -288,7 +289,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void symKorStringTest(){
+    public void symKorStringTest() {
         x = "!@#$%^&*";
         y = "컴퓨터공학부전공";
         boolean result = c.lineIsEqual(x, y);
@@ -296,7 +297,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void korSymStringTest(){
+    public void korSymStringTest() {
         x = "컴퓨터공학부전공";
         y = "!@#$%^&*";
         boolean result = c.lineIsEqual(x, y);
@@ -304,7 +305,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenSymKorTest(){
+    public void diffLenSymKorTest() {
         x = "!@#$%^&*";
         y = "컴퓨터";
         boolean result = c.lineIsEqual(x, y);
@@ -312,7 +313,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenKorSymTest(){
+    public void diffLenKorSymTest() {
         x = "컴퓨터";
         y = "!@#$%^&*";
         boolean result = c.lineIsEqual(x, y);
@@ -320,7 +321,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void symNumStringTest(){
+    public void symNumStringTest() {
         x = "!@#$%^&*";
         y = "12345678";
         boolean result = c.lineIsEqual(x, y);
@@ -328,7 +329,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void numSymStringTest(){
+    public void numSymStringTest() {
         x = "12345678";
         y = "!@#$%^&*";
         boolean result = c.lineIsEqual(x, y);
@@ -336,7 +337,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenSymNumTest(){
+    public void diffLenSymNumTest() {
         x = "!@#$%^&*";
         y = "123";
         boolean result = c.lineIsEqual(x, y);
@@ -344,7 +345,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenNumSymTest(){
+    public void diffLenNumSymTest() {
         x = "123";
         y = "!@#$%^&*";
         boolean result = c.lineIsEqual(x, y);
@@ -352,7 +353,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void symEngStringTest(){
+    public void symEngStringTest() {
         x = "!@#$%^&*";
         y = "ABCDEFGH";
         boolean result = c.lineIsEqual(x, y);
@@ -360,7 +361,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void engSymStringTest(){
+    public void engSymStringTest() {
         x = "ABCDEFGH";
         y = "!@#$%^&*";
         boolean result = c.lineIsEqual(x, y);
@@ -368,7 +369,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenSymEngTest(){
+    public void diffLenSymEngTest() {
         x = "!@#$%^&*";
         y = "ABC";
         boolean result = c.lineIsEqual(x, y);
@@ -376,7 +377,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenEngSymTest(){
+    public void diffLenEngSymTest() {
         x = "ABC";
         y = "!@#$%^&*";
         boolean result = c.lineIsEqual(x, y);
@@ -384,7 +385,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void numEngStringTest(){
+    public void numEngStringTest() {
         x = "12345678";
         y = "ABCDEFGH";
         boolean result = c.lineIsEqual(x, y);
@@ -392,7 +393,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void engNumStringTest(){
+    public void engNumStringTest() {
         x = "ABCDEFGH";
         y = "12345678";
         boolean result = c.lineIsEqual(x, y);
@@ -400,7 +401,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenNumEngTest(){
+    public void diffLenNumEngTest() {
         x = "12345678";
         y = "ABC";
         boolean result = c.lineIsEqual(x, y);
@@ -408,16 +409,15 @@ public class ComparisonTest {
     }
 
     @Test
-    public void diffLenEngNumTest(){
+    public void diffLenEngNumTest() {
         x = "ABC";
         y = "12345678";
         boolean result = c.lineIsEqual(x, y);
         Assert.assertFalse(result);
-
     }
 
     @Test
-    public void samePanelTest(){
+    public void samePanelTest() {
         left.add("Hello world!");
         left.add(null);
         left.add("안녕하세요.");
@@ -434,6 +434,21 @@ public class ComparisonTest {
         right.add(null);
         right.add("!@#$%^");
 
-        c.panelFix(left, right);
+        array = c.panelFix(left, right);
+        Assert.assertEquals(4, array.size());
+    }
+
+    @Test
+    public void leftNullPanelTest() {
+        right.add("Hello world!");
+        right.add(null);
+        right.add("안녕하세요.");
+        right.add(null);
+        right.add("123456");
+        right.add(null);
+        right.add("!@#$%^");
+
+        array = c.panelFix(left, right);
+        Assert.assertEquals(0, array.size());
     }
 }
