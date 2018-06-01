@@ -4,18 +4,13 @@ public class Comparison {
     //private static ArrayList<String> leftPanelList;
     //private static ArrayList<String> rightPanelList;
     private int pairNum;
-    private int partition;
-    private int[] leftShadowLine;
-    private int[] rightShadowLine;
     private int[][] solPair;
-    private int[][] sameLineIndex = new int [2][];
     private Integer[][] board;
     private String[][] solution;
     private ArrayList<String> diffLine = new ArrayList<String>();
 
 
     Comparison() {
-        partition = 0;
     }
 
     /**
