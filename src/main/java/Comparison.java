@@ -65,32 +65,7 @@ public class Comparison {
         } else return false; // The other case, false
     }
 
-    /**
-     * Don't care right now
-     * It is not finished
-     * @param noworiginPos
-     * @param nowcomparedPos
-     * @param x
-     * @param y
-     */
-    public void figureSameIndex(int noworiginPos, int nowcomparedPos, String[] x, String[] y) {
-        int i=noworiginPos,j=nowcomparedPos;
-        if (this.lineIsEqual(x[i], y[j])) {
-            sameLineIndex[0][partition] =  noworiginPos;
-            while (this.lineIsEqual(x[i], y[j])) {
-                i++;
-                j++;
-            }
-            sameLineIndex[1][partition] = i;
-            partition++;
-        }
-    }
-
-    /**
-     * test for LcS by strings
-     * @param x : ArrayList for left panel
-     * @param y : ArrayList for right panel
-     * */
+    //
     private int[][] lcsPanelLength(ArrayList<String> x, ArrayList<String> y) {
         // Add 0(null) string for counting
         x.add(0,"0");
