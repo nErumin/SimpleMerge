@@ -177,31 +177,4 @@ public class Comparison {
         }
         return diffLine;
     }
-
-    public static void main(String[] args) {
-        Comparison board = new Comparison();
-        ArrayList<String> leftPanelList = new ArrayList<String>();
-        ArrayList<String> rightPanelList = new ArrayList<String>();
-
-        leftPanelList.add("안녕하세요.");
-        leftPanelList.add("");
-        leftPanelList.add("Hello world!");
-        leftPanelList.add("");
-        leftPanelList.add("123456");
-        leftPanelList.add("");
-        leftPanelList.add("!@#$%^");
-
-        rightPanelList.add("Hello world!");
-        rightPanelList.add("");
-        rightPanelList.add("안녕하세요.");
-        rightPanelList.add("");
-        rightPanelList.add("123456");
-        rightPanelList.add("");
-        rightPanelList.add("!@#$%^");
-
-        board.panelFix(leftPanelList, rightPanelList);
-
-        for(int i = 0; i < leftPanelList.size(); i++)
-            System.out.println(leftPanelList.get(i) + " " + rightPanelList.get(i));
-    }
 }
