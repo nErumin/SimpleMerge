@@ -91,7 +91,7 @@ public class Comparison {
      * @param x : ArrayList for left panel
      * @param y : ArrayList for right panel
      * */
-    public int[][] lcsPanelLength(ArrayList<String> x, ArrayList<String> y) {
+    private int[][] lcsPanelLength(ArrayList<String> x, ArrayList<String> y) {
         // Add 0(null) string for counting
         x.add(0,"0");
         y.add(0,"0");
