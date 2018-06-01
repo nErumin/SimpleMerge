@@ -1,20 +1,17 @@
 import java.util.ArrayList;
 
 public class Merger {
-    ArrayList<String> left = new ArrayList<String>(),
-        right = new ArrayList<String>();
-    int changeIndex;
 
     Merger(){
 
     }
 
-    void mergeLeft2Right() {
-
+    public void mergeLeft2Right(int index, ArrayList<String> left, ArrayList<String> right) {
+        right.add(index, left.get(index));
     }
 
-    void mergeRight2Left() {
-
+    public void mergeRight2Left(int index, ArrayList<String> left, ArrayList<String> right) {
+        left.add(index, right.get(index));
     }
 
 }
