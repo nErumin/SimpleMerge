@@ -33,4 +33,21 @@ public class MergerTest {
         merger.mergeRightLeft(0, left, right);
         Assert.assertEquals("", left.get(0));
     }
+
+    @Test
+    public void lefStringMergeTest() {
+        left.add("Hello world!");
+        right.add("");
+        merger.mergeLeftRight(0, left, right);
+        Assert.assertEquals("Hello world!", right.get(0));
+    }
+
+    @Test
+    public void rightStringMergeTest() {
+        left.add("");
+        right.add("Hello world!");
+        merger.mergeRightLeft(0, left, right);
+        Assert.assertEquals("Hello world!", left.get(0));
+    }
+
 }
