@@ -146,7 +146,6 @@ public class Comparison {
         for (j = k - 1, i = 0; i < k; i++ ,j--) {
             solPair[i][0] = mirrorSolPair[j][0];
             solPair[i][1] = mirrorSolPair[j][1];
-            System.out.println(solPair[i][0] + " " + solPair[i][1]);
         }
         x.remove(0);
         y.remove(0);
@@ -179,7 +178,6 @@ public class Comparison {
                     pair[j][1] += howMany;
                 }
                 while (howMany > 0) {
-                    System.out.println(howMany);
                     rightPanelList.add(pair[i][1],"");
                     howMany--;
                 }
@@ -189,7 +187,6 @@ public class Comparison {
                     pair[j][0] += howMany;
                 }
                 while (howMany > 0) {
-                    System.out.println(howMany);
                     leftPanelList.add(pair[i][0],"");
                     howMany--;
                 }
