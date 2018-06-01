@@ -180,7 +180,7 @@ public class Comparison {
                 }
                 while (howMany > 0) {
                     System.out.println(howMany);
-                    rightPanelList.add(pair[i][1],null);
+                    rightPanelList.add(pair[i][1],"");
                     howMany--;
                 }
             } else {
@@ -190,7 +190,7 @@ public class Comparison {
                 }
                 while (howMany > 0) {
                     System.out.println(howMany);
-                    leftPanelList.add(pair[i][0],null);
+                    leftPanelList.add(pair[i][0],"");
                     howMany--;
                 }
             }
@@ -222,21 +222,21 @@ public class Comparison {
         ArrayList<String> rightPanelList = new ArrayList<String>();
 
         leftPanelList.add("안녕하세요.");
-        leftPanelList.add(null);
+        leftPanelList.add("");
         leftPanelList.add("Hello world!");
-        leftPanelList.add(null);
+        leftPanelList.add("");
         leftPanelList.add("123456");
-        leftPanelList.add(null);
+        leftPanelList.add("");
         leftPanelList.add("!@#$%^");
-/*
+
         rightPanelList.add("Hello world!");
-        rightPanelList.add(null);
+        rightPanelList.add("");
         rightPanelList.add("안녕하세요.");
-        rightPanelList.add(null);
+        rightPanelList.add("");
         rightPanelList.add("123456");
-        rightPanelList.add(null);
+        rightPanelList.add("");
         rightPanelList.add("!@#$%^");
-*/
+
         board.panelFix(leftPanelList, rightPanelList);
 
         for(int i = 0; i < leftPanelList.size(); i++)

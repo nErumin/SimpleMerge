@@ -422,19 +422,19 @@ public class ComparisonTest {
     @Test
     public void samePanelTest() {
         left.add("Hello world!");
-        left.add(null);
+        left.add("");
         left.add("안녕하세요.");
-        left.add(null);
+        left.add("");
         left.add("123456");
-        left.add(null);
+        left.add("");
         left.add("!@#$%^");
 
         right.add("Hello world!");
-        right.add(null);
+        right.add("");
         right.add("안녕하세요.");
-        right.add(null);
+        right.add("");
         right.add("123456");
-        right.add(null);
+        right.add("");
         right.add("!@#$%^");
 
         array = c.panelFix(left, right);
@@ -444,11 +444,11 @@ public class ComparisonTest {
     @Test
     public void leftNullPanelTest() {
         left.add("Hello world!");
-        left.add(null);
+        left.add("");
         left.add("안녕하세요.");
-        left.add(null);
+        left.add("");
         left.add("123456");
-        left.add(null);
+        left.add("");
         left.add("!@#$%^");
 
         array = c.panelFix(left, right);
@@ -458,11 +458,11 @@ public class ComparisonTest {
     @Test
     public void rightNullPanelTest() {
         right.add("Hello world!");
-        right.add(null);
+        right.add("");
         right.add("안녕하세요.");
-        right.add(null);
+        right.add("");
         right.add("123456");
-        right.add(null);
+        right.add("");
         right.add("!@#$%^");
 
         array = c.panelFix(left, right);
@@ -478,14 +478,14 @@ public class ComparisonTest {
     @Test
     public void Test() {
         left.add("안녕하세요.");
-        left.add(null);
+        left.add("");
         left.add("Hello world!");
-        left.add(null);
+        left.add("");
 
         right.add("Hello world!");
-        right.add(null);
+        right.add("");
         right.add("안녕하세요.");
-        right.add(null);
+        right.add("");
 
         array = c.panelFix(left, right);
         Assert.assertEquals(2, array.size());
