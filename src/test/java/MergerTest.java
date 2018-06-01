@@ -50,4 +50,20 @@ public class MergerTest {
         Assert.assertEquals("Hello world!", left.get(0));
     }
 
+    @Test
+    public void lefStringReplaceTest() {
+        left.add("Hello world!");
+        right.add("헬로우 월드!");
+        merger.mergeLeftRight(0, left, right);
+        Assert.assertEquals("Hello world!", right.get(0));
+    }
+
+    @Test
+    public void rightStringReplaceTest() {
+        left.add("Hello world!");
+        right.add("헬로우 월드!");
+        merger.mergeLeftRight(0, left, right);
+        Assert.assertEquals("Hello world!", right.get(0));
+    }
+
 }
