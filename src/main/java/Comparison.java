@@ -160,7 +160,7 @@ public class Comparison {
     public ArrayList<String> panelFix(ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
         int howMany; lcsPanelLength(leftPanelList, rightPanelList);
         int[][] pair = solPair;
-        
+
         for (int i = 0; i < pairNum; i++) {
             if (pair[i][0] > pair[i][1]) {
                 howMany = pair[i][0] - pair[i][1];
