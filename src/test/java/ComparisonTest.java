@@ -12,9 +12,11 @@ public class ComparisonTest {
         right = new ArrayList<String>(),
         array;
 
-    /**
-     * Case 1: Same length input String
+    /** lineIsEqual Class Testing
      *
+     * Case 1: Same length number
+     * Left: String
+     * Right: String
      */
     @Test
     public void sameStringTest() {
@@ -24,7 +26,11 @@ public class ComparisonTest {
         Assert.assertTrue(result);
     }
 
-
+    /**
+     * Case 2: Same length, but different contents
+     * Left: String
+     * Right: String
+     */
     @Test
     public void nomalCaseTest() {
         x = "123456789";
@@ -33,7 +39,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
-
+    /**
+     * Case 3
+     * Left: null,
+     * Right: String
+     */
     @Test
     public void nullLeftStringTest() {
         x = "";
@@ -42,7 +52,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
-
+    /**
+     * Case 4
+     * Left: Character,
+     * Right: null
+     */
     @Test
     public void nullRightStringTest() {
         x = "123456789";
@@ -51,7 +65,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
-
+    /**
+     * Caes 5
+     * Left: null
+     * Right: null
+     */
     @Test
     public void nullStringTest() {
         x = "";
@@ -60,7 +78,11 @@ public class ComparisonTest {
         Assert.assertTrue(result);
     }
 
-
+    /**
+     * Case 6: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void shortLeftStringTest() {
         x = "123456789";
@@ -69,7 +91,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
-
+    /**
+     * Case 7: Different length
+     * LEft: String
+     * Right: String
+     */
     @Test
     public void shortRightStringTest() {
         x = "2345";
@@ -78,6 +104,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /** Korean
+     * Case 8
+     * Left: String
+     * Right: String
+     */
     @Test
     public void sameKorStringTest() {
         x = "컴퓨터공학부";
@@ -86,6 +117,11 @@ public class ComparisonTest {
         Assert.assertTrue(result);
     }
 
+    /**
+     * Case 9: Different contents
+     * Left: String
+     * Right: String
+     */
     @Test
     public void nomalCaseKorTest() {
         x = "컴퓨터공학";
@@ -94,7 +130,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
-
+    /**
+     * Case 10: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void korShortRStrTest() {
         x = "컴퓨터공학";
@@ -103,6 +143,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 11: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void korShortLStrTest() {
         x = "컴공";
@@ -111,6 +156,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 12
+     * Left: null
+     * Right: String
+     */
     @Test
     public void nullLeftKorTest() {
         x = "가나다라마";
@@ -119,6 +169,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 13
+     * Left: String
+     * Right: null
+     */
     @Test
     public void nullRightKorTest() {
         x = "가나다라마";
@@ -127,6 +182,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 14
+     * Left: Symbol
+     * Right: Symbol
+     */
     @Test
     public void sameSymbolTest() {
         x = "!@#$%^&*";
@@ -135,6 +195,11 @@ public class ComparisonTest {
         Assert.assertTrue(result);
     }
 
+    /**
+     * Case 15: Different Symbol
+     * Left: String
+     * Right: String
+     */
     @Test
     public void normalSymbolTest() {
         x = "!@#$%^&*";
@@ -143,6 +208,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 16
+     * Left: null
+     * Right: String
+     */
     @Test
     public void nullLeftSymbolTest() {
         x = "";
@@ -151,6 +221,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 17
+     * Left: String
+     * Right: null
+     */
     @Test
     public void nullRightSymbolTest() {
         x = "!@#$%^&*";
@@ -159,6 +234,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 18: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void shortLeftSymbolTest() {
         x = "!@#$";
@@ -167,6 +247,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 19: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void shortRightSymbolTest() {
         x = "!@#$%^&*";
@@ -175,6 +260,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /** English
+     * Case 20
+     * Left: String
+     * Right: String
+     */
     @Test
     public void sameEngStringTest() {
         x = "CompEngScien";
@@ -183,6 +273,11 @@ public class ComparisonTest {
         Assert.assertTrue(result);
     }
 
+    /**
+     * Case 21
+     * Left: String
+     * Right: String
+     */
     @Test
     public void nomalCaseEngTest() {
         x = "SoftWare";
@@ -191,7 +286,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
-
+    /**
+     * Case 21: Different legnth
+     * Left: String
+     * Right: String
+     */
     @Test
     public void engShortRStrTest() {
         x = "ComputerEngineering";
@@ -200,6 +299,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 22: Different legnth
+     * Left: String
+     * Right: String
+     */
     @Test
     public void engShortLStrTest() {
         x = "CE";
@@ -208,6 +312,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 23
+     * Left: String
+     * Right: null
+     */
     @Test
     public void nullLeftEngTest() {
         x = "ABCDE";
@@ -216,6 +325,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 24
+     * Left: String
+     * Right: null
+     */
     @Test
     public void nullRightEngTest() {
         x = "ABCDE";
@@ -224,6 +338,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /** English - Korean
+     * Case 25
+     * Left: String
+     * Right: String
+     */
     @Test
     public void engKorStringTest() {
         x = "Computer";
@@ -232,6 +351,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 26
+     * Left: String
+     * Right: String
+     */
     @Test
     public void korEngStringTest() {
         x = "컴퓨터공학부전공";
@@ -240,6 +364,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 27: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenEngKorTest() {
         x = "Computer";
@@ -248,6 +377,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 28: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenKorEngTest() {
         x = "컴퓨터";
@@ -256,6 +390,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /** Number - Korean
+     * Case 29
+     * Left: String
+     * Right: String
+     */
     @Test
     public void numKorStringTest() {
         x = "12345678";
@@ -264,6 +403,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 30
+     * Left: String
+     * Right: String
+     */
     @Test
     public void korNumStringTest() {
         x = "컴퓨터공학부전공";
@@ -272,6 +416,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 31: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenNumKorTest() {
         x = "12345678";
@@ -280,6 +429,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 32: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenKorNumTest() {
         x = "컴퓨터";
@@ -288,6 +442,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /** Symbol - Korean
+     * Case 33
+     * Left: String
+     * Right: String
+     */
     @Test
     public void symKorStringTest() {
         x = "!@#$%^&*";
@@ -296,6 +455,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 34
+     * Left: String
+     * Right: String
+     */
     @Test
     public void korSymStringTest() {
         x = "컴퓨터공학부전공";
@@ -304,6 +468,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 35: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenSymKorTest() {
         x = "!@#$%^&*";
@@ -312,6 +481,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 36: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenKorSymTest() {
         x = "컴퓨터";
@@ -320,6 +494,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 37: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void symNumStringTest() {
         x = "!@#$%^&*";
@@ -328,6 +507,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /** Number - Symbol
+     * Case 38
+     * Left: String
+     * Right: String
+     */
     @Test
     public void numSymStringTest() {
         x = "12345678";
@@ -336,6 +520,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 39: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenSymNumTest() {
         x = "!@#$%^&*";
@@ -344,6 +533,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 40: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenNumSymTest() {
         x = "123";
@@ -352,6 +546,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /** Symbol - English
+     * Case 41
+     * Left: String
+     * Right: String
+     */
     @Test
     public void symEngStringTest() {
         x = "!@#$%^&*";
@@ -360,6 +559,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 42
+     * Left: String
+     * Right: String
+     */
     @Test
     public void engSymStringTest() {
         x = "ABCDEFGH";
@@ -368,6 +572,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 43: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenSymEngTest() {
         x = "!@#$%^&*";
@@ -376,6 +585,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 44: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenEngSymTest() {
         x = "ABC";
@@ -384,6 +598,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 45: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void numEngStringTest() {
         x = "12345678";
@@ -392,6 +611,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /** English - Number
+     * Case 46
+     * Left: String
+     * Right: String
+     */
     @Test
     public void engNumStringTest() {
         x = "ABCDEFGH";
@@ -400,6 +624,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 47: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenNumEngTest() {
         x = "12345678";
@@ -408,6 +637,11 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
+    /**
+     * Case 48: Different length
+     * Left: String
+     * Right: String
+     */
     @Test
     public void diffLenEngNumTest() {
         x = "ABC";
@@ -416,8 +650,8 @@ public class ComparisonTest {
         Assert.assertFalse(result);
     }
 
-    /**
-     * panelFix Method TestCase
+    /** panelFix Method TestCase
+     * Smae contents panel
      */
     @Test
     public void samePanelTest() {
@@ -441,6 +675,9 @@ public class ComparisonTest {
         Assert.assertEquals(0, array.size());
     }
 
+    /**
+     * Left panel: null
+     */
     @Test
     public void leftNullPanelTest() {
         left.add("Hello world!");
@@ -455,6 +692,9 @@ public class ComparisonTest {
         Assert.assertEquals(7, array.size());
     }
 
+    /**
+     * Right panel: null
+     */
     @Test
     public void rightNullPanelTest() {
         right.add("Hello world!");
@@ -469,14 +709,20 @@ public class ComparisonTest {
         Assert.assertEquals(7, array.size());
     }
 
+    /**
+     * Both panel: null
+     */
     @Test
     public void bothNullPanelTest() {
         array = c.panelFix(left, right);
         Assert.assertEquals(0, array.size());
     }
 
+    /**
+     * Different two panel
+     */
     @Test
-    public void Test() {
+    public void difPanelTest() {
         left.add("안녕하세요.");
         left.add("");
         left.add("Hello world!");
@@ -488,6 +734,7 @@ public class ComparisonTest {
         right.add("");
 
         array = c.panelFix(left, right);
+        for (int i = 0; i < left.size(); i++);
         Assert.assertEquals(2, array.size());
     }
 }
