@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
 public class Comparison {
-    //private static ArrayList<String> leftPanelList;
-    //private static ArrayList<String> rightPanelList;
     private int pairNum;
     private int[][] solPair;
     private Integer[][] board;
@@ -13,7 +11,7 @@ public class Comparison {
     Comparison() {
     }
 
-    /**
+    /*
      * calculate LcS length
      * @param x: Left Panel String
      * @param y: Right Panel String
@@ -60,7 +58,6 @@ public class Comparison {
         } else return false; // The other case, false
     }
 
-    //
     private int[][] lcsPanelLength(ArrayList<String> x, ArrayList<String> y) {
         // Add 0(null) string for counting
         x.add(0,"0");
@@ -153,9 +150,14 @@ public class Comparison {
             }
         }
 
+        /*
+         * After match the same string
+         * or when length of two panel's are different,
+         * fill in the null string.
+         */
+        // Check panel length
         int buf = leftPanelList.size() - rightPanelList.size();
         int gap = Math.abs(buf);
-
         while (gap > 0) {
             if (buf < 0) {
                 leftPanelList.add(null);
@@ -165,11 +167,12 @@ public class Comparison {
             gap--;
         }
 
+        // Rescan both panel and check different string
         for (int i = 0; i < Math.max(leftPanelList.size(), rightPanelList.size()); i++) {
             if (leftPanelList.get(i) != rightPanelList.get(i)) {
                 diffLine.add("" + i);
             }
         }
-        return diffLine;
+        return diffLine; // return index
     }
 }
