@@ -10,6 +10,15 @@ public class MergerTest {
         right = new ArrayList<String>();
 
     @Test
+    public void nuㅣlToNullMergeTest() {
+        left.add("");
+        right.add("");
+        merger.mergeLeftRight(0, left, right);
+        Assert.assertEquals("", right.get(0));
+        Assert.assertEquals("", left.get(0));
+    }
+
+    @Test
     public void leftNullMergeTest() {
         left.add("");
         right.add("Hello world!");
