@@ -9,12 +9,11 @@ public class MergerTest {
         left = new ArrayList<String>(),
         right = new ArrayList<String>();
 
-
     @Test
     public void leftNullMergeTest() {
         left.add("");
         right.add("Hello world!");
-        merger.mergeLeft2Right(0, left, right);
+        merger.mergeLeftRight(0, left, right);
         Assert.assertEquals("", right.get(0));
     }
 
@@ -22,7 +21,7 @@ public class MergerTest {
     public void rightNullMergeTest() {
         left.add("Hello world!");
         right.add("");
-        merger.mergeRight2Left(0, left, right);
+        merger.mergeRightLeft(0, left, right);
         Assert.assertEquals("", left.get(0));
     }
 }

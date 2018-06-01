@@ -6,11 +6,11 @@ public class Merger {
 
     }
 
-    public void mergeLeft2Right(int index, ArrayList<String> left, ArrayList<String> right) {
+    public void mergeLeftRight(int index, ArrayList<String> left, ArrayList<String> right) {
         right.add(index, left.get(index));
     }
 
-    public void mergeRight2Left(int index, ArrayList<String> left, ArrayList<String> right) {
+    public void mergeRightLeft(int index, ArrayList<String> left, ArrayList<String> right) {
         left.add(index, right.get(index));
     }
 
