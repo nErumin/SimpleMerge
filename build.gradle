@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'idea'
 
-mainClassName = 'MainApplication'
+mainClassName = 'Main'
 
 sourceCompatibility = "1.9"
 targetCompatibility = "1.9"
