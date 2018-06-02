@@ -58,13 +58,21 @@ public class Comparison {
         } else return false; // The other case, false
     }
 
+    /**
+     * 패널 내의 문장들에 대해서 문장을 단위로 LCS 알고리즘으로
+     * 서로 같은 문장을 찾아내서, 해당 문장의 인덱스를 짝지어 저장 후
+     * 반환하는 함수
+     * @param x 왼쪽 패널  내용
+     * @param y 오른쪽 패널 내용
+     * */
     private int[][] lcsPanelLength(ArrayList<String> x, ArrayList<String> y) {
-        // Add 0(null) string for counting
+        // 표를 이용해 연산하기 위해 0을 맨앞에 인위적으로 넣어줌.
         x.add(0,"0");
         y.add(0,"0");
         this.board = new Integer[x.size()][y.size()];
         this.solution = new String[x.size()][y.size()];
 
+        // 표의 1열과 1행은 0이어야 하므로 0으로 처리.
         for (int i = 0; i < x.size(); i++) {
             board[i][0] = 0;
         }
@@ -72,6 +80,7 @@ public class Comparison {
             board[0][j] = 0;
         }
 
+        //패널 내 문자열에 대해 LCS
         for (int i = 1; i < x.size(); i++) {
             for (int j = 1; j < y.size(); j++) {
                 if ((x.get(i) == y.get(j)) && (x.get(i) != null && y.get(j) != null)) {
@@ -89,10 +98,12 @@ public class Comparison {
                 }
             }
         }
+        //인덱스를 담을 공간, 되짚어 가기 때문에 값이 반대순서로 담김
         int[][] mirrorSolPair = new int[x.size()][2];
         int i = x.size()-1;
         int j = y.size()-1;
         int k = 0;
+        //사전에 저장된 이동경로 정보를 바탕으로 백트래킹
         while (board[i][j] != 0) {
             if (solution[i][j] == "diagonal") {
                 mirrorSolPair[k][0] = i - 1;
@@ -109,6 +120,7 @@ public class Comparison {
             }
         }
         pairNum = k;
+        //반대 순서로 담긴 정보를 다시 정방향 전환
         solPair = new int[k][2];
         for (j = k - 1, i = 0; i < k; i++ ,j--) {
             solPair[i][0] = mirrorSolPair[j][0];
@@ -116,18 +128,21 @@ public class Comparison {
         }
         x.remove(0);
         y.remove(0);
+        //순서쌍 반환
         return solPair;
     }
 
     /**
-     * Fix the panel with blank addition
-     * @param leftPanelList
-     * @param rightPanelList
+     * 양쪽 패널을 병합에 용이하고 사용자가 편하게 볼 수 있도록
+     * 줄바꿈을 추가하여 인위적 수정
+     * @param leftPanelList 왼쪽 패널 문자열
+     * @param rightPanelList 오른쪽 패널 문자열
      */
     public ArrayList<String> panelFix(ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
         int howMany; lcsPanelLength(leftPanelList, rightPanelList);
         int[][] pair = solPair;
 
+        //순서쌍 간의 차이를 이용해서 인위적으로 줄넘김 문자열 삽입
         for (int i = 0; i < pairNum; i++) {
             if (pair[i][0] > pair[i][1]) {
                 howMany = pair[i][0] - pair[i][1];
