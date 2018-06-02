@@ -43,7 +43,7 @@
         </MenuBar>
     </top>
    <center>
-      <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+      <SplitPane id="splitpane" dividerPositions="0.5" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
         <items>
             <InlineCssTextArea fx:id="textpane" prefHeight="450.0" prefWidth="320.0" />
 
