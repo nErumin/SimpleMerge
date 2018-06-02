@@ -5,74 +5,65 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 
-<?import javafx.scene.layout.Pane?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FileController">
-    <center>
-        <SplitPane id="orisplit" dividerPositions="0.5" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
-            <items>
-                <SplitPane id="splitpane-left" dividerPositions="0.07" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-                    <items>
-                        <AnchorPane id="anchorleft" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                            <children>
-                                <ToolBar id="toolbarleft" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <items>
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#openFile" text="Load" />
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#saveFile" text="Save" />
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#editFile" text="Edit" />
-                                    </items>
-                                </ToolBar>
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane id="anchorright" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                            <children>
-                                <InlineCssTextArea fx:id="textpane" prefHeight="498.0" prefWidth="395.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                            </children>
-                        </AnchorPane>
-                    </items>
-                </SplitPane>
-                <SplitPane id="splitpane-right" dividerPositions="0.07" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-                    <items>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                            <children>
-                                <ToolBar id="toolbarright" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <items>
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#openFileRight" text="Load" />
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#saveFileRight" text="Save" />
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#editFileRight" text="Edit" />
-                                    </items>
-                                </ToolBar>
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                            <children>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FileController">
+   <center>
+      <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+        <items>
+            <SplitPane dividerPositions="0.1" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <ToolBar prefHeight="53.0" prefWidth="397.0">
+                          <items>
+                              <Button mnemonicParsing="false" onAction="#openFile" text="Load" />
+                              <Button mnemonicParsing="false" onAction="#saveFile" text="Save" />
+                            <Button fx:id="editButton" mnemonicParsing="false" onAction="#editFile" text="Edit" />
+                          </items>
+                        </ToolBar>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <InlineCssTextArea fx:id="textpane" prefHeight="498.0" prefWidth="395.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <SplitPane dividerPositions="0.10022779043280182" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <ToolBar prefHeight="52.0" prefWidth="394.0">
+                           <items>
+                              <Button mnemonicParsing="false" onAction="#openFileRight" text="Load" />
+                              <Button mnemonicParsing="false" onAction="#saveFileRight" text="Save" />
+                              <Button fx:id="editButtonRight" mnemonicParsing="false" onAction="#editFileRight" text="Edit" />
+                           </items>
+                        </ToolBar>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
 
-                                <InlineCssTextArea fx:id="textpaneRight" prefHeight="503.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                </InlineCssTextArea>
-                            </children>
-                        </AnchorPane>
-                    </items>
-                </SplitPane>
-            </items>
-        </SplitPane>
-    </center>
-    <top>
-        <ToolBar fx:id="menubar" prefHeight="40.0" prefWidth="720.0">
-
-            <items>
-            <HBox prefHeight="22.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                   <Pane HBox.hgrow="ALWAYS" />
-                      <Button mnemonicParsing="false" text="Copy to Right-&gt;" />
-                      <Button mnemonicParsing="false" text="Compare" />
-                      <Button mnemonicParsing="false" text="&lt;-Copy to Left" />
-                   <Pane HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            </items>
-        </ToolBar>
-    </top>
+                          <InlineCssTextArea fx:id="textpaneRight" prefHeight="503.0" prefWidth="396.0">
+        </InlineCssTextArea>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+        </items>
+      </SplitPane>
+   </center>
+   <top>
+      <ToolBar fx:id="menubar" prefHeight="27.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+        <items>
+            <Button mnemonicParsing="false" text="Compare" />
+            <Button mnemonicParsing="false" text="Copy to Right-&gt;" />
+          <Button mnemonicParsing="false" text="&lt;-Copy to Left" />
+        </items>
+      </ToolBar>
+   </top>
 
 </BorderPane>
