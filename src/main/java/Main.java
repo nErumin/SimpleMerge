@@ -24,7 +24,7 @@ public class Main extends Application {
 
             // setting the height and width of stage.
             primaryStage.setWidth(800);
-            primaryStage.setHeight(600);
+            primaryStage.setHeight(650);
 
             // setting the App title
             primaryStage.setTitle("Simplemerge");
