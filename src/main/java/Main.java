@@ -14,11 +14,12 @@ public class Main extends Application {
         try {
             // loading the fxml
             Pane pane = FXMLLoader.load(getClass().getResource(
-                "second.fxml"));
+                "fxtemplate.fxml"));
 
             // creating and initializing the scene.
             Scene scene = new Scene(pane);
             primaryStage.setScene(scene);
+
 
 
             // setting the height and width of stage.
@@ -27,7 +28,7 @@ public class Main extends Application {
 
             // setting the App title
             primaryStage.setTitle("Simplemerge");
-            scene.getStylesheets().add(getClass().getResource("notepad.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("fxtemplate.css").toExternalForm());
 
 
 

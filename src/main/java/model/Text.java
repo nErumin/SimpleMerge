@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 /**
  * 텍스트를 나타내는 클래스입니다.
  */
-public final class Text {
+public final class Text implements Splittable {
     private static final String WORD_SPLIT_REGEX = "\\s*\\S+\\s*";
     private static final String EXTRACT_PURE_WORD_REGEX = "\\s+";
     private static final String LINE_SPLIT_REGEX =
