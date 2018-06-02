@@ -11,6 +11,8 @@ import java.io.*;
 import javafx.application.Platform;
 import javafx.event.*;
 import javafx.stage.*;
+import javafx.scene.control.Button;
+
 import org.fxmisc.richtext.InlineCssTextArea;
 
 
@@ -26,11 +28,13 @@ public class FileController{
     @FXML
     private InlineCssTextArea textpaneRight;
     @FXML
-    private javafx.scene.control.Button editButton;
+    private Button editButton;
     @FXML
-    private javafx.scene.control.Button editButtonRight;
+    private Button editButtonRight;
 
 
+
+    
     @FXML
     protected void newFile(ActionEvent event) {
         textpane.clear();
@@ -57,15 +61,15 @@ public class FileController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            highlightLine(10,20);
+
         }
         textpane.setEditable(false);
-        //editButton.setDisable(true);
+        editButton.setDisable(false);
     }
     @FXML
     protected void editFile(ActionEvent event) {
         textpane.setEditable(true);
-        //editButton.setDisable(false);
+        editButton.setDisable(true);
 
     }
     @FXML
@@ -157,16 +161,16 @@ public class FileController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            highlightLineRight(10,20);
+
         }
         textpaneRight.setEditable(false);
-        //editButtonRight.setDisable(true);
+        editButtonRight.setDisable(false);
 
     }
     @FXML
     protected void editFileRight(ActionEvent event) {
         textpaneRight.setEditable(true);
-        //editButtonRight.setDisable(false);
+        editButtonRight.setDisable(true);
 
     }
     @FXML
