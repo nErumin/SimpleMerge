@@ -19,7 +19,7 @@
                           <items>
                               <Button mnemonicParsing="false" onAction="#openFile" text="Load" />
                               <Button mnemonicParsing="false" onAction="#saveFile" text="Save" />
-                            <Button mnemonicParsing="false" onAction="#editFile" text="Edit" />
+                            <Button fx:id="editButton" mnemonicParsing="false" onAction="#editFile" text="Edit" />
                           </items>
                         </ToolBar>
                      </children>
@@ -39,7 +39,7 @@
                            <items>
                               <Button mnemonicParsing="false" onAction="#openFileRight" text="Load" />
                               <Button mnemonicParsing="false" onAction="#saveFileRight" text="Save" />
-                              <Button mnemonicParsing="false" onAction="#editFileRight" text="Edit" />
+                              <Button fx:id="editButtonRight" mnemonicParsing="false" onAction="#editFileRight" text="Edit" />
                            </items>
                         </ToolBar>
                      </children>
