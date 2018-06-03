@@ -52,9 +52,15 @@ public class FileController{
         leftPanelText = new Text(fixedLeft);
         rightPanelText = new Text(fixedRight);
 
+        List<String> diffLine = panelComparison.findDifLine(leftPanelText, rightPanelText);
+
+
         textpane.setAccessibleText(leftPanelText.lines().toString());
         textpaneRight.setAccessibleText(rightPanelText.lines().toString());
-
+        for(String s : diffLine){
+            highlightLine(leftPanelText.indexOf(s),leftPanelText.indexOf(s+1));
+            highlightLineRight(rightPanelText.indexOf(s),rightPanelText.indexOf(s+1));
+        }
     }
 
     @FXML
