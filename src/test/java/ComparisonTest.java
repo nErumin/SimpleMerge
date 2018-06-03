@@ -1,16 +1,23 @@
+import javafx.util.Pair;
+import model.Splittable;
 import org.junit.Assert;
 import org.junit.Test;
+import org.easymock.EasyMock;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ComparisonTest {
 
     private Comparison c = new Comparison();
+    private Pair<List<String>, List<String>> twoPanel;
     private String x, y;
     private ArrayList<String>
         left = new ArrayList<String>(),
         right = new ArrayList<String>(),
         array;
+
+    private Splittable txt = EasyMock.createMock(Splittable.class);
 
     /** lineIsEqual Class Testing
      *
@@ -655,6 +662,9 @@ public class ComparisonTest {
      */
     @Test
     public void samePanelTest() {
+
+        EasyMock.expect(txt.lines());
+
         left.add("Hello world!");
         left.add("");
         left.add("안녕하세요.");
@@ -671,7 +681,7 @@ public class ComparisonTest {
         right.add("");
         right.add("!@#$%^");
 
-        array = c.panelFix(left, right);
+
         Assert.assertEquals(0, array.size());
     }
 
@@ -680,6 +690,7 @@ public class ComparisonTest {
      */
     @Test
     public void leftNullPanelTest() {
+
         left.add("Hello world!");
         left.add("");
         left.add("안녕하세요.");
@@ -688,7 +699,6 @@ public class ComparisonTest {
         left.add("");
         left.add("!@#$%^");
 
-        array = c.panelFix(left, right);
         Assert.assertEquals(7, array.size());
     }
 
@@ -705,7 +715,7 @@ public class ComparisonTest {
         right.add("");
         right.add("!@#$%^");
 
-        array = c.panelFix(left, right);
+
         Assert.assertEquals(7, array.size());
     }
 
@@ -714,7 +724,7 @@ public class ComparisonTest {
      */
     @Test
     public void bothNullPanelTest() {
-        array = c.panelFix(left, right);
+
         Assert.assertEquals(0, array.size());
     }
 
@@ -733,7 +743,7 @@ public class ComparisonTest {
         right.add("안녕하세요.");
         right.add("");
 
-        array = c.panelFix(left, right);
+
         for (int i = 0; i < left.size(); i++);
         Assert.assertEquals(2, array.size());
     }
