@@ -1,5 +1,6 @@
 import javafx.util.Pair;
 import model.Splittable;
+import org.fxmisc.richtext.model.TwoDimensional;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -16,6 +17,7 @@ public class MergerTest {
         right = new ArrayList<String>();
     private Pair<List<String>, List<String>> actual;
     private Splittable splitLeftMock, splitRightMock;
+    private Pair<List<String>, List<String>> twoPanel;
 
     @Before
     public void baseSetting(){
@@ -25,23 +27,55 @@ public class MergerTest {
 
     @Test
     public void nullToNullMergeTest() {
-        left.add("");
-        right.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = merger.mergeLeftRight(0, splitLeftMock, splitRightMock);
+
     }
 
     @Test
     public void leftNullMergeTest() {
-        left.add("");
         right.add("Hello world!");
 
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
 
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = merger.mergeRightLeft(0, splitLeftMock, splitRightMock);
+        Assert.assertEquals(right.get(0), twoPanel.getKey().get(0));
     }
 
     @Test
     public void rightNullMergeTest() {
         left.add("Hello world!");
-        right.add("");
 
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = merger.mergeLeftRight(0, splitLeftMock, splitRightMock);
+        Assert.assertEquals(left.get(0), twoPanel.getValue().get(0));
     }
 
     @Test
@@ -49,6 +83,18 @@ public class MergerTest {
         left.add("Hello world!");
         right.add("");
 
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = merger.mergeLeftRight(0, splitLeftMock, splitRightMock);
+        Assert.assertEquals(left.get(0), twoPanel.getValue().get(0));
     }
 
     @Test
@@ -56,6 +102,18 @@ public class MergerTest {
         left.add("");
         right.add("Hello world!");
 
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = merger.mergeRightLeft(0, splitLeftMock, splitRightMock);
+        Assert.assertEquals(right.get(0), twoPanel.getKey().get(0));
     }
 
     @Test
@@ -63,6 +121,18 @@ public class MergerTest {
         left.add("Hello world!");
         right.add("헬로우 월드!");
 
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = merger.mergeRightLeft(0, splitLeftMock, splitRightMock);
+        Assert.assertEquals(right.get(0), twoPanel.getKey().get(0));
     }
 
     @Test
@@ -70,6 +140,18 @@ public class MergerTest {
         left.add("Hello world!");
         right.add("헬로우 월드!");
 
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = merger.mergeLeftRight(0, splitLeftMock, splitRightMock);
+        Assert.assertEquals(left.get(0), twoPanel.getValue().get(0));
     }
 
 }

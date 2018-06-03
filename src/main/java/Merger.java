@@ -15,7 +15,13 @@ public class Merger {
     public Pair<List<String>,List<String>> mergeLeftRight(int index, Splittable leftSplitter, Splittable rightSplitter) {
         List<String> left = IterableUtility.toList(leftSplitter.lines());
         List<String> right = IterableUtility.toList(rightSplitter.lines());
-        right.add(index, left.get(index));
+
+        if (right.size() == 0 && left.size() == 0) {
+        } else if (right.size() == 0 && left.size() != 0) {
+            right.add(left.get(index));
+        } else {
+            right.add(index, left.get(index));
+        }
         return new Pair<>(left,right);
     }
 
@@ -28,7 +34,13 @@ public class Merger {
     public Pair<List<String>,List<String>> mergeRightLeft(int index, Splittable leftSplitter, Splittable rightSplitter) {
         List<String> left = IterableUtility.toList(leftSplitter.lines());
         List<String> right = IterableUtility.toList(rightSplitter.lines());
-        left.add(index, right.get(index));
+
+        if (right.size() == 0 && left.size() == 0) {
+        } else if (left.size() == 0 && right.size() != 0) {
+            left.add(right.get(index));
+        } else {
+            left.add(index, right.get(index));
+        }
         return new Pair<>(left,right);
     }
 }
