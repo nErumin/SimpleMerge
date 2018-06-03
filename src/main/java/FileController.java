@@ -52,7 +52,8 @@ public class FileController{
         leftPanelText = new Text(fixedLeft);
         rightPanelText = new Text(fixedRight);
 
-                                                                        
+        textpane.setAccessibleText(leftPanelText.lines().toString());
+        textpaneRight.setAccessibleText(rightPanelText.lines().toString());
 
     }
 
