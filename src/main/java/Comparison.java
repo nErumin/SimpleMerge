@@ -84,7 +84,8 @@ public class Comparison {
         //패널 내 문자열에 대해 LCS
         for (int i = 1; i < x.size(); i++) {
             for (int j = 1; j < y.size(); j++) {
-                if ((x.get(i).equals(y.get(j))) && (x.get(i) != null && y.get(j) != null)) {
+                if ((x.get(i).equals(y.get(j))) && (x.get(i) != null && y.get(j) != null) &&
+                    !x.get(i).equals(StringUtility.EMPTY_STRING)) {
                     solution[i][j] = "diagonal";
                     board[i][j] = board[i - 1][j - 1] + 1;
                 } else {
