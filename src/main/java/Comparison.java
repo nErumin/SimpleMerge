@@ -1,16 +1,13 @@
+import model.Splittable;
+import utility.IterableUtility;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Comparison {
     private int pairNum;
-    private int[][] solPair;
     private Integer[][] board;
     private String[][] solution;
-    private List<String> diffLine = new ArrayList<String>();
-
-
-    Comparison() {
-    }
 
     /*
      * calculate LcS length
@@ -63,10 +60,13 @@ public class Comparison {
      * 패널 내의 문장들에 대해서 문장을 단위로 LCS 알고리즘으로
      * 서로 같은 문장을 찾아내서, 해당 문장의 인덱스를 짝지어 저장 후
      * 반환하는 함수
-     * @param x 왼쪽 패널  내용
-     * @param y 오른쪽 패널 내용
+     * @param leftSplitter 왼쪽 패널  내용
+     * @param rightSplitter 오른쪽 패널 내용
      * */
-    private void lcsPanelLength(List<String> x, List<String> y) {
+    private int[][] lcsPanelLength(Splittable leftSplitter, Splittable rightSplitter) {
+
+        List<String> x = IterableUtility.toList(leftSplitter.lines());
+        List<String> y = IterableUtility.toList(rightSplitter.lines());
         // 표를 이용해 연산하기 위해 0을 맨앞에 인위적으로 넣어줌.
         x.add(0,"0");
         y.add(0,"0");
@@ -122,26 +122,32 @@ public class Comparison {
         }
         pairNum = k;
         //반대 순서로 담긴 정보를 다시 정방향 전환
-        solPair = new int[k][2];
+        int[][] solPair = new int[k][2];
         for (j = k - 1, i = 0; i < k; i++ ,j--) {
             solPair[i][0] = mirrorSolPair[j][0];
             solPair[i][1] = mirrorSolPair[j][1];
         }
         x.remove(0);
         y.remove(0);
+
+        return solPair;
     }
 
     /**
      * 양쪽 패널을 병합에 용이하고 사용자가 편하게 볼 수 있도록
      * 줄바꿈을 추가하여 인위적 수정
-     * @param leftPanelList 왼쪽 패널 문자열
-     * @param rightPanelList 오른쪽 패널 문자열
+     * @param leftSplitter 왼쪽 패널 문자열
+     * @param rightSplitter 오른쪽 패널 문자열
      */
-    public List<String> panelFix(List<String> leftPanelList, List<String> rightPanelList) {
+    public List<String> panelFix(Splittable leftSplitter, Splittable rightSplitter) {
         int howMany;
         int[][] pair;
-        lcsPanelLength(leftPanelList, rightPanelList);
-        pair = solPair;
+        List<String> diffLine = new ArrayList<String>();
+
+        pair = lcsPanelLength(leftSplitter, rightSplitter);
+        
+        List<String> leftPanelList = IterableUtility.toList(leftSplitter.lines());
+        List<String> rightPanelList = IterableUtility.toList(rightSplitter.lines());
 
         //순서쌍 간의 차이를 이용해서 인위적으로 줄넘김 문자열 삽입
         for (int i = 0; i < pairNum; i++) {
