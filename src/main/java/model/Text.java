@@ -1,5 +1,6 @@
 package model;
 
+import utility.IterableUtility;
 import utility.StreamUtility;
 import utility.StringUtility;
 
@@ -21,7 +22,7 @@ public final class Text implements Splittable {
                                     , StringUtility.LINE_SEPARATOR
                                     , StringUtility.LINE_SEPARATOR);
     private static final String EXTRACT_PURE_LINE_REGEX =
-        String.format("[%s]+", StringUtility.LINE_SEPARATOR);
+        String.format("(?<=%s)", StringUtility.LINE_SEPARATOR);
 
     private StringBuffer buffer;
 
@@ -65,7 +66,7 @@ public final class Text implements Splittable {
     private Stream<String> lineStream() {
         return newLineIncludingStream()
             .flatMap(line -> Arrays.stream(line.split(EXTRACT_PURE_LINE_REGEX)))
-            .filter(line -> !line.equals(StringUtility.EMPTY_STRING));
+            .map(line -> line.replace(StringUtility.LINE_SEPARATOR, StringUtility.EMPTY_STRING));
     }
 
     /**
@@ -232,6 +233,15 @@ public final class Text implements Splittable {
      */
     public String findNearestLine(int position) {
         return findNearestString(newLineIncludingLines(), position);
+    }
+
+    /**
+     *
+     * @param lineIndex
+     * @return
+     */
+    public String getLine(int lineIndex) {
+        return IterableUtility.toList(lines()).get(lineIndex);
     }
 
     /**

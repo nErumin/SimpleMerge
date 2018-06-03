@@ -83,7 +83,7 @@ public class Comparison {
         //패널 내 문자열에 대해 LCS
         for (int i = 1; i < x.size(); i++) {
             for (int j = 1; j < y.size(); j++) {
-                if ((x.get(i) == y.get(j)) && (x.get(i) != null && y.get(j) != null)) {
+                if ((x.get(i).equals(y.get(j))) && (x.get(i) != null && y.get(j) != null)) {
                     solution[i][j] = "diagonal";
                     board[i][j] = board[i - 1][j - 1] + 1;
                 } else {
@@ -105,14 +105,14 @@ public class Comparison {
         int k = 0;
         //사전에 저장된 이동경로 정보를 바탕으로 백트래킹
         while (board[i][j] != 0) {
-            if (solution[i][j] == "diagonal") {
+            if (solution[i][j].equals("diagonal")) {
                 mirrorSolPair[k][0] = i - 1;
                 mirrorSolPair[k][1] = j - 1;
                 i--;
                 j--;
                 k++;
             } else {
-                if (solution[i][j] == "up") {
+                if (solution[i][j].equals("up")) {
                     i--;
                 } else {
                     j--;
