@@ -710,10 +710,14 @@ public class TextTest {
         final List<String> lines = new ArrayList<>();
         text.lines().forEach(lines::add);
 
-        Assert.assertThat(lines.size(), is(equalTo(2)));
+        Assert.assertThat(lines.size(), is(equalTo(4)));
         Assert.assertThat(lines.get(0),
-            is(equalTo(" Hello, World!")));
+            is(equalTo(StringUtility.EMPTY_STRING)));
         Assert.assertThat(lines.get(1),
+            is(equalTo(" Hello, World!")));
+        Assert.assertThat(lines.get(2),
+            is(equalTo(StringUtility.EMPTY_STRING)));
+        Assert.assertThat(lines.get(3),
             is(equalTo("Hello, Universe!")));
     }
 
@@ -781,5 +785,29 @@ public class TextTest {
 
         Assert.assertThat(text.findNearestWord(22),
             is(equalTo("Universe!")));
+    }
+
+    @Test
+    public void sentenceIndexFindingTest() {
+        final Text text = new Text("Hello, World!\nHello, Universe!");
+
+        Assert.assertThat(text.indexOf(text.findNearestLine(20)),
+            is(equalTo(14)));
+    }
+
+    @Test
+    public void wordIndexFindingTest() {
+        final Text text = new Text("Hello, World!\nHello, Universe!");
+
+        Assert.assertThat(text.indexOf("World!"),
+            is(equalTo(7)));
+    }
+
+    @Test
+    public void notExistIndexFindingTest() {
+        final Text text = new Text("Hello, World!\nHello, Universe!");
+
+        Assert.assertThat(text.indexOf("WORLD"),
+            is(equalTo(-1)));
     }
 }
