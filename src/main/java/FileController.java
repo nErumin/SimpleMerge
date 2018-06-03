@@ -1,19 +1,17 @@
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.stage.*;
 import java.io.*;
 import javafx.application.Platform;
-import javafx.event.*;
-import javafx.stage.*;
 import javafx.scene.control.Button;
 
+import java.util.List;
 import javafx.util.Pair;
+import javafx.stage.Stage;
+
+
 import org.fxmisc.richtext.InlineCssTextArea;
 import model.Text;
 import utility.StringUtility;
@@ -95,6 +93,10 @@ public class FileController{
         leftPanelText = new Text(merged.getKey().toString());
         rightPanelText = new Text(merged.getValue().toString());
     }
+
+
+
+
 
     public void initialize() {
         editButtonRight.setDisable(false);
@@ -311,7 +313,11 @@ public class FileController{
             }
         }
     }
-
+    @FXML
+    protected void compareButtonAction(){
+        ViewController fv = new ViewController();
+        fv.compareButtonAction();
+    }
     /**
      * Highlight left panel
      * @param from start location for highlighting

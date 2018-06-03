@@ -65,9 +65,11 @@
             <HBox prefHeight="22.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                    <Pane HBox.hgrow="ALWAYS" />
-                      <Button mnemonicParsing="false" onAction="#copyToRight" text="Copy to Right-&gt;" />
-                      <Button mnemonicParsing="false" onAction="#comparePanel" text="Compare" />
-                      <Button mnemonicParsing="false" onAction="#copyToLeft" text="&lt;-Copy to Left" />
+
+                      <Button fx:id="copytorightButton" mnemonicParsing="false" text="Copy to Right-&gt;" />
+                      <Button fx:id="compareButton" onAction="#compareButtonAction" mnemonicParsing="false" text="Compare" />
+                      <Button fx:id="copytoleftButton" mnemonicParsing="false" text="&lt;-Copy to Left" />
+
                    <Pane HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
