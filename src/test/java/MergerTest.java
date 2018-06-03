@@ -13,9 +13,6 @@ public class MergerTest {
     public void nuㅣlToNullMergeTest() {
         left.add("");
         right.add("");
-
-        Assert.assertEquals("", right.get(0));
-        Assert.assertEquals("", left.get(0));
     }
 
     @Test
@@ -23,7 +20,6 @@ public class MergerTest {
         left.add("");
         right.add("Hello world!");
 
-        Assert.assertEquals("", right.get(0));
     }
 
     @Test
@@ -31,7 +27,6 @@ public class MergerTest {
         left.add("Hello world!");
         right.add("");
 
-        Assert.assertEquals("", left.get(0));
     }
 
     @Test
@@ -39,7 +34,6 @@ public class MergerTest {
         left.add("Hello world!");
         right.add("");
 
-        Assert.assertEquals("Hello world!", right.get(0));
     }
 
     @Test
@@ -47,7 +41,6 @@ public class MergerTest {
         left.add("");
         right.add("Hello world!");
 
-        Assert.assertEquals("Hello world!", left.get(0));
     }
 
     @Test
@@ -55,7 +48,6 @@ public class MergerTest {
         left.add("Hello world!");
         right.add("헬로우 월드!");
 
-        Assert.assertEquals("Hello world!", right.get(0));
     }
 
     @Test
@@ -63,7 +55,6 @@ public class MergerTest {
         left.add("Hello world!");
         right.add("헬로우 월드!");
 
-        Assert.assertEquals("Hello world!", right.get(0));
     }
 
 }
