@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Comparison {
     private int pairNum;
-    private Integer[][] board;
-    private String[][] solution;
 
     /*
      * calculate LcS length
@@ -21,7 +19,7 @@ public class Comparison {
         // Add 0(null) string for counting
         x = "0" + x;
         y = "0" + y;
-        this.board = new Integer[x.length()][y.length()];
+        Integer[][] board = new Integer[x.length()][y.length()];
 
         for (i = 0; i < x.length(); i++) {
             board[i][0] = 0;
@@ -70,8 +68,8 @@ public class Comparison {
         // 표를 이용해 연산하기 위해 0을 맨앞에 인위적으로 넣어줌.
         x.add(0,"0");
         y.add(0,"0");
-        this.board = new Integer[x.size()][y.size()];
-        this.solution = new String[x.size()][y.size()];
+        Integer[][] board = new Integer[x.size()][y.size()];
+        String[][] solution = new String[x.size()][y.size()];
 
         // 표의 1열과 1행은 0이어야 하므로 0으로 처리.
         for (int i = 0; i < x.size(); i++) {
@@ -145,7 +143,7 @@ public class Comparison {
         List<String> diffLine = new ArrayList<String>();
 
         pair = lcsPanelLength(leftSplitter, rightSplitter);
-        
+
         List<String> leftPanelList = IterableUtility.toList(leftSplitter.lines());
         List<String> rightPanelList = IterableUtility.toList(rightSplitter.lines());
 
