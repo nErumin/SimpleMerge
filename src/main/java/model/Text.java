@@ -219,6 +219,10 @@ public final class Text implements Splittable {
      *  startIndex가 음수거나, 텍스트의 길이를 벗어나면 발생합니다.
      */
     public void replace(int startIndex, String replacingString) {
+        if (replacingString.length() == 0) {
+            return;
+        }
+
         if (startIndex < 0 || startIndex >= length()) {
             throw new StringIndexOutOfBoundsException();
         }
