@@ -59,7 +59,6 @@ public class FileController{
 
         List<String> diffLine = panelComparison.findDifLine(leftPanelText, rightPanelText);
 
-
         textpane.clear();
         textpaneRight.clear();
 
@@ -101,10 +100,6 @@ public class FileController{
         leftPanelText = new Text(merged.getKey().toString());
         rightPanelText = new Text(merged.getValue().toString());
     }
-
-
-
-
 
     public void initialize() {
         editButtonRight.setDisable(false);
@@ -332,9 +327,7 @@ public class FileController{
      * @param to end location for highlighting
      */
     public void highlightLine(int from, int to) {
-
-        textpane.setStyle(from,to,"-rtfx-background-color: lightgreen; ");
-
+        textpane.setStyle(from, to, "-rtfx-background-color: #ff9999; ");
     }
 
     /**
@@ -343,7 +336,7 @@ public class FileController{
      * @param to end location for highlighting
      */
     public void highlightLineRight(int from, int to) {
-        textpaneRight.setStyle(from,to,"-rtfx-background-color: lightgreen; ");
+        textpaneRight.setStyle(from, to, "-rtfx-background-color: #b3ffcb; ");
     }
 
 
