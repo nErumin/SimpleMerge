@@ -13,12 +13,12 @@ matrix:
     - os: linux
       dist: trusty
       jdk: oraclejdk9
-    # Headless Linux
-    - os: linux
-      dist: trusty
-      jdk: oraclejdk9
-      env:
-        - _JAVA_OPTIONS="-Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw -Dprism.text=t2k -Dtestfx.setup.timeout=2500"
+#    # Headless Linux
+#    - os: linux
+#      dist: trusty
+#      jdk: oraclejdk9
+#      env:
+#        - _JAVA_OPTIONS="-Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw -Dprism.text=t2k -Dtestfx.setup.timeout=2500"
 
 
 
