@@ -710,14 +710,10 @@ public class TextTest {
         final List<String> lines = new ArrayList<>();
         text.lines().forEach(lines::add);
 
-        Assert.assertThat(lines.size(), is(equalTo(4)));
+        Assert.assertThat(lines.size(), is(equalTo(2)));
         Assert.assertThat(lines.get(0),
-            is(equalTo(StringUtility.EMPTY_STRING)));
-        Assert.assertThat(lines.get(1),
             is(equalTo(" Hello, World!")));
-        Assert.assertThat(lines.get(2),
-            is(equalTo(StringUtility.EMPTY_STRING)));
-        Assert.assertThat(lines.get(3),
+        Assert.assertThat(lines.get(1),
             is(equalTo("Hello, Universe!")));
     }
 
