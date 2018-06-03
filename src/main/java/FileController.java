@@ -1,9 +1,9 @@
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import java.awt.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.stage.*;
@@ -13,7 +13,9 @@ import javafx.event.*;
 import javafx.stage.*;
 import javafx.scene.control.Button;
 
+import javafx.util.Pair;
 import org.fxmisc.richtext.InlineCssTextArea;
+import model.Text;
 
 
 public class FileController{
@@ -31,10 +33,29 @@ public class FileController{
     private Button editButton;
     @FXML
     private Button editButtonRight;
+    @FXML
+    private Button compareButton;
 
+    @FXML
+    protected void comparePanel(ActionEvent event) {
+        String leftPanel = textpane.getText();
+        String rightPanel = textpaneRight.getText();
 
+        Text leftPanelText = new Text(leftPanel);
+        Text rightPanelText = new Text(rightPanel);
+        Comparison panelComparison = new Comparison();
+        Pair<List<String>, List<String>> pair = panelComparison.panelFix(leftPanelText, rightPanelText);
 
-    
+        String fixedLeft = pair.getKey().toString();
+        String fixedRight = pair.getValue().toString();
+
+        leftPanelText = new Text(fixedLeft);
+        rightPanelText = new Text(fixedRight);
+
+                                                                        
+
+    }
+
     @FXML
     protected void newFile(ActionEvent event) {
         textpane.clear();
