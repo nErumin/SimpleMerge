@@ -1,13 +1,19 @@
+
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.stage.*;
 import java.io.*;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 
+
 import javafx.stage.Stage;
 
+
 import org.fxmisc.richtext.InlineCssTextArea;
+import model.Text;
+import utility.StringUtility;
 
 
 public class FileController{
@@ -34,6 +40,58 @@ public class FileController{
     @FXML
     private Button saveButtonRight;
 
+    @FXML
+    protected void comparePanel(ActionEvent event) {
+        String leftPanel = textpane.getText();
+        String rightPanel = textpaneRight.getText();
+
+        Text leftPanelText = new Text(leftPanel);
+        Text rightPanelText = new Text(rightPanel);
+        Comparison panelComparison = new Comparison();
+        Pair<List<String>, List<String>> pair = panelComparison.panelFix(leftPanelText, rightPanelText);
+
+        String fixedLeft = StringUtility.compact(pair.getKey(), true);
+        String fixedRight = StringUtility.compact(pair.getValue(), true);
+
+        leftPanelText = new Text(fixedLeft);
+        rightPanelText = new Text(fixedRight);
+
+        List<String> diffLine = panelComparison.findDifLine(leftPanelText, rightPanelText);
+
+        textpane.clear();
+        textpaneRight.clear();
+
+        textpane.insertText(0, leftPanelText.toString());
+        textpaneRight.insertText(0, rightPanelText.toString());
+
+        for (String s : diffLine) {
+            String leftLine = leftPanelText.getLine(Integer.parseInt(s));
+            String rightLine = rightPanelText.getLine(Integer.parseInt(s));
+
+            int leftDiffStartPoint = leftPanelText.indexOf(leftLine);
+            int rightDiffStartPoint = rightPanelText.indexOf(rightLine);
+
+            highlightLine(leftDiffStartPoint, leftDiffStartPoint + leftLine.length());
+            highlightLineRight(rightDiffStartPoint, rightDiffStartPoint + rightLine.length());
+        }
+    }
+
+    @FXML
+    protected void copyToRight(ActionEvent event) {
+        String leftPanel = textpane.getText();
+        String rightPanel = textpaneRight.getText();
+
+        Text leftPanelText = new Text(leftPanel);
+        Text rightPanelText = new Text(rightPanel);
+        int cursorPosition = textpane.getCaretPosition();
+
+        Merger panelMerger = new Merger();
+
+        Pair<List<String>, List<String>> merged = panelMerger.mergeLeftRight(cursorPosition, leftPanelText, rightPanelText);
+
+        leftPanelText = new Text(merged.getKey().toString());
+        rightPanelText = new Text(merged.getValue().toString());
+    }
 
 
 
@@ -48,6 +106,12 @@ public class FileController{
         saveButton.setDisable(false);
         textpaneRight.setEditable(false);
         textpane.setEditable(false);
+
+    }
+
+    @FXML
+    protected void copyToLeft(ActionEvent event){
+
     }
 
     @FXML
