@@ -41,7 +41,8 @@ public class MainTest {
     @AfterClass
     public static void tearDownClass() throws TimeoutException {
         FxToolkit.hideStage();
-        Platform.setImplicitExit(false);
+        //Platform.setImplicitExit(false);
+        Platform.exit();
     }
 
     @Before
