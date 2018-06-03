@@ -139,9 +139,11 @@ public class Comparison {
      * @param leftPanelList 왼쪽 패널 문자열
      * @param rightPanelList 오른쪽 패널 문자열
      */
-    public ArrayList<String> panelFix(List<String> leftPanelList, List<String> rightPanelList) {
-        int howMany; lcsPanelLength(leftPanelList, rightPanelList);
-        int[][] pair = solPair;
+    public List<String> panelFix(List<String> leftPanelList, List<String> rightPanelList) {
+        int howMany;
+        int[][] pair;
+        lcsPanelLength(leftPanelList, rightPanelList);
+        pair = solPair;
 
         //순서쌍 간의 차이를 이용해서 인위적으로 줄넘김 문자열 삽입
         for (int i = 0; i < pairNum; i++) {
