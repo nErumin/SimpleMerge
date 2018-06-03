@@ -1,3 +1,4 @@
+import javafx.util.Pair;
 import model.Splittable;
 import utility.IterableUtility;
 
@@ -137,10 +138,9 @@ public class Comparison {
      * @param leftSplitter 왼쪽 패널 문자열
      * @param rightSplitter 오른쪽 패널 문자열
      */
-    public List<String> panelFix(Splittable leftSplitter, Splittable rightSplitter) {
+    public Pair<List<String>, List<String>> panelFix(Splittable leftSplitter, Splittable rightSplitter) {
         int howMany;
         int[][] pair;
-        List<String> diffLine = new ArrayList<String>();
 
         pair = lcsPanelLength(leftSplitter, rightSplitter);
 
@@ -186,6 +186,13 @@ public class Comparison {
             }
             gap--;
         }
+        return new Pair<>(leftPanelList, rightPanelList);
+    }
+
+    public List<String> findDifLine(Splittable leftSplitter, Splittable rightSplitter){
+        List<String> diffLine = new ArrayList<String>();
+        List<String> leftPanelList = IterableUtility.toList(leftSplitter.lines());
+        List<String> rightPanelList = IterableUtility.toList(rightSplitter.lines());
 
         // Rescan both panel and check different string
         for (int i = 0; i < Math.max(leftPanelList.size(), rightPanelList.size()); i++) {
