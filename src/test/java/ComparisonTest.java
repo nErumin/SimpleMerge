@@ -1,6 +1,7 @@
 import javafx.util.Pair;
 import model.Splittable;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.easymock.EasyMock;
 
@@ -14,10 +15,16 @@ public class ComparisonTest {
     private String x, y;
     private ArrayList<String>
         left = new ArrayList<String>(),
-        right = new ArrayList<String>(),
-        array;
-
+        right = new ArrayList<String>();
+    private Splittable splitLeftMock, splitRightMock;
     private Splittable txt = EasyMock.createMock(Splittable.class);
+
+
+    @Before
+    public void baseSetting(){
+        splitLeftMock = EasyMock.createMock(Splittable.class);
+        splitRightMock = EasyMock.createMock(Splittable.class);
+    }
 
     /** lineIsEqual Class Testing
      *
@@ -662,9 +669,6 @@ public class ComparisonTest {
      */
     @Test
     public void samePanelTest() {
-
-        EasyMock.expect(txt.lines());
-
         left.add("Hello world!");
         left.add("");
         left.add("안녕하세요.");
@@ -680,6 +684,20 @@ public class ComparisonTest {
         right.add("123456");
         right.add("");
         right.add("!@#$%^");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(twoPanel.getKey(), twoPanel.getValue());
     }
 
     /**
@@ -695,6 +713,20 @@ public class ComparisonTest {
         left.add("123456");
         left.add("");
         left.add("!@#$%^");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(left, twoPanel.getKey());
     }
 
     /**
@@ -709,6 +741,19 @@ public class ComparisonTest {
         right.add("123456");
         right.add("");
         right.add("!@#$%^");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+        Assert.assertEquals(right, twoPanel.getValue());
     }
 
     /**
@@ -717,6 +762,20 @@ public class ComparisonTest {
     @Test
     public void bothNullPanelTest() {
 
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(0,twoPanel.getKey().size());
+        Assert.assertEquals(0,twoPanel.getValue().size());
     }
 
     /**
@@ -734,5 +793,24 @@ public class ComparisonTest {
         right.add("안녕하세요.");
         right.add("");
 
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        left.add(0, "");
+        left.add(0, "");
+        right.add("");
+        right.add("");
+
+        Assert.assertEquals(left, twoPanel.getKey());
+        Assert.assertEquals(right, twoPanel.getValue());
     }
 }
