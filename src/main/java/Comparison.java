@@ -66,7 +66,7 @@ public class Comparison {
      * @param x 왼쪽 패널  내용
      * @param y 오른쪽 패널 내용
      * */
-    private int[][] lcsPanelLength(List<String> x, List<String> y) {
+    private void lcsPanelLength(List<String> x, List<String> y) {
         // 표를 이용해 연산하기 위해 0을 맨앞에 인위적으로 넣어줌.
         x.add(0,"0");
         y.add(0,"0");
@@ -129,8 +129,6 @@ public class Comparison {
         }
         x.remove(0);
         y.remove(0);
-        //순서쌍 반환
-        return solPair;
     }
 
     /**
