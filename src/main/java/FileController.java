@@ -54,10 +54,11 @@ public class FileController{
         String fixedLeft = StringUtility.compact(pair.getKey(), true);
         String fixedRight = StringUtility.compact(pair.getValue(), true);
 
-        leftPanelText = new Text(fixedLeft);
-        rightPanelText = new Text(fixedRight);
+        leftPanelText.replace(0, fixedLeft);
+        rightPanelText.replace(0, fixedRight);
 
         List<String> diffLine = panelComparison.findDifLine(leftPanelText, rightPanelText);
+
 
         textpane.clear();
         textpaneRight.clear();
@@ -69,11 +70,18 @@ public class FileController{
             String leftLine = leftPanelText.getLine(Integer.parseInt(s));
             String rightLine = rightPanelText.getLine(Integer.parseInt(s));
 
-            int leftDiffStartPoint = leftPanelText.indexOf(leftLine);
-            int rightDiffStartPoint = rightPanelText.indexOf(rightLine);
+            int leftDiffStartPoint = leftPanelText.indexOfStartFromLine(
+                leftLine, Integer.parseInt(s)
+            );
 
-            highlightLine(leftDiffStartPoint, leftDiffStartPoint + leftLine.length());
-            highlightLineRight(rightDiffStartPoint, rightDiffStartPoint + rightLine.length());
+            int rightDiffStartPoint = rightPanelText.indexOfStartFromLine(
+                rightLine, Integer.parseInt(s)
+            );
+
+            highlightLine(leftDiffStartPoint,
+                leftDiffStartPoint + leftLine.length());
+            highlightLineRight(rightDiffStartPoint,
+                rightDiffStartPoint + rightLine.length());
         }
     }
 
