@@ -46,6 +46,15 @@ public final class Text implements Splittable {
     }
 
     /**
+     * 텍스트에서 내용이 시작되는 위치를 탐색합니다.
+     * @param content 탐색할 내용입니다.
+     * @return 내용이 시작되는 위치입니다. 찾지 못할경우, -1이 반환됩니다.
+     */
+    public int indexOf(String content) {
+        return buffer.indexOf(content);
+    }
+
+    /**
      * 이 텍스트에 존재하는 문장에 대한 열거자를 가져옵니다.
      * @return 텍스트에 존재하는 문장에 대한 열거자입니다.
      */
@@ -55,8 +64,8 @@ public final class Text implements Splittable {
 
     private Stream<String> lineStream() {
         return newLineIncludingStream()
-            .flatMap(word -> Arrays.stream(word.split(EXTRACT_PURE_LINE_REGEX)))
-            .filter(word -> !word.equals(StringUtility.EMPTY_STRING));
+            .flatMap(line -> Arrays.stream(line.split(EXTRACT_PURE_LINE_REGEX)))
+            .filter(line -> !line.equals(StringUtility.EMPTY_STRING));
     }
 
     /**
