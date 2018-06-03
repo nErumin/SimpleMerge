@@ -1,6 +1,7 @@
 import javafx.util.Pair;
 import model.Splittable;
 import utility.IterableUtility;
+import utility.StringUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -180,9 +181,9 @@ public class Comparison {
         int gap = Math.abs(buf);
         while (gap > 0) {
             if (buf < 0) {
-                leftPanelList.add(null);
+                leftPanelList.add(StringUtility.EMPTY_STRING);
             } else {
-                rightPanelList.add(null);
+                rightPanelList.add(StringUtility.EMPTY_STRING);
             }
             gap--;
         }
@@ -190,16 +191,17 @@ public class Comparison {
     }
 
     public List<String> findDifLine(Splittable leftSplitter, Splittable rightSplitter){
-        List<String> diffLine = new ArrayList<String>();
+        List<String> diffLine = new ArrayList<>();
         List<String> leftPanelList = IterableUtility.toList(leftSplitter.lines());
         List<String> rightPanelList = IterableUtility.toList(rightSplitter.lines());
 
         // Rescan both panel and check different string
-        for (int i = 0; i < Math.max(leftPanelList.size(), rightPanelList.size()); i++) {
+        for (int i = 0; i < Math.min(leftPanelList.size(), rightPanelList.size()); i++) {
             if (!leftPanelList.get(i).equals(rightPanelList.get(i))) {
                 diffLine.add("" + i);
             }
         }
+
         return diffLine; // return index
     }
 }

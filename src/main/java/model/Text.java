@@ -47,7 +47,7 @@ public final class Text implements Splittable {
     }
 
     /**
-     * 텍스트에서 내용이 시작되는 위치를 탐색합니다.
+     * 텍스트에서 내용이 처음 시작되는 위치를 탐색합니다.
      * @param content 탐색할 내용입니다.
      * @return 내용이 시작되는 위치입니다. 찾지 못할경우, -1이 반환됩니다.
      */
@@ -56,17 +56,43 @@ public final class Text implements Splittable {
     }
 
     /**
+     * 텍스트에서 내용이 처음 시작되는 위치를 특정 라인부터 탐색합니다.
+     * @param content 탐색할 내용입니다.
+     * @param lineIndex 탐색을 시작할 라인 번호를 가리킵니다.
+     * @return 내용이 시작되는 위치입니다. 찾지 못할경우. -1이 반환됩니다.
+     */
+    public int indexOfStartFromLine(String content, int lineIndex) {
+        int startIndex = 0;
+        int countedLine = 0;
+        for (String line : StreamUtility.toIterable(lineStream())) {
+            if (countedLine == lineIndex) {
+                break;
+            }
+
+            startIndex += line.length();
+            ++countedLine;
+        }
+        return buffer.indexOf(content, startIndex);
+    }
+
+    /**
      * 이 텍스트에 존재하는 문장에 대한 열거자를 가져옵니다.
      * @return 텍스트에 존재하는 문장에 대한 열거자입니다.
      */
     public Iterable<String> lines() {
-        return StreamUtility.toIterable(lineStream());
+        return StreamUtility.toIterable(lineNewLineReplacedStream());
+    }
+
+    private Stream<String> lineNewLineReplacedStream() {
+        return lineStream()
+            .map(line -> line.replace(StringUtility.LINE_SEPARATOR,
+                                      StringUtility.EMPTY_STRING));
     }
 
     private Stream<String> lineStream() {
         return newLineIncludingStream()
-            .flatMap(line -> Arrays.stream(line.split(EXTRACT_PURE_LINE_REGEX)))
-            .map(line -> line.replace(StringUtility.LINE_SEPARATOR, StringUtility.EMPTY_STRING));
+            .flatMap(line ->
+                Arrays.stream(line.split(EXTRACT_PURE_LINE_REGEX)));
     }
 
     /**
