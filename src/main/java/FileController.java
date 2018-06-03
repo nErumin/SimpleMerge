@@ -141,11 +141,11 @@ public class FileController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            textpane.setEditable(false);
+            editButton.setDisable(false);
         }
-        textpane.setEditable(false);
-        editButton.setDisable(false);
-    }
+        }
+
     @FXML
     protected void editFile(ActionEvent event) {
         textpane.setEditable(true);
@@ -241,10 +241,10 @@ public class FileController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            textpaneRight.setEditable(false);
+            editButtonRight.setDisable(false);
         }
-        textpaneRight.setEditable(false);
-        editButtonRight.setDisable(false);
+
 
     }
     @FXML
