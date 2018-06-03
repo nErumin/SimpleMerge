@@ -10,9 +10,9 @@ sudo: false   # Linux OS: run in container
 matrix:
   include:
 #    # Headed Linux
-#    - os: linux
-#      dist: trusty
-#      jdk: oraclejdk9
+    - os: linux
+      dist: trusty
+      jdk: oraclejdk9
     # Headless Linux
     - os: linux
       dist: trusty
