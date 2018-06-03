@@ -189,7 +189,7 @@ public class Comparison {
 
         // Rescan both panel and check different string
         for (int i = 0; i < Math.max(leftPanelList.size(), rightPanelList.size()); i++) {
-            if (leftPanelList.get(i) != rightPanelList.get(i)) {
+            if (!leftPanelList.get(i).equals(rightPanelList.get(i))) {
                 diffLine.add("" + i);
             }
         }
