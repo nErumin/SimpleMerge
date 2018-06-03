@@ -1,19 +1,17 @@
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.stage.*;
 import java.io.*;
 import javafx.application.Platform;
-import javafx.event.*;
-import javafx.stage.*;
 import javafx.scene.control.Button;
 
+import java.util.List;
 import javafx.util.Pair;
+import javafx.stage.Stage;
+
+
 import org.fxmisc.richtext.InlineCssTextArea;
 import model.Text;
 import utility.StringUtility;
@@ -56,10 +54,11 @@ public class FileController{
         String fixedLeft = StringUtility.compact(pair.getKey(), true);
         String fixedRight = StringUtility.compact(pair.getValue(), true);
 
-        leftPanelText = new Text(fixedLeft);
-        rightPanelText = new Text(fixedRight);
+        leftPanelText.replace(0, fixedLeft);
+        rightPanelText.replace(0, fixedRight);
 
         List<String> diffLine = panelComparison.findDifLine(leftPanelText, rightPanelText);
+
 
         textpane.clear();
         textpaneRight.clear();
@@ -71,11 +70,18 @@ public class FileController{
             String leftLine = leftPanelText.getLine(Integer.parseInt(s));
             String rightLine = rightPanelText.getLine(Integer.parseInt(s));
 
-            int leftDiffStartPoint = leftPanelText.indexOf(leftLine);
-            int rightDiffStartPoint = rightPanelText.indexOf(rightLine);
+            int leftDiffStartPoint = leftPanelText.indexOfStartFromLine(
+                leftLine, Integer.parseInt(s)
+            );
 
-            highlightLine(leftDiffStartPoint, leftDiffStartPoint + leftLine.length());
-            highlightLineRight(rightDiffStartPoint, rightDiffStartPoint + rightLine.length());
+            int rightDiffStartPoint = rightPanelText.indexOfStartFromLine(
+                rightLine, Integer.parseInt(s)
+            );
+
+            highlightLine(leftDiffStartPoint,
+                leftDiffStartPoint + leftLine.length());
+            highlightLineRight(rightDiffStartPoint,
+                rightDiffStartPoint + rightLine.length());
         }
     }
 
@@ -95,6 +101,10 @@ public class FileController{
         leftPanelText = new Text(merged.getKey().toString());
         rightPanelText = new Text(merged.getValue().toString());
     }
+
+
+
+
 
     public void initialize() {
         editButtonRight.setDisable(false);
@@ -139,11 +149,11 @@ public class FileController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            textpane.setEditable(false);
+            editButton.setDisable(false);
         }
-        textpane.setEditable(false);
-        editButton.setDisable(false);
-    }
+        }
+
     @FXML
     protected void editFile(ActionEvent event) {
         textpane.setEditable(true);
@@ -239,10 +249,10 @@ public class FileController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            textpaneRight.setEditable(false);
+            editButtonRight.setDisable(false);
         }
-        textpaneRight.setEditable(false);
-        editButtonRight.setDisable(false);
+
 
     }
     @FXML
@@ -311,7 +321,11 @@ public class FileController{
             }
         }
     }
-
+    @FXML
+    protected void compareButtonAction(){
+        ViewController fv = new ViewController();
+        fv.compareButtonAction();
+    }
     /**
      * Highlight left panel
      * @param from start location for highlighting
