@@ -733,6 +733,6 @@ public class ComparisonTest {
         right.add("");
         right.add("안녕하세요.");
         right.add("");
-        
+
     }
 }
