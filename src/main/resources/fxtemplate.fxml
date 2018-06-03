@@ -17,10 +17,10 @@
                     <items>
                         <AnchorPane id="anchorleft" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                             <children>
-                                <ToolBar id="toolbarleft" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <ToolBar fx:id="fxtoolbar" id="toolbarleft" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <items>
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#openFile" text="Load" />
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#saveFile" text="Save" />
+                                        <Button fx:id="loadButton"  mnemonicParsing="false" onAction="#openFile" text="Load" />
+                                        <Button fx:id="saveButton"  mnemonicParsing="false" onAction="#saveFile" text="Save" />
                                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#editFile" text="Edit" />
                                     </items>
                                 </ToolBar>
@@ -37,10 +37,10 @@
                     <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                             <children>
-                                <ToolBar id="toolbarright" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <ToolBar fx:id="fxtoolbarright" id="toolbarright" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <items>
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#openFileRight" text="Load" />
-                                        <Button id="button-small" mnemonicParsing="false" onAction="#saveFileRight" text="Save" />
+                                        <Button fx:id="loadButtonRight"  mnemonicParsing="false" onAction="#openFileRight" text="Load" />
+                                        <Button fx:id="saveButtonRight"  mnemonicParsing="false" onAction="#saveFileRight" text="Save" />
                                         <Button fx:id="editButtonRight" mnemonicParsing="false" onAction="#editFileRight" text="Edit" />
                                     </items>
                                 </ToolBar>
@@ -65,9 +65,9 @@
             <HBox prefHeight="22.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                    <Pane HBox.hgrow="ALWAYS" />
-                      <Button mnemonicParsing="false" text="Copy to Right-&gt;" />
-                      <Button mnemonicParsing="false" text="Compare" />
-                      <Button mnemonicParsing="false" text="&lt;-Copy to Left" />
+                      <Button fx:id="copytorightButton" mnemonicParsing="false" text="Copy to Right-&gt;" />
+                      <Button fx:id="compareButton" mnemonicParsing="false" text="Compare" />
+                      <Button fx:id="copytoleftButton" mnemonicParsing="false" text="&lt;-Copy to Left" />
                    <Pane HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
