@@ -1,6 +1,7 @@
 import javafx.util.Pair;
 import model.Splittable;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.easymock.EasyMock;
 
@@ -14,10 +15,17 @@ public class ComparisonTest {
     private String x, y;
     private ArrayList<String>
         left = new ArrayList<String>(),
-        right = new ArrayList<String>(),
-        array;
+        right = new ArrayList<String>();
 
+    private Splittable splitLeftMock, splitRightMock;
     private Splittable txt = EasyMock.createMock(Splittable.class);
+
+
+    @Before
+    public void baseSetting(){
+        splitLeftMock = EasyMock.createMock(Splittable.class);
+        splitRightMock = EasyMock.createMock(Splittable.class);
+    }
 
     /** lineIsEqual Class Testing
      *
@@ -662,9 +670,6 @@ public class ComparisonTest {
      */
     @Test
     public void samePanelTest() {
-
-        EasyMock.expect(txt.lines());
-
         left.add("Hello world!");
         left.add("");
         left.add("안녕하세요.");
@@ -680,6 +685,16 @@ public class ComparisonTest {
         right.add("123456");
         right.add("");
         right.add("!@#$%^");
+
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left);
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right);
+
+        EasyMock.replay(splitLeftMock);
+        EasyMock.replay(splitRightMock);
+
     }
 
     /**
