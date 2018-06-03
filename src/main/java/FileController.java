@@ -33,8 +33,13 @@ public class FileController{
     private Button editButtonRight;
 
 
+    public void initialize() {
+        editButton.setDisable(false);
+        editButtonRight.setDisable(false);
+        textpane.setEditable(false);
+        textpaneRight.setEditable(false);
+    }
 
-    
     @FXML
     protected void newFile(ActionEvent event) {
         textpane.clear();
