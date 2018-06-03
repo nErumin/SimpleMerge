@@ -1,5 +1,6 @@
 package model;
 
+import utility.IterableUtility;
 import utility.StreamUtility;
 import utility.StringUtility;
 
@@ -232,6 +233,15 @@ public final class Text implements Splittable {
      */
     public String findNearestLine(int position) {
         return findNearestString(newLineIncludingLines(), position);
+    }
+
+    /**
+     *
+     * @param lineIndex
+     * @return
+     */
+    public String getLine(int lineIndex) {
+        return IterableUtility.toList(lines()).get(lineIndex);
     }
 
     /**
