@@ -1,19 +1,17 @@
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.stage.*;
 import java.io.*;
 import javafx.application.Platform;
-import javafx.event.*;
-import javafx.stage.*;
 import javafx.scene.control.Button;
 
+import java.util.List;
 import javafx.util.Pair;
+import javafx.stage.Stage;
+
+
 import org.fxmisc.richtext.InlineCssTextArea;
 import model.Text;
 import utility.StringUtility;
@@ -104,6 +102,10 @@ public class FileController{
         rightPanelText = new Text(merged.getValue().toString());
     }
 
+
+
+
+
     public void initialize() {
         editButtonRight.setDisable(false);
         editButton.setDisable(false);
@@ -147,11 +149,11 @@ public class FileController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            textpane.setEditable(false);
+            editButton.setDisable(false);
         }
-        textpane.setEditable(false);
-        editButton.setDisable(false);
-    }
+        }
+
     @FXML
     protected void editFile(ActionEvent event) {
         textpane.setEditable(true);
@@ -247,10 +249,10 @@ public class FileController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            textpaneRight.setEditable(false);
+            editButtonRight.setDisable(false);
         }
-        textpaneRight.setEditable(false);
-        editButtonRight.setDisable(false);
+
 
     }
     @FXML
@@ -319,7 +321,11 @@ public class FileController{
             }
         }
     }
-
+    @FXML
+    protected void compareButtonAction(){
+        ViewController fv = new ViewController();
+        fv.compareButtonAction();
+    }
     /**
      * Highlight left panel
      * @param from start location for highlighting
