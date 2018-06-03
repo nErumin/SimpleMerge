@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Comparison {
     private int pairNum;
     private int[][] solPair;
     private Integer[][] board;
     private String[][] solution;
-    private ArrayList<String> diffLine = new ArrayList<String>();
+    private List<String> diffLine = new ArrayList<String>();
 
 
     Comparison() {
@@ -65,7 +66,7 @@ public class Comparison {
      * @param x 왼쪽 패널  내용
      * @param y 오른쪽 패널 내용
      * */
-    private int[][] lcsPanelLength(ArrayList<String> x, ArrayList<String> y) {
+    private int[][] lcsPanelLength(List<String> x, List<String> y) {
         // 표를 이용해 연산하기 위해 0을 맨앞에 인위적으로 넣어줌.
         x.add(0,"0");
         y.add(0,"0");
@@ -138,7 +139,7 @@ public class Comparison {
      * @param leftPanelList 왼쪽 패널 문자열
      * @param rightPanelList 오른쪽 패널 문자열
      */
-    public ArrayList<String> panelFix(ArrayList<String> leftPanelList, ArrayList<String> rightPanelList) {
+    public ArrayList<String> panelFix(List<String> leftPanelList, List<String> rightPanelList) {
         int howMany; lcsPanelLength(leftPanelList, rightPanelList);
         int[][] pair = solPair;
 
