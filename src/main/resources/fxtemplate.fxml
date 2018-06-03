@@ -66,7 +66,7 @@
                <children>
                    <Pane HBox.hgrow="ALWAYS" />
                       <Button fx:id="copytorightButton" mnemonicParsing="false" text="Copy to Right-&gt;" />
-                      <Button fx:id="compareButton" mnemonicParsing="false" text="Compare" />
+                      <Button fx:id="compareButton" onAction="#compareButtonAction" mnemonicParsing="false" text="Compare" />
                       <Button fx:id="copytoleftButton" mnemonicParsing="false" text="&lt;-Copy to Left" />
                    <Pane HBox.hgrow="ALWAYS" />
                </children>

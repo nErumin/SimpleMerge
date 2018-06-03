@@ -1,17 +1,11 @@
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import java.awt.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.stage.*;
 import java.io.*;
 import javafx.application.Platform;
-import javafx.event.*;
-import javafx.stage.*;
 import javafx.scene.control.Button;
+
+import javafx.stage.Stage;
 
 import org.fxmisc.richtext.InlineCssTextArea;
 
@@ -39,6 +33,10 @@ public class FileController{
     private Button loadButtonRight;
     @FXML
     private Button saveButtonRight;
+
+
+
+
 
 
     public void initialize() {
@@ -250,7 +248,11 @@ public class FileController{
             }
         }
     }
-
+    @FXML
+    protected void compareButtonAction(){
+        ViewController fv = new ViewController();
+        fv.compareButtonAction();
+    }
     /**
      * Highlight left panel
      * @param from start location for highlighting
