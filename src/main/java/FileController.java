@@ -33,8 +33,6 @@ public class FileController{
     private Button editButton;
     @FXML
     private Button editButtonRight;
-    @FXML
-    private Button compareButton;
 
     @FXML
     protected void comparePanel(ActionEvent event) {
@@ -54,13 +52,41 @@ public class FileController{
 
         List<String> diffLine = panelComparison.findDifLine(leftPanelText, rightPanelText);
 
-
+        textpane.clear();
+        textpaneRight.clear();
         textpane.setAccessibleText(leftPanelText.lines().toString());
         textpaneRight.setAccessibleText(rightPanelText.lines().toString());
         for(String s : diffLine){
             highlightLine(leftPanelText.indexOf(s),leftPanelText.indexOf(s+1));
             highlightLineRight(rightPanelText.indexOf(s),rightPanelText.indexOf(s+1));
         }
+    }
+
+    @FXML
+    protected void copyToRight(ActionEvent event){
+        String leftPanel = textpane.getText();
+        String rightPanel = textpaneRight.getText();
+
+        Text leftPanelText = new Text(leftPanel);
+        Text rightPanelText = new Text(rightPanel);
+
+        int cursorPosition = textpane.getCaretPosition();
+
+        Merger panelMerger = new Merger();
+
+        Pair<List<String>,List<String>> merged = panelMerger.mergeLeftRight(cursorPosition, leftPanelText, rightPanelText);
+
+        leftPanelText = new Text(merged.getKey().toString());
+        rightPanelText = new Text(merged.getValue().toString());
+
+
+
+
+    }
+
+    @FXML
+    protected void copyToLeft(ActionEvent event){
+
     }
 
     @FXML
