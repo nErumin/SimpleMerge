@@ -680,9 +680,6 @@ public class ComparisonTest {
         right.add("123456");
         right.add("");
         right.add("!@#$%^");
-
-
-        Assert.assertEquals(0, array.size());
     }
 
     /**
@@ -698,8 +695,6 @@ public class ComparisonTest {
         left.add("123456");
         left.add("");
         left.add("!@#$%^");
-
-        Assert.assertEquals(7, array.size());
     }
 
     /**
@@ -714,9 +709,6 @@ public class ComparisonTest {
         right.add("123456");
         right.add("");
         right.add("!@#$%^");
-
-
-        Assert.assertEquals(7, array.size());
     }
 
     /**
@@ -725,7 +717,6 @@ public class ComparisonTest {
     @Test
     public void bothNullPanelTest() {
 
-        Assert.assertEquals(0, array.size());
     }
 
     /**
@@ -742,9 +733,6 @@ public class ComparisonTest {
         right.add("");
         right.add("안녕하세요.");
         right.add("");
-
-
-        for (int i = 0; i < left.size(); i++);
-        Assert.assertEquals(2, array.size());
+        
     }
 }
