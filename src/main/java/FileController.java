@@ -30,11 +30,28 @@ public class FileController{
     @FXML
     private Button editButton;
     @FXML
+    private Button loadButton;
+    @FXML
+    private Button saveButton;
+    @FXML
     private Button editButtonRight;
+    @FXML
+    private Button loadButtonRight;
+    @FXML
+    private Button saveButtonRight;
 
 
+    public void initialize() {
+        editButtonRight.setDisable(false);
+        editButton.setDisable(false);
+        loadButtonRight.setDisable(false);
+        loadButton.setDisable(false);
+        saveButtonRight.setDisable(false);
+        saveButton.setDisable(false);
+        textpaneRight.setEditable(false);
+        textpane.setEditable(false);
+    }
 
-    
     @FXML
     protected void newFile(ActionEvent event) {
         textpane.clear();
