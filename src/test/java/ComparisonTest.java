@@ -1007,7 +1007,7 @@ public class ComparisonTest {
      * Case8: Different panel
      */
     @Test
-    public void panelPnelTest() {
+    public void panelPenlTest() {
         left.add("안녕하세요.");
         left.add("");
         left.add("Hello world!");
