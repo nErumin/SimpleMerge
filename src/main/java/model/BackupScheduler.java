@@ -45,7 +45,6 @@ public class BackupScheduler {
     }
 
     private void backup() throws IOException {
-        transmitter.clear();
         transmitter.save(supplier.get());
     }
 

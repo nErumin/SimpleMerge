@@ -32,6 +32,7 @@ public class FileTransmitter implements Transmitter<String>, AutoCloseable {
 
     public void save(String content) {
         try {
+            clear();
             file.writeBytes(content);
             file.seek(0);
         } catch (IOException exception) {
