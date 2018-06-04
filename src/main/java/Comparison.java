@@ -88,6 +88,12 @@ public class Comparison {
                     !x.get(i).equals(StringUtility.EMPTY_STRING)) {
                     solution[i][j] = "diagonal";
                     board[i][j] = board[i - 1][j - 1] + 1;
+                    if(x.get(i-1).equals(x.get(i))){
+                        solution[i][j] = "up";
+                    }
+                    else if(y.get(j-1).equals(y.get(j))){
+                        solution[i][j] = "left";
+                    }
                 } else {
                     if((board[i][j - 1] > board[i - 1][j])) {
                         solution[i][j] = "left";
@@ -130,7 +136,6 @@ public class Comparison {
         }
         x.remove(0);
         y.remove(0);
-
         return solPair;
     }
 

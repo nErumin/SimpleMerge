@@ -1,17 +1,24 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import javafx.stage.FileChooser;
 
 public class FileUtility {
-
-    private String filename;
+    
+    private String fileName;
     private String[] text;
     private int i = 0, j;
-
-    public void setFileName(String filename) {
-        this.filename = filename;
+    
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
-
-    public void FileRead() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filename));
+    
+    public void fileRead() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
         while (true) {
             String line = br.readLine();
             if (line == null) break;
@@ -20,34 +27,30 @@ public class FileUtility {
         }
         br.close();
     }
-
-    public String[] getText() {
-        return text;
-    }
-
-    public void FileLoad(String name) throws IOException {
-        setFileName(name);
-        FileRead();
-        getText();
-    }
-
-    public void FileRefresh() throws IOException {
-        FileRead();
-        getText();
-    }
-
-    public void FileWrite() throws IOException {
-        BufferedWriter fw = new BufferedWriter(new FileWriter(filename));
+    
+    public void fileWrite() throws IOException {
+        BufferedWriter fw = new BufferedWriter(new FileWriter(fileName));
         for (j = 0; j < i; j++) {
             fw.write(text[j]);
             fw.newLine();
         }
         fw.close();
     }
-
-    public void FileSave(String name) throws IOException {
-        setFileName(name);
-        FileWrite();
+    
+    public String[] load() throws IOException {
+        File file;
+        FileChooser fileChooser = new FileChooser();
+        file = fileChooser.showOpenDialog(null);
+        setFileName(file.getName());
+        fileRead();
+        return text;
     }
-
+    
+    public File saveAs(String path) throws IOException {
+        File file = new File(path);
+        setFileName(file.getName());
+        fileWrite();
+        return file;
+    }
+    
 }
