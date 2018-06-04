@@ -3,12 +3,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.Pane?>
 
-<ToolBar prefHeight="40.0" prefWidth="402.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FindController">
-  <items>
-      <TextField />
-      <Button fx:id="findButton" mnemonicParsing="false" text="Find" />
-      <Button fx:id="nextButton" mnemonicParsing="false" text="Next" />
-      <Button fx:id="prevButton"  mnemonicParsing="false" text="Prev" />
-  </items>
-</ToolBar>
+
+<Pane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FindController">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="402.0">
+        <items>
+            <TextField />
+            <Button fx:id="findButton" mnemonicParsing="false" text="Find" />
+            <Button fx:id="nextButton" mnemonicParsing="false" text="Next" />
+            <Button fx:id="prevButton" mnemonicParsing="false" text="Prev" />
+        </items>
+      </ToolBar>
+   </children>
+</Pane>

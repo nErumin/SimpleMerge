@@ -5,6 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.scene.input.KeyEvent;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+
+
+
 
 public class Main extends Application {
 
@@ -20,6 +26,8 @@ public class Main extends Application {
             Scene scene = new Scene(pane);
             primaryStage.setScene(scene);
 
+
+
             // setting the height and width of stage.
             primaryStage.setWidth(800);
             primaryStage.setHeight(650);
@@ -31,10 +39,14 @@ public class Main extends Application {
             // display the stage
             primaryStage.show();
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
+
 
     public static void main(String[] args) {
         launch(args);
