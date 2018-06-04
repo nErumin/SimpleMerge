@@ -28,7 +28,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
 
             // setting the height and width of stage.
-            primaryStage.setWidth(800);
+            primaryStage.setWidth(900);
             primaryStage.setHeight(650);
             primaryStage.setResizable(false);
 
