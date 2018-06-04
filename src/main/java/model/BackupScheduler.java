@@ -1,10 +1,6 @@
 package model;
 
-import utility.StringUtility;
-
 import java.io.*;
-import java.nio.channels.FileLock;
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Supplier;
@@ -40,15 +36,20 @@ public class BackupScheduler {
     }
 
     public void finish() {
-        System.out.println("cancel");
-        jobScheduler.cancel();
+        try {
+            jobScheduler.cancel();
+            transmitter.close();
+        } catch (IOException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
     private void backup() throws IOException {
+        transmitter.clear();
         transmitter.save(supplier.get());
     }
 
-    public String loadBackup() throws IOException {
+    public String loadBackup() {
         return transmitter.load();
     }
 }
