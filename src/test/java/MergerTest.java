@@ -39,7 +39,8 @@ public class MergerTest {
         EasyMock.replay(splitLeftMock);
 
         twoPanel = merger.mergeLeftRight(0, splitLeftMock, splitRightMock);
-
+        Assert.assertEquals(0, twoPanel.getKey().size());
+        Assert.assertEquals(0, twoPanel.getValue().size());
     }
 
     @Test
@@ -154,4 +155,41 @@ public class MergerTest {
         Assert.assertEquals(left.get(0), twoPanel.getValue().get(0));
     }
 
+    @Test
+    public void leftEmptyMergeTest(){
+        left.add("");
+        right.add("Hello world!");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = merger.mergeRightLeft(0, splitLeftMock, splitRightMock);
+        Assert.assertEquals(right.get(0), twoPanel.getKey().get(0));
+    }
+
+    @Test
+    public void rightEmptyMergeTest() {
+        left.add("Hello world!");
+        right.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = merger.mergeLeftRight(0, splitLeftMock, splitRightMock);
+        Assert.assertEquals(left.get(0), twoPanel.getValue().get(0));
+    }
 }
