@@ -16,8 +16,8 @@ public class ComparisonTest {
     private ArrayList<String>
         left = new ArrayList<String>(),
         right = new ArrayList<String>();
+    private List<String> actual = new ArrayList<String>();
     private Splittable splitLeftMock, splitRightMock;
-    private Splittable txt = EasyMock.createMock(Splittable.class);
 
 
     @Before
@@ -812,5 +812,207 @@ public class ComparisonTest {
 
         Assert.assertEquals(left, twoPanel.getKey());
         Assert.assertEquals(right, twoPanel.getValue());
+    }
+
+    @Test
+    public void nullNullPanelTest() {
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        actual = c.findDifLine(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(0, actual.size());
+    }
+
+    @Test
+    public void nullPanelTest() {
+        right.add("Hello world!");
+        right.add("");
+        right.add("안녕하세요.");
+        right.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        actual = c.findDifLine(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(0, actual.size());
+    }
+
+    @Test
+    public void panelNullTest() {
+        left.add("안녕하세요.");
+        left.add("");
+        left.add("Hello world!");
+        left.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        actual = c.findDifLine(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(0, actual.size());
+    }
+
+    @Test
+    public void emptyEmptyTest() {
+        left.add("");
+        right.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        actual = c.findDifLine(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(0, actual.size());
+    }
+
+    @Test
+    public void emptyPanelTest() {
+        left.add("");
+        left.add("");
+        left.add("");
+        left.add("");
+
+        right.add("안녕하세요.");
+        right.add("");
+        right.add("Hello world!");
+        right.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        actual = c.findDifLine(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(2, actual.size());
+    }
+
+    @Test
+    public void panelEmptyTest() {
+        left.add("안녕하세요.");
+        left.add("");
+        left.add("Hello world!");
+        left.add("");
+
+        right.add("");
+        right.add("");
+        right.add("");
+        right.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        actual = c.findDifLine(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(2, actual.size());
+    }
+
+    @Test
+    public void equalPanelTest() {
+        left.add("Hello world!");
+        left.add("");
+        left.add("안녕하세요.");
+        left.add("");
+        left.add("123456");
+        left.add("");
+        left.add("!@#$%^");
+
+        right.add("Hello world!");
+        right.add("");
+        right.add("안녕하세요.");
+        right.add("");
+        right.add("123456");
+        right.add("");
+        right.add("!@#$%^");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        actual = c.findDifLine(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(0, actual.size());
+    }
+
+    @Test
+    public void panelPnelTest() {
+        left.add("안녕하세요.");
+        left.add("");
+        left.add("Hello world!");
+        left.add("");
+        left.add("123456");
+        left.add("");
+        left.add("!@#$%^");
+
+        right.add("Hello world!");
+        right.add("");
+        right.add("안녕하세요.");
+        right.add("");
+        right.add("123456");
+        right.add("");
+        right.add("!@#$%^");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        actual = c.findDifLine(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(2, actual.size());
     }
 }

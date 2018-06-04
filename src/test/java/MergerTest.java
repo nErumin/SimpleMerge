@@ -156,7 +156,7 @@ public class MergerTest {
     }
 
     @Test
-    public void leftEmptyMergeTest(){
+    public void leftEmptyMergeTest() {
         left.add("");
         right.add("Hello world!");
 
