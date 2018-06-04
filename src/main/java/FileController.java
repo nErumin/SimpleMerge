@@ -9,8 +9,6 @@ import javafx.scene.control.Button;
 
 import java.util.List;
 import javafx.util.Pair;
-import javafx.stage.Stage;
-
 
 import model.BackupScheduler;
 import model.FileTransmitter;
@@ -80,8 +78,7 @@ public class FileController {
             () -> textpaneRight.getText(), RIGHT_BACKUP_PATH
         );
 
-        textpane.insertText(0, leftBackupScheduler.loadBackup());
-        textpaneRight.insertText(0, rightBackupScheduler.loadBackup());
+        //textpane.insertText(0, leftBackupScheduler.loadBackup());
 
         leftBackupScheduler.start();
         rightBackupScheduler.start();
@@ -96,8 +93,8 @@ public class FileController {
             editButtonRight.setDisable(false);
         }
 
-        textpaneRight.setStyle("-rtfx-background-color: #000000; ");
-        textpane.setStyle("-rtfx-background-color: #000000; ");
+        textpane.setStyle(0, textpane.getLength(), " ");
+        textpaneRight.setStyle(0, textpaneRight.getLength(), " ");
         copytoleftButton.setDisable(true);
         copytorightButton.setDisable(true);
     }
@@ -335,8 +332,8 @@ public class FileController {
     @FXML
     protected void refreshButtonActionRight() throws IOException {
         if (fileRight != null) {
-            try (FileTransmitter transmitter = new FileTransmitter(file.getPath())) {
-                textpane.clear();
+            try (FileTransmitter transmitter = new FileTransmitter(fileRight.getPath())) {
+                textpaneRight.clear();
                 textpaneRight.appendText(transmitter.load());
             }
 
