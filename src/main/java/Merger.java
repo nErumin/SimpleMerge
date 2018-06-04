@@ -20,6 +20,7 @@ public class Merger {
         } else if (right.size() == 0 && left.size() != 0) {
             right.add(left.get(index));
         } else {
+            right.remove(index);
             right.add(index, left.get(index));
         }
         return new Pair<>(left,right);
@@ -39,6 +40,7 @@ public class Merger {
         } else if (left.size() == 0 && right.size() != 0) {
             left.add(right.get(index));
         } else {
+            left.remove(index);
             left.add(index, right.get(index));
         }
         return new Pair<>(left,right);

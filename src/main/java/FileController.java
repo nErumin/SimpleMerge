@@ -12,18 +12,24 @@ import javafx.util.Pair;
 import javafx.stage.Stage;
 
 
+import model.BackupScheduler;
 import org.fxmisc.richtext.InlineCssTextArea;
 import model.Text;
 import utility.StringUtility;
 
 
-public class FileController{
+public class FileController {
+    private static final String LEFT_BACKUP_PATH = "left.bak";
+    private static final String RIGHT_BACKUP_PATH = "right.bak";
 
     private FileChooser fileChooser = new FileChooser();
     private File file;
+    private BackupScheduler leftBackupScheduler;
 
     private FileChooser fileChooserRight = new FileChooser();
     private File fileRight;
+    private BackupScheduler rightBackupScheduler;
+
     @FXML
     private InlineCssTextArea textpane;
     @FXML
@@ -41,13 +47,35 @@ public class FileController{
     @FXML
     private Button saveButtonRight;
 
-    @FXML
-    protected void comparePanel(ActionEvent event) {
-        String leftPanel = textpane.getText();
-        String rightPanel = textpaneRight.getText();
+    public void initialize() {
+        editButtonRight.setDisable(false);
+        editButton.setDisable(false);
+        loadButtonRight.setDisable(false);
+        loadButton.setDisable(false);
+        saveButtonRight.setDisable(false);
+        saveButton.setDisable(false);
+        textpaneRight.setEditable(false);
+        textpane.setEditable(false);
 
-        Text leftPanelText = new Text(leftPanel);
-        Text rightPanelText = new Text(rightPanel);
+        leftBackupScheduler = new BackupScheduler(
+            () -> textpane.getText(), LEFT_BACKUP_PATH
+        );
+
+        rightBackupScheduler = new BackupScheduler(
+            () -> textpaneRight.getText(), RIGHT_BACKUP_PATH
+        );
+
+        textpane.insertText(0, leftBackupScheduler.loadBackup());
+        textpaneRight.insertText(0, rightBackupScheduler.loadBackup());
+
+        leftBackupScheduler.start();
+        rightBackupScheduler.start();
+    }
+
+    @FXML
+    protected void comparePanel() {
+        Text leftPanelText = new Text(textpane.getText());
+        Text rightPanelText = new Text(textpaneRight.getText());
         Comparison panelComparison = new Comparison();
         Pair<List<String>, List<String>> pair = panelComparison.panelFix(leftPanelText, rightPanelText);
 
@@ -85,37 +113,43 @@ public class FileController{
     }
 
     @FXML
-    protected void copyToRight(ActionEvent event) {
-        String leftPanel = textpane.getText();
-        String rightPanel = textpaneRight.getText();
-
-        Text leftPanelText = new Text(leftPanel);
-        Text rightPanelText = new Text(rightPanel);
-        int cursorPosition = textpane.getCaretPosition();
+    protected void copyToLeft(){
+        Text leftPanelText = new Text(textpane.getText());
+        Text rightPanelText = new Text(textpaneRight.getText());
+        int cursorPosition = textpaneRight.getCaretPosition();
 
         Merger panelMerger = new Merger();
+        int mergeTargetLine = rightPanelText.positionToLineIndex(cursorPosition);
 
-        Pair<List<String>, List<String>> merged = panelMerger.mergeLeftRight(cursorPosition, leftPanelText, rightPanelText);
+        Pair<List<String>, List<String>> mergedResult =
+            panelMerger.mergeRightLeft(mergeTargetLine, leftPanelText, rightPanelText);
 
-        leftPanelText = new Text(merged.getKey().toString());
-        rightPanelText = new Text(merged.getValue().toString());
-    }
-
-    public void initialize() {
-        editButtonRight.setDisable(false);
-        editButton.setDisable(false);
-        loadButtonRight.setDisable(false);
-        loadButton.setDisable(false);
-        saveButtonRight.setDisable(false);
-        saveButton.setDisable(false);
-        textpaneRight.setEditable(false);
-        textpane.setEditable(false);
-
+        refreshTextPane(mergedResult);
     }
 
     @FXML
-    protected void copyToLeft(ActionEvent event){
+    protected void copyToRight() {
+        Text leftPanelText = new Text(textpane.getText());
+        Text rightPanelText = new Text(textpaneRight.getText());
+        int cursorPosition = textpane.getCaretPosition();
 
+        Merger panelMerger = new Merger();
+        int mergeTargetLine = leftPanelText.positionToLineIndex(cursorPosition);
+
+        Pair<List<String>, List<String>> mergedResult =
+            panelMerger.mergeLeftRight(mergeTargetLine, leftPanelText, rightPanelText);
+        refreshTextPane(mergedResult);
+    }
+
+    private void refreshTextPane(Pair<List<String>, List<String>> pair) {
+        String fixedLeft = StringUtility.compact(pair.getKey(), true);
+        String fixedRight = StringUtility.compact(pair.getValue(), true);
+
+        textpane.clear();
+        textpaneRight.clear();
+
+        textpane.insertText(0, fixedLeft);
+        textpaneRight.insertText(0, fixedRight);
     }
 
     @FXML
@@ -141,13 +175,15 @@ public class FileController{
                 while ((sCurrentLine = br.readLine()) != null) {
                     textpane.appendText(sCurrentLine + "\n" );
                 }
+                br.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             textpane.setEditable(false);
             editButton.setDisable(false);
+            textpane.setStyle(" "); //ERASEIT!
         }
-        }
+    }
 
     @FXML
     protected void editFile(ActionEvent event) {
@@ -246,6 +282,8 @@ public class FileController{
             }
             textpaneRight.setEditable(false);
             editButtonRight.setDisable(false);
+            textpaneRight.setStyle(" "); //ERASEIT!
+
         }
 
 
@@ -343,6 +381,9 @@ public class FileController{
     @FXML
     protected void exitApp(ActionEvent event) {
         Platform.exit();
-    }
 
+        System.out.println("EXIT APP");
+        leftBackupScheduler.finish();
+        rightBackupScheduler.finish();
+    }
 }
