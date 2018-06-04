@@ -5,7 +5,7 @@ import utility.StringUtility;
 import java.io.*;
 import java.nio.channels.FileLock;
 
-public class FileTransmitter implements Transmitter<String> {
+public class FileTransmitter implements Transmitter<String>, AutoCloseable {
     private final RandomAccessFile file;
     private final FileLock fileLock;
 
@@ -58,6 +58,9 @@ public class FileTransmitter implements Transmitter<String> {
         return null;
     }
 
+    public void clear() throws IOException {
+        file.setLength(0);
+    }
     public void close() throws IOException {
         fileLock.release();
         file.close();
