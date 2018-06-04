@@ -47,7 +47,7 @@ public class FileController {
     @FXML
     private Button saveButtonRight;
 
-    public void initialize() {
+    public void initialize() throws IOException {
         editButtonRight.setDisable(false);
         editButton.setDisable(false);
         loadButtonRight.setDisable(false);
