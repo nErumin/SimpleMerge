@@ -665,7 +665,7 @@ public class ComparisonTest {
     }
 
     /** panelFix Method TestCase
-     * Smae contents panel
+     * Case 1: Same contents panel
      */
     @Test
     public void samePanelTest() {
@@ -701,11 +701,10 @@ public class ComparisonTest {
     }
 
     /**
-     * Left panel: null
+     * Case 2: Right panel: null
      */
     @Test
     public void leftNullPanelTest() {
-
         left.add("Hello world!");
         left.add("");
         left.add("안녕하세요.");
@@ -730,7 +729,7 @@ public class ComparisonTest {
     }
 
     /**
-     * Right panel: null
+     * Case 3: Left panel: null
      */
     @Test
     public void rightNullPanelTest() {
@@ -757,7 +756,7 @@ public class ComparisonTest {
     }
 
     /**
-     * Both panel: null
+     * Case 4: Both panel: null
      */
     @Test
     public void bothNullPanelTest() {
@@ -779,7 +778,7 @@ public class ComparisonTest {
     }
 
     /**
-     * Different two panel
+     * Case 5: Different two panel
      */
     @Test
     public void difPanelTest() {
@@ -814,6 +813,9 @@ public class ComparisonTest {
         Assert.assertEquals(right, twoPanel.getValue());
     }
 
+    /** findDifLine Method TestCase
+     * Case 1: Both panel: null
+     */
     @Test
     public void nullNullPanelTest() {
 
@@ -832,6 +834,9 @@ public class ComparisonTest {
         Assert.assertEquals(0, actual.size());
     }
 
+    /**
+     * Case 2: Left panel: null
+     */
     @Test
     public void nullPanelTest() {
         right.add("Hello world!");
@@ -854,6 +859,9 @@ public class ComparisonTest {
         Assert.assertEquals(0, actual.size());
     }
 
+    /**
+     * Case 3: Right panel: null
+     */
     @Test
     public void panelNullTest() {
         left.add("안녕하세요.");
@@ -876,6 +884,9 @@ public class ComparisonTest {
         Assert.assertEquals(0, actual.size());
     }
 
+    /**
+     * Case 4: Both panel: empty
+     */
     @Test
     public void emptyEmptyTest() {
         left.add("");
@@ -896,6 +907,9 @@ public class ComparisonTest {
         Assert.assertEquals(0, actual.size());
     }
 
+    /**
+     * Case 5: Left panel: empty
+     */
     @Test
     public void emptyPanelTest() {
         left.add("");
@@ -923,6 +937,9 @@ public class ComparisonTest {
         Assert.assertEquals(2, actual.size());
     }
 
+    /**
+     * Case 6: Right panel: empty
+     */
     @Test
     public void panelEmptyTest() {
         left.add("안녕하세요.");
@@ -950,6 +967,9 @@ public class ComparisonTest {
         Assert.assertEquals(2, actual.size());
     }
 
+    /**
+     * Case 7: Same panel
+     */
     @Test
     public void equalPanelTest() {
         left.add("Hello world!");
@@ -983,6 +1003,9 @@ public class ComparisonTest {
         Assert.assertEquals(0, actual.size());
     }
 
+    /**
+     * Case8: Different panel
+     */
     @Test
     public void panelPnelTest() {
         left.add("안녕하세요.");
