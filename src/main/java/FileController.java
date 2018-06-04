@@ -210,8 +210,9 @@ public class FileController {
 
     @FXML
     protected void openFile(ActionEvent event) {
-        file = fileChooser.showOpenDialog(null);
-        if (file != null) {
+        File chosenFile = fileChooser.showOpenDialog(null);
+        if (chosenFile != null) {
+            file = chosenFile;
             textpane.clear();
             textpane.appendText(loadFileContent(file));
             initializeComponent(true);
@@ -264,8 +265,9 @@ public class FileController {
 
     @FXML
     protected void openFileRight(ActionEvent event) {
-        fileRight = fileChooserRight.showOpenDialog(null);
-        if (fileRight != null) {
+        File chosenFile = fileChooserRight.showOpenDialog(null);
+        if (chosenFile != null) {
+            fileRight = chosenFile;
             textpaneRight.clear();
             textpaneRight.appendText(loadFileContent(fileRight));
             initializeComponent(false);
