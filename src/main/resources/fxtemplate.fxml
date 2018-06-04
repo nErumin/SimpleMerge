@@ -72,16 +72,17 @@
             <items>
             <HBox prefHeight="22.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                   <Pane HBox.hgrow="ALWAYS" />
-                        <Button fx:id="findButton" onAction="#findButtonAction"  mnemonicParsing="false" text="find" />
-                        <Button fx:id="viewButton" onAction="#viewButtonAction" mnemonicParsing="false" text="view" />
-                      <Button fx:id="copytorightButton" onAction="#copyToRight" mnemonicParsing="false" text="Copy to Right -&gt;" />
-                      <Button fx:id="compareButton" onAction="#comparePanel" mnemonicParsing="false" text="Compare" />
-                      <Button fx:id="copytoleftButton" onAction="#copyToLeft" mnemonicParsing="false" text="&lt;- Copy to Left" />
+                   <Button fx:id="findButton" onAction="#findButtonAction"  mnemonicParsing="false" text="find" />
+                   <Button fx:id="viewButton" onAction="#viewButtonAction" mnemonicParsing="false" text="view" />
+
+                   <Pane HBox.hgrow="ALWAYS"  />
+                   <Button fx:id="copytorightButton" onAction="#copyToRight" mnemonicParsing="false" text="Copy to Right -&gt;" />
+                   <Button fx:id="compareButton" onAction="#comparePanel" mnemonicParsing="false" text="Compare" />
+                   <Button fx:id="copytoleftButton" onAction="#copyToLeft" mnemonicParsing="false" text="&lt;- Copy to Left" />
+
+                   <Pane HBox.hgrow="ALWAYS" prefWidth="50.0"/>
                    <Button fx:id="exitButton" onAction="#exitApp" mnemonicParsing="false" text="Exit" />
 
-
-                   <Pane HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             </items>
