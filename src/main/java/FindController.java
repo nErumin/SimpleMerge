@@ -1,5 +1,10 @@
 import javafx.fxml.FXML;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyCode;
 
+import javafx.scene.input.KeyCodeCombination;
 import java.io.*;
 
 import javafx.scene.control.ListView;
@@ -23,7 +28,7 @@ public class FindController {
 
 
 
-    public void main() {
+    public void findWindow() {
         try {
 
             Pane pane = FXMLLoader.load(getClass().getResource(
@@ -37,8 +42,8 @@ public class FindController {
 
             // setting the height and width of stage.
             stage.setWidth(400);
-            stage.setHeight(40);
-            stage.setTitle("FindView Sample");
+            stage.setHeight(60);
+            stage.setTitle("Find");
             stage.setScene(scene);
             stage.show();
 

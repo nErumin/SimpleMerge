@@ -1,11 +1,25 @@
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.SplitPane;
 import javafx.stage.*;
 import java.io.*;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+
+import javafx.scene.input.KeyCode;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Button;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.Pane;
+import javafx.fxml.FXMLLoader;
 
 import java.util.List;
 import javafx.util.Pair;
@@ -16,6 +30,8 @@ import model.BackupScheduler;
 import org.fxmisc.richtext.InlineCssTextArea;
 import model.Text;
 import utility.StringUtility;
+
+
 
 
 public class FileController {
@@ -46,6 +62,16 @@ public class FileController {
     private Button loadButtonRight;
     @FXML
     private Button saveButtonRight;
+    @FXML
+    private Button copytorightButton;
+    @FXML
+    private Button compareButton;
+    @FXML
+    private Button copytoleftButton;
+
+
+
+
 
     public void initialize() throws IOException {
         editButtonRight.setDisable(false);
@@ -56,6 +82,11 @@ public class FileController {
         saveButton.setDisable(false);
         textpaneRight.setEditable(false);
         textpane.setEditable(false);
+        copytoleftButton.setDisable(true);
+        copytorightButton.setDisable(true);
+        compareButton.setMnemonicParsing(true);
+
+        compareButton.setText("_Compare");
 
         leftBackupScheduler = new BackupScheduler(
             () -> textpane.getText(), LEFT_BACKUP_PATH
@@ -70,7 +101,12 @@ public class FileController {
 
         leftBackupScheduler.start();
         rightBackupScheduler.start();
+
+//Handler to exit the application
+
     }
+
+
 
     @FXML
     protected void comparePanel() {
@@ -110,6 +146,9 @@ public class FileController {
             highlightLineRight(rightDiffStartPoint,
                 rightDiffStartPoint + rightLine.length());
         }
+        copytoleftButton.setDisable(false);
+        copytorightButton.setDisable(false);
+
     }
 
     @FXML
@@ -150,6 +189,8 @@ public class FileController {
 
         textpane.insertText(0, fixedLeft);
         textpaneRight.insertText(0, fixedRight);
+        copytoleftButton.setDisable(false);
+        copytorightButton.setDisable(false);
     }
 
     @FXML
@@ -181,8 +222,11 @@ public class FileController {
             }
             textpane.setEditable(false);
             editButton.setDisable(false);
-            textpane.setStyle(" "); //ERASEIT!
+            textpaneRight.setStyle("-rtfx-background-color: #000000; ");
+            textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
+
         }
+
     }
 
     @FXML
@@ -282,8 +326,11 @@ public class FileController {
             }
             textpaneRight.setEditable(false);
             editButtonRight.setDisable(false);
-            textpaneRight.setStyle(" "); //ERASEIT!
 
+            textpaneRight.setStyle("-rtfx-background-color: #000000; ");
+            textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
+            copytoleftButton.setDisable(false);
+            copytorightButton.setDisable(false);
         }
 
 
@@ -355,10 +402,69 @@ public class FileController {
         }
     }
     @FXML
-    protected void compareButtonAction(){
+    protected void viewButtonAction(){
         ViewController fv = new ViewController();
-        fv.compareButtonAction();
+        fv.viewWindow();
     }
+    @FXML
+    protected void findButtonAction(){
+        FindController fv = new FindController();
+        fv.findWindow();
+    }
+    @FXML
+    protected void RefreshButtonAction() {
+        if (file != null) {
+//            Stage stage = (Stage) textpane.getScene().getWindow();
+//            stage.setTitle(file.getName() + " - Notepad");
+            BufferedReader br = null;
+            try {
+                textpane.clear();
+
+                String sCurrentLine;
+                br = new BufferedReader(new FileReader(file));
+                while ((sCurrentLine = br.readLine()) != null) {
+                    textpane.appendText(sCurrentLine + "\n");
+                }
+                br.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            textpane.setEditable(false);
+            editButton.setDisable(false);
+            textpaneRight.setStyle("-rtfx-background-color: #000000; ");
+            textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
+            copytoleftButton.setDisable(true);
+            copytorightButton.setDisable(true);
+        }
+    }
+    @FXML
+    protected void RefreshButtonActionRight(){
+            if (fileRight != null) {
+//                Stage stage = (Stage) textpaneRight.getScene().getWindow();
+//                stage.setTitle(fileRight.getName() + " - Notepad");
+                BufferedReader br = null;
+                try {
+                    textpaneRight.clear();
+
+                    String sCurrentLine;
+                    br = new BufferedReader(new FileReader(fileRight));
+                    while ((sCurrentLine = br.readLine()) != null) {
+                        textpaneRight.appendText(sCurrentLine + "\n");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                textpaneRight.setEditable(false);
+                editButtonRight.setDisable(false);
+
+                textpaneRight.setStyle("-rtfx-background-color: #000000; ");
+                textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
+                copytoleftButton.setDisable(true);
+                copytorightButton.setDisable(true);
+            }
+
+
+        }
     /**
      * Highlight left panel
      * @param from start location for highlighting
@@ -376,6 +482,7 @@ public class FileController {
     public void highlightLineRight(int from, int to) {
         textpaneRight.setStyle(from, to, "-rtfx-background-color: #b3ffcb; ");
     }
+
 
 
     @FXML
