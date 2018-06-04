@@ -25,9 +25,6 @@ public class FindController {
     @FXML
     private Button prevButton;
 
-
-
-
     public void findWindow() {
         try {
 
@@ -37,8 +34,6 @@ public class FindController {
             Scene scene = new Scene(pane);
             Stage stage = new Stage();
             stage.setScene(scene);
-
-
 
             // setting the height and width of stage.
             stage.setWidth(400);

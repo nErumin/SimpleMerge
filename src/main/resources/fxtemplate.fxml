@@ -46,8 +46,8 @@
                                 <ToolBar fx:id="fxtoolbarright" id="toolbarright" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <items>
                                         <Button fx:id="loadButtonRight"  mnemonicParsing="false" onAction="#openFileRight" text="Load" />
-                                        <Button fx:id="saveAsButtonRight"  mnemonicParsing="false" onAction="#saveFileRight" text="SaveAs" />
-                                        <Button fx:id="saveButtonRight"  mnemonicParsing="false" onAction="#saveAsFileRight" text="Save" />
+                                        <Button fx:id="saveAsButtonRight"  mnemonicParsing="false" onAction="#saveAsFileRight" text="SaveAs" />
+                                        <Button fx:id="saveButtonRight"  mnemonicParsing="false" onAction="#saveFileRight" text="Save" />
                                         <Button fx:id="editButtonRight" mnemonicParsing="false" onAction="#editFileRight" text="Edit" />
                                         <Button fx:id="refreshButtonRight" mnemonicParsing="false" onAction="#refreshButtonActionRight" text="Refresh" />
                                     </items>
