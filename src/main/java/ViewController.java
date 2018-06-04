@@ -28,7 +28,7 @@ public class ViewController {
     ObservableList<String> list = FXCollections.observableArrayList("abc","def","ghi");
     ObservableList<String> listRight = FXCollections.observableArrayList("shc", "ltk", "Hunde woogun");
 
-    public void compareButtonAction() {
+    public void viewWindow() {
         try {
             listView = new ListView<String>();
             listViewRight = new ListView<String>();
@@ -47,9 +47,9 @@ public class ViewController {
 
 
             // setting the height and width of stage.
-            stage.setWidth(640);
-            stage.setHeight(480);
-            stage.setTitle("FindView Sample");
+            stage.setWidth(600);
+            stage.setHeight(400);
+            stage.setTitle("Diff View");
             stage.setScene(scene);
             stage.show();
 
