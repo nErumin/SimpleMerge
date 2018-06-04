@@ -96,8 +96,7 @@ public class FileController {
             () -> textpaneRight.getText(), RIGHT_BACKUP_PATH
         );
 
-        textpane.insertText(0, leftBackupScheduler.loadBackup());
-        textpaneRight.insertText(0, rightBackupScheduler.loadBackup());
+        //textpane.insertText(0, leftBackupScheduler.loadBackup());
 
         leftBackupScheduler.start();
         rightBackupScheduler.start();
@@ -222,8 +221,8 @@ public class FileController {
             }
             textpane.setEditable(false);
             editButton.setDisable(false);
-            textpaneRight.setStyle("-rtfx-background-color: #000000; ");
-            textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
+            textpaneRight.setStyle(0,textpaneRight.getLength()," ");
+            textpane.setStyle(0,textpane.getLength()," ");//ERASEIT!
 
         }
 
@@ -327,8 +326,9 @@ public class FileController {
             textpaneRight.setEditable(false);
             editButtonRight.setDisable(false);
 
-            textpaneRight.setStyle("-rtfx-background-color: #000000; ");
-            textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
+            textpaneRight.setStyle(0,textpaneRight.getLength()," ");
+            textpane.setStyle(0,textpane.getLength()," ");//ERASEIT!
+
             copytoleftButton.setDisable(false);
             copytorightButton.setDisable(false);
         }
@@ -431,8 +431,8 @@ public class FileController {
             }
             textpane.setEditable(false);
             editButton.setDisable(false);
-            textpaneRight.setStyle("-rtfx-background-color: #000000; ");
-            textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
+            textpaneRight.setStyle(0,textpaneRight.getLength()," ");
+            textpane.setStyle(0,textpane.getLength()," ");//ERASEIT!
             copytoleftButton.setDisable(true);
             copytorightButton.setDisable(true);
         }
@@ -456,9 +456,9 @@ public class FileController {
                 }
                 textpaneRight.setEditable(false);
                 editButtonRight.setDisable(false);
+                textpaneRight.setStyle(0,textpaneRight.getLength()," ");
+                textpane.setStyle(0,textpane.getLength()," ");//ERASEIT!
 
-                textpaneRight.setStyle("-rtfx-background-color: #000000; ");
-                textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
                 copytoleftButton.setDisable(true);
                 copytorightButton.setDisable(true);
             }
