@@ -42,12 +42,9 @@ public class FileController{
     private Button saveButtonRight;
 
     @FXML
-    protected void comparePanel(ActionEvent event) {
-        String leftPanel = textpane.getText();
-        String rightPanel = textpaneRight.getText();
-
-        Text leftPanelText = new Text(leftPanel);
-        Text rightPanelText = new Text(rightPanel);
+    protected void comparePanel() {
+        Text leftPanelText = new Text(textpane.getText());
+        Text rightPanelText = new Text(textpaneRight.getText());
         Comparison panelComparison = new Comparison();
         Pair<List<String>, List<String>> pair = panelComparison.panelFix(leftPanelText, rightPanelText);
 
@@ -85,20 +82,43 @@ public class FileController{
     }
 
     @FXML
-    protected void copyToRight(ActionEvent event) {
-        String leftPanel = textpane.getText();
-        String rightPanel = textpaneRight.getText();
+    protected void copyToLeft(){
+        Text leftPanelText = new Text(textpane.getText());
+        Text rightPanelText = new Text(textpaneRight.getText());
+        int cursorPosition = textpaneRight.getCaretPosition();
 
-        Text leftPanelText = new Text(leftPanel);
-        Text rightPanelText = new Text(rightPanel);
+        Merger panelMerger = new Merger();
+        int mergeTargetLine = rightPanelText.positionToLineIndex(cursorPosition);
+
+        Pair<List<String>, List<String>> mergedResult =
+            panelMerger.mergeRightLeft(mergeTargetLine, leftPanelText, rightPanelText);
+
+        refreshTextPane(mergedResult);
+    }
+
+    @FXML
+    protected void copyToRight() {
+        Text leftPanelText = new Text(textpane.getText());
+        Text rightPanelText = new Text(textpaneRight.getText());
         int cursorPosition = textpane.getCaretPosition();
 
         Merger panelMerger = new Merger();
+        int mergeTargetLine = leftPanelText.positionToLineIndex(cursorPosition);
 
-        Pair<List<String>, List<String>> merged = panelMerger.mergeLeftRight(cursorPosition, leftPanelText, rightPanelText);
+        Pair<List<String>, List<String>> mergedResult =
+            panelMerger.mergeLeftRight(mergeTargetLine, leftPanelText, rightPanelText);
+        refreshTextPane(mergedResult);
+    }
 
-        leftPanelText = new Text(merged.getKey().toString());
-        rightPanelText = new Text(merged.getValue().toString());
+    private void refreshTextPane(Pair<List<String>, List<String>> pair) {
+        String fixedLeft = StringUtility.compact(pair.getKey(), true);
+        String fixedRight = StringUtility.compact(pair.getValue(), true);
+
+        textpane.clear();
+        textpaneRight.clear();
+
+        textpane.insertText(0, fixedLeft);
+        textpaneRight.insertText(0, fixedRight);
     }
 
     public void initialize() {
@@ -110,12 +130,6 @@ public class FileController{
         saveButton.setDisable(false);
         textpaneRight.setEditable(false);
         textpane.setEditable(false);
-
-    }
-
-    @FXML
-    protected void copyToLeft(ActionEvent event){
-
     }
 
     @FXML
@@ -146,6 +160,7 @@ public class FileController{
             }
             textpane.setEditable(false);
             editButton.setDisable(false);
+            textpane.setStyle(" "); //ERASEIT!
         }
         }
 
@@ -246,6 +261,8 @@ public class FileController{
             }
             textpaneRight.setEditable(false);
             editButtonRight.setDisable(false);
+            textpaneRight.setStyle(" "); //ERASEIT!
+
         }
 
 

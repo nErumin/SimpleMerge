@@ -266,12 +266,31 @@ public final class Text implements Splittable {
     }
 
     /**
-     *
-     * @param lineIndex
-     * @return
+     * 특정 줄의 내용을 가져옵니다.
+     * @param lineIndex 가져올 줄 번호입니다.
+     * @return 해당 줄 번호에 대한 내용입니다.
      */
     public String getLine(int lineIndex) {
         return IterableUtility.toList(lines()).get(lineIndex);
+    }
+
+    /**
+     * 전체 텍스트에 대한 위치를 포함하는 줄의 번호를 가져옵니다.
+     * @param position 전체 텍스트에 대한 위치를 나타냅니다.
+     * @return 해당 위치를 포함하는 줄 번호입니다.
+     */
+    public int positionToLineIndex(int position) {
+        int countedLine = 0;
+        for (String line : StreamUtility.toIterable(lineStream())) {
+            ++countedLine;
+            position -= line.length();
+
+            if (position < 0) {
+                break;
+            }
+        }
+
+        return countedLine - 1;
     }
 
     /**
