@@ -1,4 +1,6 @@
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.util.Pair;
 
 import model.BackupScheduler;
 import model.FileTransmitter;
+import org.fxmisc.richtext.Caret;
 import org.fxmisc.richtext.InlineCssTextArea;
 import model.Text;
 import utility.StringUtility;
@@ -85,6 +88,9 @@ public class FileController {
         textpane.appendText(leftBackupScheduler.loadBackup());
         textpaneRight.appendText(rightBackupScheduler.loadBackup());
 
+        textpane.setShowCaret(Caret.CaretVisibility.ON);
+        textpaneRight.setShowCaret(Caret.CaretVisibility.ON);
+
         leftBackupScheduler.start();
         rightBackupScheduler.start();
     }
@@ -96,9 +102,12 @@ public class FileController {
             setEditableRight(false);
         }
 
+        compareDependentComponentSet(false);
+    }
+
+    private void removeStyle() {
         textpane.setStyle(0, textpane.getLength(), " ");
         textpaneRight.setStyle(0, textpaneRight.getLength(), " ");
-        compareDependentComponentSet(false);
     }
 
     private void compareDependentComponentSet(boolean state) {
@@ -110,15 +119,20 @@ public class FileController {
     private void setEditableLeft(boolean state) {
         textpane.setEditable(state);
         editButton.setDisable(state);
+        removeStyle();
     }
 
     private void setEditableRight(boolean state) {
         textpaneRight.setEditable(state);
         editButtonRight.setDisable(state);
+        removeStyle();
     }
 
     @FXML
     protected void comparePanel() {
+        setEditableLeft(false);
+        setEditableRight(false);
+
         Text leftPanelText = new Text(textpane.getText());
         Text rightPanelText = new Text(textpaneRight.getText());
         Comparison panelComparison = new Comparison();
@@ -223,6 +237,7 @@ public class FileController {
         textpaneRight.insertText(0, fixedRight);
 
         compareDependentComponentSet(false);
+        compareButton.setDisable(false);
     }
 
     @FXML
@@ -247,9 +262,8 @@ public class FileController {
 
     @FXML
     protected void editFile() {
-        textpane.setEditable(true);
-        editButton.setDisable(true);
-
+        setEditableLeft(true);
+        compareButton.setDisable(false);
     }
 
     @FXML
@@ -294,8 +308,8 @@ public class FileController {
 
     @FXML
     protected void editFileRight() {
-        textpaneRight.setEditable(true);
-        editButtonRight.setDisable(true);
+        setEditableRight(true);
+        compareButton.setDisable(false);
     }
 
     @FXML
