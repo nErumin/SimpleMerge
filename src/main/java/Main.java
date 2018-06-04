@@ -20,19 +20,13 @@ public class Main extends Application {
             Scene scene = new Scene(pane);
             primaryStage.setScene(scene);
 
-
-
             // setting the height and width of stage.
             primaryStage.setWidth(800);
             primaryStage.setHeight(650);
 
             // setting the App title
-            primaryStage.setTitle("Simplemerge");
+            primaryStage.setTitle("SimpleMerge");
             scene.getStylesheets().add(getClass().getResource("fxtemplate.css").toExternalForm());
-
-
-
-
 
             // display the stage
             primaryStage.show();
@@ -41,7 +35,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-    //test git
+
     public static void main(String[] args) {
         launch(args);
     }

@@ -12,18 +12,24 @@ import javafx.util.Pair;
 import javafx.stage.Stage;
 
 
+import model.BackupScheduler;
 import org.fxmisc.richtext.InlineCssTextArea;
 import model.Text;
 import utility.StringUtility;
 
 
-public class FileController{
+public class FileController {
+    private static final String LEFT_BACKUP_PATH = "left.bak";
+    private static final String RIGHT_BACKUP_PATH = "right.bak";
 
     private FileChooser fileChooser = new FileChooser();
     private File file;
+    private BackupScheduler leftBackupScheduler;
 
     private FileChooser fileChooserRight = new FileChooser();
     private File fileRight;
+    private BackupScheduler rightBackupScheduler;
+
     @FXML
     private InlineCssTextArea textpane;
     @FXML
@@ -40,6 +46,31 @@ public class FileController{
     private Button loadButtonRight;
     @FXML
     private Button saveButtonRight;
+
+    public void initialize() {
+        editButtonRight.setDisable(false);
+        editButton.setDisable(false);
+        loadButtonRight.setDisable(false);
+        loadButton.setDisable(false);
+        saveButtonRight.setDisable(false);
+        saveButton.setDisable(false);
+        textpaneRight.setEditable(false);
+        textpane.setEditable(false);
+
+        leftBackupScheduler = new BackupScheduler(
+            () -> textpane.getText(), LEFT_BACKUP_PATH
+        );
+
+        rightBackupScheduler = new BackupScheduler(
+            () -> textpaneRight.getText(), RIGHT_BACKUP_PATH
+        );
+
+        textpane.insertText(0, leftBackupScheduler.loadBackup());
+        textpaneRight.insertText(0, rightBackupScheduler.loadBackup());
+
+        leftBackupScheduler.start();
+        rightBackupScheduler.start();
+    }
 
     @FXML
     protected void comparePanel() {
@@ -121,17 +152,6 @@ public class FileController{
         textpaneRight.insertText(0, fixedRight);
     }
 
-    public void initialize() {
-        editButtonRight.setDisable(false);
-        editButton.setDisable(false);
-        loadButtonRight.setDisable(false);
-        loadButton.setDisable(false);
-        saveButtonRight.setDisable(false);
-        saveButton.setDisable(false);
-        textpaneRight.setEditable(false);
-        textpane.setEditable(false);
-    }
-
     @FXML
     protected void newFile(ActionEvent event) {
         textpane.clear();
@@ -155,6 +175,7 @@ public class FileController{
                 while ((sCurrentLine = br.readLine()) != null) {
                     textpane.appendText(sCurrentLine + "\n" );
                 }
+                br.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -162,7 +183,7 @@ public class FileController{
             editButton.setDisable(false);
             textpane.setStyle(" "); //ERASEIT!
         }
-        }
+    }
 
     @FXML
     protected void editFile(ActionEvent event) {
@@ -360,6 +381,9 @@ public class FileController{
     @FXML
     protected void exitApp(ActionEvent event) {
         Platform.exit();
-    }
 
+        System.out.println("EXIT APP");
+        leftBackupScheduler.finish();
+        rightBackupScheduler.finish();
+    }
 }

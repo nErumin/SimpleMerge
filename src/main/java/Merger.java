@@ -18,7 +18,6 @@ public class Merger {
 
         if (right.size() == 0 && left.size() == 0) {
         } else if (right.size() == 0 && left.size() != 0) {
-            right.remove(index);
             right.add(left.get(index));
         } else {
             right.remove(index);
@@ -39,7 +38,6 @@ public class Merger {
 
         if (right.size() == 0 && left.size() == 0) {
         } else if (left.size() == 0 && right.size() != 0) {
-            left.remove(index);
             left.add(right.get(index));
         } else {
             left.remove(index);
