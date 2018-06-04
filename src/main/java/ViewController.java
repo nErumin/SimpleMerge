@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Pair;
@@ -45,8 +46,12 @@ public class ViewController {
             stage.setScene(scene);
             // setting the height and width of stage.
             stage.setWidth(600);
-            stage.setHeight(400);
-            stage.setTitle("Diff View");
+            stage.setHeight(445);
+            stage.setResizable(false);
+            stage.getIcons().add(
+                new Image(ViewController.class.getResourceAsStream("icon.png"))
+            );
+            stage.setTitle("Different Lines View");
             stage.setScene(scene);
             stage.show();
 

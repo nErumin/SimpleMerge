@@ -3,6 +3,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
@@ -26,15 +27,17 @@ public class Main extends Application {
             Scene scene = new Scene(pane);
             primaryStage.setScene(scene);
 
-
-
             // setting the height and width of stage.
             primaryStage.setWidth(800);
             primaryStage.setHeight(650);
+            primaryStage.setResizable(false);
 
             // setting the App title
             primaryStage.setTitle("SimpleMerge");
-            scene.getStylesheets().add(getClass().getResource("fxtemplate.css").toExternalForm());
+            primaryStage.getIcons().add(
+                new Image(Main.class.getResourceAsStream("icon.png")));
+            scene.getStylesheets().add(
+                getClass().getResource("fxtemplate.css").toExternalForm());
 
             // display the stage
             primaryStage.show();
