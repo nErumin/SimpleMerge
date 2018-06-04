@@ -24,9 +24,10 @@
                                 <ToolBar fx:id="fxtoolbar" id="toolbarleft" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <items>
                                         <Button fx:id="loadButton"  mnemonicParsing="false" onAction="#openFile" text="Load" />
+                                        <Button fx:id="saveAsButton"  mnemonicParsing="false" onAction="#saveAsFile" text="SaveAs" />
                                         <Button fx:id="saveButton"  mnemonicParsing="false" onAction="#saveFile" text="Save" />
                                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#editFile" text="Edit" />
-                                        <Button fx:id="RefreshButton" mnemonicParsing="false" onAction="#RefreshButtonAction" text="Refresh" />
+                                        <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refreshButtonAction" text="Refresh" />
                                     </items>
                                 </ToolBar>
                             </children>
@@ -45,9 +46,10 @@
                                 <ToolBar fx:id="fxtoolbarright" id="toolbarright" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <items>
                                         <Button fx:id="loadButtonRight"  mnemonicParsing="false" onAction="#openFileRight" text="Load" />
-                                        <Button fx:id="saveButtonRight"  mnemonicParsing="false" onAction="#saveFileRight" text="Save" />
+                                        <Button fx:id="saveAsButtonRight"  mnemonicParsing="false" onAction="#saveFileRight" text="SaveAs" />
+                                        <Button fx:id="saveButtonRight"  mnemonicParsing="false" onAction="#saveAsFileRight" text="Save" />
                                         <Button fx:id="editButtonRight" mnemonicParsing="false" onAction="#editFileRight" text="Edit" />
-                                        <Button fx:id="RefreshButtonRight" mnemonicParsing="false" onAction="#RefreshButtonActionRight" text="Refresh" />
+                                        <Button fx:id="refreshButtonRight" mnemonicParsing="false" onAction="#refreshButtonActionRight" text="Refresh" />
                                     </items>
                                 </ToolBar>
                             </children>
@@ -73,9 +75,11 @@
                    <Pane HBox.hgrow="ALWAYS" />
                         <Button fx:id="findButton" onAction="#findButtonAction"  mnemonicParsing="false" text="find" />
                         <Button fx:id="viewButton" onAction="#viewButtonAction" mnemonicParsing="false" text="view" />
-                      <Button fx:id="copytorightButton" onAction="#copyToRight" mnemonicParsing="false" text="Copy to Right-&gt;" />
+                      <Button fx:id="copytorightButton" onAction="#copyToRight" mnemonicParsing="false" text="Copy to Right -&gt;" />
                       <Button fx:id="compareButton" onAction="#comparePanel" mnemonicParsing="false" text="Compare" />
-                      <Button fx:id="copytoleftButton" onAction="#copyToLeft" mnemonicParsing="false" text="&lt;-Copy to Left" />
+                      <Button fx:id="copytoleftButton" onAction="#copyToLeft" mnemonicParsing="false" text="&lt;- Copy to Left" />
+                   <Button fx:id="exitButton" onAction="#exitApp" mnemonicParsing="false" text="Exit" />
+
 
                    <Pane HBox.hgrow="ALWAYS" />
                </children>

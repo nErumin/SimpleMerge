@@ -223,6 +223,11 @@ public final class Text implements Splittable {
             return;
         }
 
+        if (length() == 0) {
+            append(replacingString);
+            return;
+        }
+
         if (startIndex < 0 || startIndex >= length()) {
             throw new StringIndexOutOfBoundsException();
         }
