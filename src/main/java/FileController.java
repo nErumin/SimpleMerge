@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Button;
 
 import java.util.List;
+
 import javafx.util.Pair;
 
 import model.BackupScheduler;
@@ -57,7 +58,8 @@ public class FileController {
     @FXML
     private Button viewButton;
 
-    public void initialize() throws IOException {
+    @FXML
+    private void initialize() throws IOException {
         initializeComponent(true);
         initializeComponent(false);
 
@@ -224,7 +226,7 @@ public class FileController {
     }
 
     @FXML
-    protected void openFile(ActionEvent event) {
+    protected void openFile() {
         File chosenFile = fileChooser.showOpenDialog(null);
         if (chosenFile != null) {
             file = chosenFile;
@@ -244,7 +246,7 @@ public class FileController {
     }
 
     @FXML
-    protected void editFile(ActionEvent event) {
+    protected void editFile() {
         textpane.setEditable(true);
         editButton.setDisable(true);
 
@@ -279,7 +281,7 @@ public class FileController {
     }
 
     @FXML
-    protected void openFileRight(ActionEvent event) {
+    protected void openFileRight() {
         File chosenFile = fileChooserRight.showOpenDialog(null);
         if (chosenFile != null) {
             fileRight = chosenFile;
@@ -291,7 +293,7 @@ public class FileController {
     }
 
     @FXML
-    protected void editFileRight(ActionEvent event) {
+    protected void editFileRight() {
         textpaneRight.setEditable(true);
         editButtonRight.setDisable(true);
     }
@@ -331,15 +333,20 @@ public class FileController {
     @FXML
     protected void findButtonAction(){
         FindController fv = new FindController();
-        fv.findWindow();
+        fv.createFindWindow(
+            () -> textpane.getText(),
+            index -> textpane.moveTo(index)
+        );
     }
 
     @FXML
-    protected void refreshButtonAction() throws IOException {
+    protected void refreshButtonAction() {
         if (file != null) {
             try (FileTransmitter transmitter = new FileTransmitter(file.getPath())) {
                 textpane.clear();
                 textpane.appendText(transmitter.load());
+            } catch (IOException exception) {
+
             }
 
             initializeComponent(true);
@@ -347,11 +354,13 @@ public class FileController {
     }
 
     @FXML
-    protected void refreshButtonActionRight() throws IOException {
+    protected void refreshButtonActionRight() {
         if (fileRight != null) {
             try (FileTransmitter transmitter = new FileTransmitter(fileRight.getPath())) {
                 textpaneRight.clear();
                 textpaneRight.appendText(transmitter.load());
+            } catch (IOException exception) {
+
             }
 
             initializeComponent(false);
@@ -359,7 +368,7 @@ public class FileController {
     }
 
     @FXML
-    protected void exitApp(ActionEvent event) {
+    protected void exitApp() {
         Platform.exit();
 
         leftBackupScheduler.sweepBackup();
