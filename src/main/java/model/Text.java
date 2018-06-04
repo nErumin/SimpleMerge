@@ -52,7 +52,21 @@ public final class Text implements Splittable {
      * @return 내용이 시작되는 위치입니다. 찾지 못할경우, -1이 반환됩니다.
      */
     public int indexOf(String content) {
-        return buffer.indexOf(content);
+        return indexOf(content, 0);
+    }
+
+    /**
+     * 지정 위치에서 시작해서, 텍스트에서 내용이 처음 시작되는 위치를 탐색합니다.
+     * @param content 탐색할 내용입니다.
+     * @param startPos 탐색을 시작할 위치입니다.
+     * @return 내용이 시작되는 위치입니다. 찾지 못할경우, -1이 반환됩니다.
+     */
+    public int indexOf(String content, int startPos) {
+        if (startPos >= length()) {
+            return -1;
+        }
+
+        return buffer.indexOf(content, startPos);
     }
 
     /**

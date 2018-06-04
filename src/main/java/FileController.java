@@ -1,4 +1,6 @@
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -8,10 +10,12 @@ import javafx.application.Platform;
 import javafx.scene.control.Button;
 
 import java.util.List;
+
 import javafx.util.Pair;
 
 import model.BackupScheduler;
 import model.FileTransmitter;
+import org.fxmisc.richtext.Caret;
 import org.fxmisc.richtext.InlineCssTextArea;
 import model.Text;
 import utility.StringUtility;
@@ -54,8 +58,11 @@ public class FileController {
     private Button refreshButton;
     @FXML
     private Button refreshButtonRight;
+    @FXML
+    private Button viewButton;
 
-    public void initialize() throws IOException {
+    @FXML
+    private void initialize() throws IOException {
         initializeComponent(true);
         initializeComponent(false);
 
@@ -81,27 +88,51 @@ public class FileController {
         textpane.appendText(leftBackupScheduler.loadBackup());
         textpaneRight.appendText(rightBackupScheduler.loadBackup());
 
+        textpane.setShowCaret(Caret.CaretVisibility.ON);
+        textpaneRight.setShowCaret(Caret.CaretVisibility.ON);
+
         leftBackupScheduler.start();
         rightBackupScheduler.start();
     }
 
     private void initializeComponent(boolean isLeft) {
         if (isLeft) {
-            textpane.setEditable(false);
-            editButton.setDisable(false);
+            setEditableLeft(false);
         } else {
-            textpaneRight.setEditable(false);
-            editButtonRight.setDisable(false);
+            setEditableRight(false);
         }
 
+        compareDependentComponentSet(false);
+    }
+
+    private void removeStyle() {
         textpane.setStyle(0, textpane.getLength(), " ");
         textpaneRight.setStyle(0, textpaneRight.getLength(), " ");
-        copytoleftButton.setDisable(true);
-        copytorightButton.setDisable(true);
+    }
+
+    private void compareDependentComponentSet(boolean state) {
+        copytoleftButton.setDisable(!state);
+        copytorightButton.setDisable(!state);
+        viewButton.setDisable(!state);
+    }
+
+    private void setEditableLeft(boolean state) {
+        textpane.setEditable(state);
+        editButton.setDisable(state);
+        removeStyle();
+    }
+
+    private void setEditableRight(boolean state) {
+        textpaneRight.setEditable(state);
+        editButtonRight.setDisable(state);
+        removeStyle();
     }
 
     @FXML
     protected void comparePanel() {
+        setEditableLeft(false);
+        setEditableRight(false);
+
         Text leftPanelText = new Text(textpane.getText());
         Text rightPanelText = new Text(textpaneRight.getText());
         Comparison panelComparison = new Comparison();
@@ -120,8 +151,8 @@ public class FileController {
         rightPanelText.replace(0, fixedRight);
         highlightDifference(panelComparison.findDifLine(leftPanelText, rightPanelText));
 
-        copytoleftButton.setDisable(false);
-        copytorightButton.setDisable(false);
+        compareButton.setDisable(true);
+        compareDependentComponentSet(true);
     }
 
     private void highlightDifference(Iterable<String> diffLine) {
@@ -205,12 +236,12 @@ public class FileController {
         textpane.insertText(0, fixedLeft);
         textpaneRight.insertText(0, fixedRight);
 
-        copytoleftButton.setDisable(false);
-        copytorightButton.setDisable(false);
+        compareDependentComponentSet(false);
+        compareButton.setDisable(false);
     }
 
     @FXML
-    protected void openFile(ActionEvent event) {
+    protected void openFile() {
         File chosenFile = fileChooser.showOpenDialog(null);
         if (chosenFile != null) {
             file = chosenFile;
@@ -230,10 +261,9 @@ public class FileController {
     }
 
     @FXML
-    protected void editFile(ActionEvent event) {
-        textpane.setEditable(true);
-        editButton.setDisable(true);
-
+    protected void editFile() {
+        setEditableLeft(true);
+        compareButton.setDisable(false);
     }
 
     @FXML
@@ -265,7 +295,7 @@ public class FileController {
     }
 
     @FXML
-    protected void openFileRight(ActionEvent event) {
+    protected void openFileRight() {
         File chosenFile = fileChooserRight.showOpenDialog(null);
         if (chosenFile != null) {
             fileRight = chosenFile;
@@ -277,9 +307,9 @@ public class FileController {
     }
 
     @FXML
-    protected void editFileRight(ActionEvent event) {
-        textpaneRight.setEditable(true);
-        editButtonRight.setDisable(true);
+    protected void editFileRight() {
+        setEditableRight(true);
+        compareButton.setDisable(false);
     }
 
     @FXML
@@ -304,28 +334,66 @@ public class FileController {
 
     @FXML
     protected void viewButtonAction() {
-        ViewController fv = new ViewController();
 
         Text leftPanelText = new Text(textpane.getText());
         Text rightPanelText = new Text(textpaneRight.getText());
         Comparison panelComparison = new Comparison();
         Pair<List<String>, List<String>> pair = panelComparison.panelFix(leftPanelText, rightPanelText);
+        List<String> diffLines = panelComparison.findDifLine(leftPanelText, rightPanelText);
 
-        fv.viewWindow();
-        //fv.setList(pair);
+        ViewController fv = new ViewController();
+        fv.createViewWindow(pair, diffLines);
     }
     @FXML
-    protected void findButtonAction(){
+    protected void findButton() {
+        removeStyle();
+        compareDependentComponentSet(false);
+        compareButton.setDisable(true);
+
         FindController fv = new FindController();
-        fv.findWindow();
+        fv.createFindWindow(
+            () -> textpane.getText(),
+            (index, searchWord) -> {
+                removeStyle();
+                textpane.moveTo(index);
+                highlightLine(index, index + searchWord.length());
+            },
+            () -> {
+                removeStyle();
+                compareButton.setDisable(false);
+            }
+        );
     }
 
     @FXML
-    protected void refreshButtonAction() throws IOException {
+    protected void findButtonRight() {
+        removeStyle();
+        compareDependentComponentSet(false);
+        compareButton.setDisable(true);
+
+        FindController fv = new FindController();
+        fv.createFindWindow(
+            () -> textpaneRight.getText(),
+            (index, searchWord) -> {
+                removeStyle();
+                textpaneRight.moveTo(index);
+                highlightLineRight(index, index + searchWord.length());
+            },
+            () -> {
+                removeStyle();
+                compareButton.setDisable(false);
+            }
+        );
+    }
+
+    @FXML
+    protected void refreshButtonAction() {
         if (file != null) {
             try (FileTransmitter transmitter = new FileTransmitter(file.getPath())) {
                 textpane.clear();
                 textpane.appendText(transmitter.load());
+            } catch (IOException exception) {
+
             }
 
             initializeComponent(true);
@@ -333,11 +401,13 @@ public class FileController {
     }
 
     @FXML
-    protected void refreshButtonActionRight() throws IOException {
+    protected void refreshButtonActionRight() {
         if (fileRight != null) {
             try (FileTransmitter transmitter = new FileTransmitter(fileRight.getPath())) {
                 textpaneRight.clear();
                 textpaneRight.appendText(transmitter.load());
+            } catch (IOException exception) {
+
             }
 
             initializeComponent(false);
@@ -345,7 +415,7 @@ public class FileController {
     }
 
     @FXML
-    protected void exitApp(ActionEvent event) {
+    protected void exitApp() {
         Platform.exit();
 
         leftBackupScheduler.sweepBackup();
