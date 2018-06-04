@@ -28,6 +28,7 @@
                                         <Button fx:id="saveButton"  mnemonicParsing="false" onAction="#saveFile" text="Save" />
                                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#editFile" text="Edit" />
                                         <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refreshButtonAction" text="Refresh" />
+                                        <Button fx:id="findButton" onAction="#findButton"  mnemonicParsing="false" text="Find" />
                                     </items>
                                 </ToolBar>
                             </children>
@@ -46,10 +47,11 @@
                                 <ToolBar fx:id="fxtoolbarright" id="toolbarright" nodeOrientation="RIGHT_TO_LEFT" prefHeight="37.0" prefWidth="196.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <items>
                                         <Button fx:id="loadButtonRight"  mnemonicParsing="false" onAction="#openFileRight" text="Load" />
-                                        <Button fx:id="saveAsButtonRight"  mnemonicParsing="false" onAction="#saveFileRight" text="SaveAs" />
-                                        <Button fx:id="saveButtonRight"  mnemonicParsing="false" onAction="#saveAsFileRight" text="Save" />
+                                        <Button fx:id="saveAsButtonRight"  mnemonicParsing="false" onAction="#saveAsFileRight" text="SaveAs" />
+                                        <Button fx:id="saveButtonRight"  mnemonicParsing="false" onAction="#saveFileRight" text="Save" />
                                         <Button fx:id="editButtonRight" mnemonicParsing="false" onAction="#editFileRight" text="Edit" />
                                         <Button fx:id="refreshButtonRight" mnemonicParsing="false" onAction="#refreshButtonActionRight" text="Refresh" />
+                                        <Button fx:id="findButtonRight" onAction="#findButtonRight"  mnemonicParsing="false" text="Find" />
                                     </items>
                                 </ToolBar>
                             </children>
@@ -72,7 +74,6 @@
             <items>
             <HBox prefHeight="22.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                   <Button fx:id="findButton" onAction="#findButtonAction"  mnemonicParsing="false" text="find" />
                    <Button fx:id="viewButton" onAction="#viewButtonAction" mnemonicParsing="false" text="view" />
 
                    <Pane HBox.hgrow="ALWAYS"  />
