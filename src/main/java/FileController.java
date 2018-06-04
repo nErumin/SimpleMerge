@@ -1,25 +1,11 @@
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.SplitPane;
 import javafx.stage.*;
 import java.io.*;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
-
-import javafx.scene.input.KeyCode;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Button;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.layout.Pane;
-import javafx.fxml.FXMLLoader;
 
 import java.util.List;
 import javafx.util.Pair;
@@ -27,12 +13,10 @@ import javafx.stage.Stage;
 
 
 import model.BackupScheduler;
+import model.FileTransmitter;
 import org.fxmisc.richtext.InlineCssTextArea;
 import model.Text;
 import utility.StringUtility;
-
-
-
 
 public class FileController {
     private static final String LEFT_BACKUP_PATH = "left.bak";
@@ -68,22 +52,22 @@ public class FileController {
     private Button compareButton;
     @FXML
     private Button copytoleftButton;
-
-
-
-
+    @FXML
+    private Button refreshButton;
+    @FXML
+    private Button refreshButtonRight;
 
     public void initialize() throws IOException {
-        editButtonRight.setDisable(false);
-        editButton.setDisable(false);
+        initializeComponent(true);
+        initializeComponent(false);
+
+        refreshButton.setDisable(true);
+        refreshButtonRight.setDisable(true);
+        loadButtonRight.setDisable(false);
         loadButtonRight.setDisable(false);
         loadButton.setDisable(false);
         saveButtonRight.setDisable(false);
         saveButton.setDisable(false);
-        textpaneRight.setEditable(false);
-        textpane.setEditable(false);
-        copytoleftButton.setDisable(true);
-        copytorightButton.setDisable(true);
         compareButton.setMnemonicParsing(true);
 
         compareButton.setText("_Compare");
@@ -101,12 +85,22 @@ public class FileController {
 
         leftBackupScheduler.start();
         rightBackupScheduler.start();
-
-//Handler to exit the application
-
     }
 
+    private void initializeComponent(boolean isLeft) {
+        if (isLeft) {
+            textpane.setEditable(false);
+            editButton.setDisable(false);
+        } else {
+            textpaneRight.setEditable(false);
+            editButtonRight.setDisable(false);
+        }
 
+        textpaneRight.setStyle("-rtfx-background-color: #000000; ");
+        textpane.setStyle("-rtfx-background-color: #000000; ");
+        copytoleftButton.setDisable(true);
+        copytorightButton.setDisable(true);
+    }
 
     @FXML
     protected void comparePanel() {
@@ -118,16 +112,23 @@ public class FileController {
         String fixedLeft = StringUtility.compact(pair.getKey(), true);
         String fixedRight = StringUtility.compact(pair.getValue(), true);
 
+        textpane.clear();
+        textpane.appendText(fixedLeft);
+
+        textpaneRight.clear();
+        textpaneRight.appendText(fixedRight);
+
         leftPanelText.replace(0, fixedLeft);
         rightPanelText.replace(0, fixedRight);
+        highlightDifference(panelComparison.findDifLine(leftPanelText, rightPanelText));
 
-        List<String> diffLine = panelComparison.findDifLine(leftPanelText, rightPanelText);
+        copytoleftButton.setDisable(false);
+        copytorightButton.setDisable(false);
+    }
 
-        textpane.clear();
-        textpaneRight.clear();
-
-        textpane.insertText(0, leftPanelText.toString());
-        textpaneRight.insertText(0, rightPanelText.toString());
+    private void highlightDifference(Iterable<String> diffLine) {
+        Text leftPanelText = new Text(textpane.getText());
+        Text rightPanelText = new Text(textpaneRight.getText());
 
         for (String s : diffLine) {
             String leftLine = leftPanelText.getLine(Integer.parseInt(s));
@@ -146,18 +147,33 @@ public class FileController {
             highlightLineRight(rightDiffStartPoint,
                 rightDiffStartPoint + rightLine.length());
         }
-        copytoleftButton.setDisable(false);
-        copytorightButton.setDisable(false);
+    }
 
+    /**
+     * Highlight left panel
+     * @param from start location for highlighting
+     * @param to end location for highlighting
+     */
+    private void highlightLine(int from, int to) {
+        textpane.setStyle(from, to, "-rtfx-background-color: #ff9999; ");
+    }
+
+    /**
+     * Highlight right panel
+     * @param from start location for highlighting
+     * @param to end location for highlighting
+     */
+    private void highlightLineRight(int from, int to) {
+        textpaneRight.setStyle(from, to, "-rtfx-background-color: #b3ffcb; ");
     }
 
     @FXML
     protected void copyToLeft(){
         Text leftPanelText = new Text(textpane.getText());
         Text rightPanelText = new Text(textpaneRight.getText());
-        int cursorPosition = textpaneRight.getCaretPosition();
 
         Merger panelMerger = new Merger();
+        int cursorPosition = textpaneRight.getCaretPosition();
         int mergeTargetLine = rightPanelText.positionToLineIndex(cursorPosition);
 
         Pair<List<String>, List<String>> mergedResult =
@@ -170,13 +186,14 @@ public class FileController {
     protected void copyToRight() {
         Text leftPanelText = new Text(textpane.getText());
         Text rightPanelText = new Text(textpaneRight.getText());
-        int cursorPosition = textpane.getCaretPosition();
 
-        Merger panelMerger = new Merger();
+        int cursorPosition = textpane.getCaretPosition();
         int mergeTargetLine = leftPanelText.positionToLineIndex(cursorPosition);
 
+        Merger panelMerger = new Merger();
         Pair<List<String>, List<String>> mergedResult =
             panelMerger.mergeLeftRight(mergeTargetLine, leftPanelText, rightPanelText);
+
         refreshTextPane(mergedResult);
     }
 
@@ -189,44 +206,28 @@ public class FileController {
 
         textpane.insertText(0, fixedLeft);
         textpaneRight.insertText(0, fixedRight);
+
         copytoleftButton.setDisable(false);
         copytorightButton.setDisable(false);
-    }
-
-    @FXML
-    protected void newFile(ActionEvent event) {
-        textpane.clear();
-        Stage stage = (Stage) textpane.getScene().getWindow();
-        stage.setTitle("Untitled - Notepad");
-        file = null;
     }
 
     @FXML
     protected void openFile(ActionEvent event) {
         file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            Stage stage = (Stage) textpane.getScene().getWindow();
-            stage.setTitle(file.getName() + " - Notepad");
-            BufferedReader br = null;
-            try {
-                textpane.clear();
-
-                String sCurrentLine;
-                br = new BufferedReader(new FileReader(file));
-                while ((sCurrentLine = br.readLine()) != null) {
-                    textpane.appendText(sCurrentLine + "\n" );
-                }
-                br.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            textpane.setEditable(false);
-            editButton.setDisable(false);
-            textpaneRight.setStyle("-rtfx-background-color: #000000; ");
-            textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
-
+            textpane.clear();
+            textpane.appendText(loadFileContent(file));
+            initializeComponent(true);
+            refreshButton.setDisable(false);
         }
+    }
 
+    private String loadFileContent(File file) {
+        try (FileTransmitter transmitter = new FileTransmitter(file.getPath())) {
+            return transmitter.load();
+        } catch (IOException exception) {
+            return StringUtility.EMPTY_STRING;
+        }
     }
 
     @FXML
@@ -235,261 +236,118 @@ public class FileController {
         editButton.setDisable(true);
 
     }
+
     @FXML
-    protected void saveFile(ActionEvent event) {
-        String content = textpane.getText();
-        if (file != null) {
-            try {
-                // if file doesnt exists, then create it
-                if (!file.exists()) {
-                    file.createNewFile();
-                }
-                FileWriter fw = new FileWriter(file.getAbsoluteFile());
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(content);
-                bw.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            // open a file dialog box
+    protected void saveFile() {
+        if (file == null) {
             file = fileChooser.showSaveDialog(null);
-            if (file != null) {
-                Stage stage = (Stage) textpane.getScene().getWindow();
-                stage.setTitle(file.getName() + " - Notepad");
-                try {
-                    // if file doesnt exists, then create it
-                    if (!file.exists()) {
-                        file.createNewFile();
-                    }
-                    FileWriter fw = new FileWriter(file.getAbsoluteFile());
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    bw.write(content);
-                    bw.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         }
-    }
 
-    @FXML
-    protected void saveasFile(ActionEvent event) {
-        file = fileChooser.showSaveDialog(null);
-
-        String content = textpane.getText();
         if (file != null) {
-            Stage stage = (Stage) textpane.getScene().getWindow();
-            stage.setTitle(file.getName() + " - Notepad");
-            try {
-                // if file doesnt exists, then create it
-                if (!file.exists()) {
-                    file.createNewFile();
-                }
-                FileWriter fw = new FileWriter(file.getAbsoluteFile());
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(content);
-                bw.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            saveContentToFile(file, textpane.getText());
         }
     }
 
-    //////RIGHT
-
     @FXML
-    protected void newFileRight(ActionEvent event) {
-        textpaneRight.clear();
-        Stage stage = (Stage) textpaneRight.getScene().getWindow();
-        stage.setTitle("Untitled - Notepad");
-        fileRight = null;
+    protected void saveAsFile() {
+        File chosenFile = fileChooser.showSaveDialog(null);
+
+        if (chosenFile != null) {
+            saveContentToFile(chosenFile, textpane.getText());
+        }
+    }
+
+    private void saveContentToFile(File file, String content) {
+        try (FileTransmitter transmitter = new FileTransmitter(file.getPath())) {
+            transmitter.save(content);
+        } catch (IOException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
     @FXML
     protected void openFileRight(ActionEvent event) {
         fileRight = fileChooserRight.showOpenDialog(null);
         if (fileRight != null) {
-            Stage stage = (Stage) textpaneRight.getScene().getWindow();
-            stage.setTitle(fileRight.getName() + " - Notepad");
-            BufferedReader br = null;
-            try {
-                textpaneRight.clear();
-
-                String sCurrentLine;
-                br = new BufferedReader(new FileReader(fileRight));
-                while ((sCurrentLine = br.readLine()) != null) {
-                    textpaneRight.appendText(sCurrentLine + "\n");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            textpaneRight.setEditable(false);
-            editButtonRight.setDisable(false);
-
-            textpaneRight.setStyle("-rtfx-background-color: #000000; ");
-            textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
-            copytoleftButton.setDisable(false);
-            copytorightButton.setDisable(false);
+            textpaneRight.clear();
+            textpaneRight.appendText(loadFileContent(fileRight));
+            initializeComponent(false);
+            refreshButtonRight.setDisable(false);
         }
-
-
     }
+
     @FXML
     protected void editFileRight(ActionEvent event) {
         textpaneRight.setEditable(true);
         editButtonRight.setDisable(true);
-
     }
+
     @FXML
-    protected void saveFileRight(ActionEvent event) {
-        String content = textpaneRight.getText();
-        if (fileRight != null) {
-            try {
-                // if file doesnt exists, then create it
-                if (!fileRight.exists()) {
-                    fileRight.createNewFile();
-                }
-                FileWriter fw = new FileWriter(fileRight.getAbsoluteFile());
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(content);
-                bw.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            // open a file dialog box
+    protected void saveFileRight() {
+        if (fileRight == null) {
             fileRight = fileChooserRight.showSaveDialog(null);
-            if (fileRight != null) {
-                Stage stage = (Stage) textpaneRight.getScene().getWindow();
-                stage.setTitle(fileRight.getName() + " - SimpleMerge");
-                try {
-                    // if file doesnt exists, then create it
-                    if (!fileRight.exists()) {
-                        fileRight.createNewFile();
-                    }
-                    FileWriter fw = new FileWriter(fileRight.getAbsoluteFile());
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    bw.write(content);
-                    bw.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         }
-    }
 
-    @FXML
-    protected void saveasFileRight(ActionEvent event) {
-        fileRight = fileChooserRight.showSaveDialog(null);
-
-        String content = textpaneRight.getText();
         if (fileRight != null) {
-            Stage stage = (Stage) textpaneRight.getScene().getWindow();
-            stage.setTitle(fileRight.getName() + " - SimpleMerge");
-            try {
-                // if file doesnt exists, then create it
-                if (!fileRight.exists()) {
-                    fileRight.createNewFile();
-                }
-                FileWriter fw = new FileWriter(fileRight.getAbsoluteFile());
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(content);
-                bw.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            saveContentToFile(fileRight, textpaneRight.getText());
         }
     }
+
     @FXML
-    protected void viewButtonAction(){
+    protected void saveAsFileRight() {
+        File chosenFile = fileChooser.showSaveDialog(null);
+
+        if (chosenFile != null) {
+            saveContentToFile(chosenFile, textpaneRight.getText());
+        }
+    }
+
+    @FXML
+    protected void viewButtonAction() {
         ViewController fv = new ViewController();
+
+        Text leftPanelText = new Text(textpane.getText());
+        Text rightPanelText = new Text(textpaneRight.getText());
+        Comparison panelComparison = new Comparison();
+        Pair<List<String>, List<String>> pair = panelComparison.panelFix(leftPanelText, rightPanelText);
+
         fv.viewWindow();
+        fv.setList(pair);
     }
     @FXML
     protected void findButtonAction(){
         FindController fv = new FindController();
         fv.findWindow();
     }
+
     @FXML
-    protected void RefreshButtonAction() {
+    protected void refreshButtonAction() throws IOException {
         if (file != null) {
-//            Stage stage = (Stage) textpane.getScene().getWindow();
-//            stage.setTitle(file.getName() + " - Notepad");
-            BufferedReader br = null;
-            try {
+            try (FileTransmitter transmitter = new FileTransmitter(file.getPath())) {
                 textpane.clear();
-
-                String sCurrentLine;
-                br = new BufferedReader(new FileReader(file));
-                while ((sCurrentLine = br.readLine()) != null) {
-                    textpane.appendText(sCurrentLine + "\n");
-                }
-                br.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+                textpane.appendText(transmitter.load());
             }
-            textpane.setEditable(false);
-            editButton.setDisable(false);
-            textpaneRight.setStyle("-rtfx-background-color: #000000; ");
-            textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
-            copytoleftButton.setDisable(true);
-            copytorightButton.setDisable(true);
+
+            initializeComponent(true);
         }
     }
+
     @FXML
-    protected void RefreshButtonActionRight(){
-            if (fileRight != null) {
-//                Stage stage = (Stage) textpaneRight.getScene().getWindow();
-//                stage.setTitle(fileRight.getName() + " - Notepad");
-                BufferedReader br = null;
-                try {
-                    textpaneRight.clear();
-
-                    String sCurrentLine;
-                    br = new BufferedReader(new FileReader(fileRight));
-                    while ((sCurrentLine = br.readLine()) != null) {
-                        textpaneRight.appendText(sCurrentLine + "\n");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                textpaneRight.setEditable(false);
-                editButtonRight.setDisable(false);
-
-                textpaneRight.setStyle("-rtfx-background-color: #000000; ");
-                textpane.setStyle("-rtfx-background-color: #000000; ");//ERASEIT!
-                copytoleftButton.setDisable(true);
-                copytorightButton.setDisable(true);
+    protected void refreshButtonActionRight() throws IOException {
+        if (fileRight != null) {
+            try (FileTransmitter transmitter = new FileTransmitter(file.getPath())) {
+                textpane.clear();
+                textpaneRight.appendText(transmitter.load());
             }
 
-
+            initializeComponent(false);
         }
-    /**
-     * Highlight left panel
-     * @param from start location for highlighting
-     * @param to end location for highlighting
-     */
-    public void highlightLine(int from, int to) {
-        textpane.setStyle(from, to, "-rtfx-background-color: #ff9999; ");
     }
-
-    /**
-     * Highlight right panel
-     * @param from start location for highlighting
-     * @param to end location for highlighting
-     */
-    public void highlightLineRight(int from, int to) {
-        textpaneRight.setStyle(from, to, "-rtfx-background-color: #b3ffcb; ");
-    }
-
-
 
     @FXML
     protected void exitApp(ActionEvent event) {
         Platform.exit();
 
-        System.out.println("EXIT APP");
         leftBackupScheduler.finish();
         rightBackupScheduler.finish();
     }
