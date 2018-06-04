@@ -78,7 +78,8 @@ public class FileController {
             () -> textpaneRight.getText(), RIGHT_BACKUP_PATH
         );
 
-        //textpane.insertText(0, leftBackupScheduler.loadBackup());
+        textpane.appendText(leftBackupScheduler.loadBackup());
+        textpaneRight.appendText(rightBackupScheduler.loadBackup());
 
         leftBackupScheduler.start();
         rightBackupScheduler.start();
@@ -311,7 +312,7 @@ public class FileController {
         Pair<List<String>, List<String>> pair = panelComparison.panelFix(leftPanelText, rightPanelText);
 
         fv.viewWindow();
-        fv.setList(pair);
+        //fv.setList(pair);
     }
     @FXML
     protected void findButtonAction(){
@@ -346,6 +347,9 @@ public class FileController {
     @FXML
     protected void exitApp(ActionEvent event) {
         Platform.exit();
+
+        leftBackupScheduler.sweepBackup();
+        rightBackupScheduler.sweepBackup();
 
         leftBackupScheduler.finish();
         rightBackupScheduler.finish();
