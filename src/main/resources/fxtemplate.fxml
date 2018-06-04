@@ -28,6 +28,7 @@
                                         <Button fx:id="saveButton"  mnemonicParsing="false" onAction="#saveFile" text="Save" />
                                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#editFile" text="Edit" />
                                         <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refreshButtonAction" text="Refresh" />
+                                        <Button fx:id="findButton" onAction="#findButton"  mnemonicParsing="false" text="Find" />
                                     </items>
                                 </ToolBar>
                             </children>
@@ -50,6 +51,7 @@
                                         <Button fx:id="saveButtonRight"  mnemonicParsing="false" onAction="#saveFileRight" text="Save" />
                                         <Button fx:id="editButtonRight" mnemonicParsing="false" onAction="#editFileRight" text="Edit" />
                                         <Button fx:id="refreshButtonRight" mnemonicParsing="false" onAction="#refreshButtonActionRight" text="Refresh" />
+                                        <Button fx:id="findButtonRight" onAction="#findButtonRight"  mnemonicParsing="false" text="Find" />
                                     </items>
                                 </ToolBar>
                             </children>
@@ -72,7 +74,6 @@
             <items>
             <HBox prefHeight="22.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                   <Button fx:id="findButton" onAction="#findButtonAction"  mnemonicParsing="false" text="find" />
                    <Button fx:id="viewButton" onAction="#viewButtonAction" mnemonicParsing="false" text="view" />
 
                    <Pane HBox.hgrow="ALWAYS"  />

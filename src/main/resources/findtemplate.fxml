@@ -10,10 +10,8 @@
    <children>
       <ToolBar prefHeight="40.0" prefWidth="402.0">
         <items>
-            <TextField />
-            <Button fx:id="findButton" mnemonicParsing="false" text="Find" />
-            <Button fx:id="nextButton" mnemonicParsing="false" text="Next" />
-            <Button fx:id="prevButton" mnemonicParsing="false" text="Prev" />
+            <TextField fx:id="searchTextField" />
+            <Button fx:id="findButton" mnemonicParsing="false" onAction="#searchText" text="Find Next" />
         </items>
       </ToolBar>
    </children>

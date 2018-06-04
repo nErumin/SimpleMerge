@@ -345,11 +345,44 @@ public class FileController {
         fv.createViewWindow(pair, diffLines);
     }
     @FXML
-    protected void findButtonAction(){
+    protected void findButton() {
+        removeStyle();
+        compareDependentComponentSet(false);
+        compareButton.setDisable(true);
+
         FindController fv = new FindController();
         fv.createFindWindow(
             () -> textpane.getText(),
-            index -> textpane.moveTo(index)
+            (index, searchWord) -> {
+                removeStyle();
+                textpane.moveTo(index);
+                highlightLine(index, index + searchWord.length());
+            },
+            () -> {
+                removeStyle();
+                compareButton.setDisable(false);
+            }
+        );
+    }
+
+    @FXML
+    protected void findButtonRight() {
+        removeStyle();
+        compareDependentComponentSet(false);
+        compareButton.setDisable(true);
+
+        FindController fv = new FindController();
+        fv.createFindWindow(
+            () -> textpaneRight.getText(),
+            (index, searchWord) -> {
+                removeStyle();
+                textpaneRight.moveTo(index);
+                highlightLineRight(index, index + searchWord.length());
+            },
+            () -> {
+                removeStyle();
+                compareButton.setDisable(false);
+            }
         );
     }
 
