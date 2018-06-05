@@ -86,13 +86,16 @@ public class Comparison {
             for (int j = 1; j < y.size(); j++) {
                 if ((x.get(i).equals(y.get(j))) && (x.get(i) != null && y.get(j) != null) &&
                     !x.get(i).equals(StringUtility.EMPTY_STRING)) {
-                    solution[i][j] = "diagonal";
-                    board[i][j] = board[i - 1][j - 1] + 1;
-                    if(x.get(i-1).equals(x.get(i))){
+                    if(i>=j&&x.get(i-1).equals(x.get(i))&&!(x.get(i-1).equals(y.get(j-1)))){
                         solution[i][j] = "up";
+                        board[i][j] = board[i - 1][j];
                     }
-                    else if(y.get(j-1).equals(y.get(j))){
+                    else if(i<=j&&y.get(j-1).equals(y.get(j))&&!(x.get(i-1).equals(y.get(j-1)))){
                         solution[i][j] = "left";
+                        board[i][j] = board[i][j - 1];
+                    }else {
+                        solution[i][j] = "diagonal";
+                        board[i][j] = board[i - 1][j - 1] + 1;
                     }
                 } else {
                     if((board[i][j - 1] > board[i - 1][j])) {
