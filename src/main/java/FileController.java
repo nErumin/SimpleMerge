@@ -247,6 +247,7 @@ public class FileController {
             file = chosenFile;
             textpane.clear();
             textpane.appendText(loadFileContent(file));
+            compareButton.setDisable(false);
             initializeComponent(true);
             refreshButton.setDisable(false);
         }
@@ -301,6 +302,7 @@ public class FileController {
             fileRight = chosenFile;
             textpaneRight.clear();
             textpaneRight.appendText(loadFileContent(fileRight));
+            compareButton.setDisable(false);
             initializeComponent(false);
             refreshButtonRight.setDisable(false);
         }
