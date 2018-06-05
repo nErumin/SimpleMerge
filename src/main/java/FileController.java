@@ -236,6 +236,7 @@ public class FileController {
         textpane.insertText(0, fixedLeft);
         textpaneRight.insertText(0, fixedRight);
 
+        removeStyle();
         compareDependentComponentSet(false);
         compareButton.setDisable(false);
     }
