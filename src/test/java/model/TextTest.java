@@ -5,11 +5,9 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.Assert;
 import org.junit.Test;
-import utility.IterableUtility;
 import utility.StringUtility;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TextTest {
