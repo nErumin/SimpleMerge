@@ -1,3 +1,5 @@
+package model;
+
 import model.Splittable;
 import utility.IterableUtility;
 import javafx.util.Pair;

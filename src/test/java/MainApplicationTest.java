@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
 import static org.testfx.api.FxAssert.verifyThat;
 
 
-public class MainTest {
+public class MainApplicationTest {
     FxRobot robot = new FxRobot();
 
     @BeforeClass
@@ -47,7 +47,7 @@ public class MainTest {
 
     @Before
     public void setup() throws Exception {
-        FxToolkit.setupApplication(Main.class);
+        FxToolkit.setupApplication(MainApplication.class);
         FxToolkit.showStage();
     }
 

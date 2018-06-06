@@ -13,7 +13,7 @@
 
 
         <?import javafx.scene.layout.Pane?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FileController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindowController">
     <center>
         <SplitPane id="orisplit" dividerPositions="0.5" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
             <items>
@@ -72,7 +72,7 @@
         <ToolBar fx:id="menubar" prefHeight="40.0" prefWidth="720.0">
 
             <items>
-            <HBox prefHeight="22.0" prefWidth="760.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox prefHeight="22.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                    <Button fx:id="viewButton" onAction="#viewButtonAction" mnemonicParsing="false" text="View" />
 
