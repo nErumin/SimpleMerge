@@ -1,3 +1,5 @@
+package model;
+
 import javafx.util.Pair;
 import model.Splittable;
 import utility.IterableUtility;
@@ -6,7 +8,7 @@ import utility.StringUtility;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Comparison {
+public class Comparer {
     private int pairNum;
 
     /*

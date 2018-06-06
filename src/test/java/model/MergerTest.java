@@ -1,9 +1,10 @@
+package model;
+
 import javafx.util.Pair;
+import model.Merger;
 import model.Splittable;
-import org.fxmisc.richtext.model.TwoDimensional;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.easymock.EasyMock;
 import java.util.ArrayList;

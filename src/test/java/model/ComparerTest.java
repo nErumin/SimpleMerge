@@ -1,4 +1,7 @@
+package model;
+
 import javafx.util.Pair;
+import model.Comparer;
 import model.Splittable;
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,9 +11,9 @@ import org.easymock.EasyMock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComparisonTest {
+public class ComparerTest {
 
-    private Comparison c = new Comparison();
+    private Comparer c = new Comparer();
     private Pair<List<String>, List<String>> twoPanel;
     private String x, y;
     private ArrayList<String>

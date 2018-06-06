@@ -1,8 +1,5 @@
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-
+import controller.FindWindowController;
+import controller.ViewWindowController;
 import javafx.fxml.FXML;
 import javafx.stage.*;
 import java.io.*;
@@ -13,14 +10,12 @@ import java.util.List;
 
 import javafx.util.Pair;
 
-import model.BackupScheduler;
-import model.FileTransmitter;
+import model.*;
 import org.fxmisc.richtext.Caret;
 import org.fxmisc.richtext.InlineCssTextArea;
-import model.Text;
 import utility.StringUtility;
 
-public class FileController {
+public class MainWindowController {
     private static final String LEFT_BACKUP_PATH = "left.bak";
     private static final String RIGHT_BACKUP_PATH = "right.bak";
 
@@ -135,8 +130,8 @@ public class FileController {
 
         Text leftPanelText = new Text(textpane.getText());
         Text rightPanelText = new Text(textpaneRight.getText());
-        Comparison panelComparison = new Comparison();
-        Pair<List<String>, List<String>> pair = panelComparison.panelFix(leftPanelText, rightPanelText);
+        Comparer panelComparer = new Comparer();
+        Pair<List<String>, List<String>> pair = panelComparer.panelFix(leftPanelText, rightPanelText);
 
         String fixedLeft = StringUtility.compact(pair.getKey(), true);
         String fixedRight = StringUtility.compact(pair.getValue(), true);
@@ -149,7 +144,7 @@ public class FileController {
 
         leftPanelText.replace(0, fixedLeft);
         rightPanelText.replace(0, fixedRight);
-        highlightDifference(panelComparison.findDifLine(leftPanelText, rightPanelText));
+        highlightDifference(panelComparer.findDifLine(leftPanelText, rightPanelText));
 
         compareButton.setDisable(true);
         compareDependentComponentSet(true);
@@ -236,6 +231,7 @@ public class FileController {
         textpane.insertText(0, fixedLeft);
         textpaneRight.insertText(0, fixedRight);
 
+        removeStyle();
         compareDependentComponentSet(false);
         compareButton.setDisable(false);
     }
@@ -339,11 +335,11 @@ public class FileController {
 
         Text leftPanelText = new Text(textpane.getText());
         Text rightPanelText = new Text(textpaneRight.getText());
-        Comparison panelComparison = new Comparison();
-        Pair<List<String>, List<String>> pair = panelComparison.panelFix(leftPanelText, rightPanelText);
-        List<String> diffLines = panelComparison.findDifLine(leftPanelText, rightPanelText);
+        Comparer panelComparer = new Comparer();
+        Pair<List<String>, List<String>> pair = panelComparer.panelFix(leftPanelText, rightPanelText);
+        List<String> diffLines = panelComparer.findDifLine(leftPanelText, rightPanelText);
 
-        ViewController fv = new ViewController();
+        ViewWindowController fv = new ViewWindowController();
         fv.createViewWindow(pair, diffLines);
     }
     @FXML
@@ -352,7 +348,7 @@ public class FileController {
         compareDependentComponentSet(false);
         compareButton.setDisable(true);
 
-        FindController fv = new FindController();
+        FindWindowController fv = new FindWindowController();
         fv.createFindWindow(
             () -> textpane.getText(),
             (index, searchWord) -> {
@@ -373,7 +369,7 @@ public class FileController {
         compareDependentComponentSet(false);
         compareButton.setDisable(true);
 
-        FindController fv = new FindController();
+        FindWindowController fv = new FindWindowController();
         fv.createFindWindow(
             () -> textpaneRight.getText(),
             (index, searchWord) -> {
