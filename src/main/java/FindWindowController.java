@@ -1,3 +1,5 @@
+package controller;
+
 import javafx.fxml.FXML;
 import java.io.*;
 import java.util.function.BiConsumer;
@@ -16,7 +18,7 @@ import model.Text;
 import utility.Action;
 import utility.StringUtility;
 
-public class FindController {
+public class FindWindowController {
     private static final String ERROR_MESSAGE = "Cannot find text.";
 
     @FXML
@@ -26,15 +28,15 @@ public class FindController {
     private BiConsumer<Integer, String> resultConsumer;
     private String lastContent;
     private int lastFoundPosition;
-    public FindController(Supplier<String> contentSupplier,
-                          BiConsumer<Integer, String> resultConsumer) {
+    public FindWindowController(Supplier<String> contentSupplier,
+                                BiConsumer<Integer, String> resultConsumer) {
         this.contentSupplier = contentSupplier;
         this.resultConsumer = resultConsumer;
         this.lastContent = StringUtility.EMPTY_STRING;
         this.lastFoundPosition = -1;
     }
 
-    public FindController() {
+    public FindWindowController() {
 
     }
 
@@ -43,8 +45,8 @@ public class FindController {
                                  Action closeAction) {
         try {
             Pane pane = FXMLLoader.load(getClass().getResource(
-                "findtemplate.fxml"), null, null,
-                c -> new FindController(contentSupplier, resultConsumer));
+                "FindWindowTemplate.fxml"), null, null,
+                c -> new FindWindowController(contentSupplier, resultConsumer));
 
             Scene scene = new Scene(pane);
             Stage stage = new Stage();
@@ -55,7 +57,7 @@ public class FindController {
             stage.setResizable(false);
             stage.initStyle(StageStyle.UTILITY);
             stage.getIcons().add(
-                new Image(FindController.class.getResourceAsStream("icon.png"))
+                new Image(FindWindowController.class.getResourceAsStream("icon.png"))
             );
             stage.setTitle("Find");
             stage.setScene(scene);
@@ -87,7 +89,7 @@ public class FindController {
                     (Stage) alert.getDialogPane().getScene().getWindow();
 
                 alertStage.getIcons().add(
-                    new Image(ViewController.class.getResourceAsStream("icon.png"))
+                    new Image(controller.ViewWindowController.class.getResourceAsStream("icon.png"))
                 );
 
                 alert.showAndWait();

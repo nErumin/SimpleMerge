@@ -104,6 +104,13 @@ public final class Text implements Splittable {
     }
 
     private Stream<String> lineStream() {
+        if (toString().replace(StringUtility.LINE_SEPARATOR, StringUtility.EMPTY_STRING)
+                      .length() == 0) {
+            return toString().chars()
+                             .mapToObj(c -> (char) c)
+                             .map(c -> c.toString());
+        }
+
         return newLineIncludingStream()
             .flatMap(line ->
                 Arrays.stream(line.split(EXTRACT_PURE_LINE_REGEX)));

@@ -1,22 +1,20 @@
+package controller;
+
 import javafx.fxml.FXML;
 
 import java.io.*;
 import java.util.List;
 
 import javafx.scene.control.ListView;
-import javafx.scene.control.Button;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.util.Pair;
 
-public class ViewController {
+public class ViewWindowController {
     @FXML
     private ListView<String> listView;
     @FXML
@@ -24,13 +22,13 @@ public class ViewController {
     private Pair<List<String>, List<String>> diffPair;
     private List<String> diffLines;
 
-    public ViewController(Pair<List<String>, List<String>> diffPair,
-                          List<String> diffLines) {
+    public ViewWindowController(Pair<List<String>, List<String>> diffPair,
+                                List<String> diffLines) {
         this.diffPair = diffPair;
         this.diffLines = diffLines;
     }
 
-    public ViewController() {
+    public ViewWindowController() {
 
     }
 
@@ -38,8 +36,8 @@ public class ViewController {
                                  List<String> diffLines) {
         try {
             SplitPane pane = FXMLLoader.load(getClass().getResource(
-                "viewtemplate.fxml"), null, null,
-                (c) -> new ViewController(diffPair, diffLines));
+                "ViewWindowTemplate.fxml"), null, null,
+                (c) -> new ViewWindowController(diffPair, diffLines));
 
             Scene scene = new Scene(pane);
             Stage stage = new Stage();
@@ -49,7 +47,7 @@ public class ViewController {
             stage.setHeight(445);
             stage.setResizable(false);
             stage.getIcons().add(
-                new Image(ViewController.class.getResourceAsStream("icon.png"))
+                new Image(ViewWindowController.class.getResourceAsStream("icon.png"))
             );
             stage.setTitle("Different Lines View");
             stage.setScene(scene);

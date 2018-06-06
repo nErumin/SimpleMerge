@@ -6,22 +6,20 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
-import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import utility.Action;
 
 
-public class Main extends Application {
+public class MainApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
             // loading the fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "fxtemplate.fxml"));
+                "MainWindowTemplate.fxml"));
 
             // creating and initializing the scene.
             Scene scene = new Scene(loader.load());
@@ -35,9 +33,9 @@ public class Main extends Application {
             // setting the App title
             primaryStage.setTitle("SimpleMerge");
             primaryStage.getIcons().add(
-                new Image(Main.class.getResourceAsStream("icon.png")));
+                new Image(MainApplication.class.getResourceAsStream("icon.png")));
             scene.getStylesheets().add(
-                getClass().getResource("fxtemplate.css").toExternalForm());
+                getClass().getResource("MainWindowDesignTemplate.css").toExternalForm());
 
             // display the stage
             primaryStage.show();
@@ -48,7 +46,7 @@ public class Main extends Application {
         }
     }
 
-    private void registerShortcut(FileController controller, Scene scene) {
+    private void registerShortcut(MainWindowController controller, Scene scene) {
         KeyCombination openLeftKey = new KeyCodeCombination(KeyCode.O,
             KeyCombination.CONTROL_DOWN);
 
@@ -97,6 +95,12 @@ public class Main extends Application {
             KeyCombination.CONTROL_DOWN,
             KeyCombination.SHIFT_DOWN);
 
+        KeyCombination leftSearchKey = new KeyCodeCombination(KeyCode.F,
+            KeyCombination.CONTROL_DOWN);
+
+        KeyCombination rightSearchKey = new KeyCodeCombination(KeyCode.G,
+            KeyCombination.CONTROL_DOWN);
+
         KeyCombination quitKey = new KeyCodeCombination(KeyCode.Q,
             KeyCombination.CONTROL_DOWN);
 
@@ -114,6 +118,8 @@ public class Main extends Application {
         registerKey(scene, viewKey, controller::viewButtonAction);
         registerKey(scene, leftMergeKey, controller::copyToLeft);
         registerKey(scene, rightMergeKey, controller::copyToRight);
+        registerKey(scene, leftSearchKey, controller::findButton);
+        registerKey(scene, rightSearchKey, controller::findButtonRight);
         registerKey(scene, quitKey, controller::exitApp);
     }
 
