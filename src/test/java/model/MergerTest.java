@@ -1,8 +1,6 @@
 package model;
 
 import javafx.util.Pair;
-import model.Merger;
-import model.Splittable;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

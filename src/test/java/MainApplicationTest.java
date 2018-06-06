@@ -1,32 +1,15 @@
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import org.junit.Test;
-import java.io.IOException;
-import java.io.*;
 
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import javafx.application.Platform;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.testfx.api.FxRobot;
-import org.testfx.framework.junit.ApplicationTest;
-import javafx.scene.control.TextArea;
 import org.junit.*;
-import org.testfx.api.FxRobot;
-import org.testfx.api.FxToolkit;
-import org.easymock.*;
-import org.fxmisc.richtext.InlineCssTextArea;
+import org.testfx.api.FxToolkit;;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.util.concurrent.TimeoutException;
 
-import static org.junit.Assert.*;
 import static org.testfx.api.FxAssert.verifyThat;
 
 
