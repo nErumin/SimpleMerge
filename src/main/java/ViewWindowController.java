@@ -1,5 +1,3 @@
-package controller;
-
 import javafx.fxml.FXML;
 
 import java.io.*;

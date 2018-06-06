@@ -1,5 +1,3 @@
-package controller;
-
 import javafx.fxml.FXML;
 import java.io.*;
 import java.util.function.BiConsumer;
@@ -89,7 +87,7 @@ public class FindWindowController {
                     (Stage) alert.getDialogPane().getScene().getWindow();
 
                 alertStage.getIcons().add(
-                    new Image(controller.ViewWindowController.class.getResourceAsStream("icon.png"))
+                    new Image(ViewWindowController.class.getResourceAsStream("icon.png"))
                 );
 
                 alert.showAndWait();

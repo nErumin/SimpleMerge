@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<Pane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FindWindowController">
+<Pane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FindWindowController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="402.0">
         <items>

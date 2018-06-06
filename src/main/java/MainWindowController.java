@@ -1,5 +1,3 @@
-import controller.FindWindowController;
-import controller.ViewWindowController;
 import javafx.fxml.FXML;
 import javafx.stage.*;
 import java.io.*;
