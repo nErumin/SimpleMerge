@@ -1,10 +1,8 @@
 package model;
 
 import javafx.util.Pair;
-import model.Splittable;
 import utility.IterableUtility;
 import utility.StringUtility;
-
 import java.util.ArrayList;
 import java.util.List;
 

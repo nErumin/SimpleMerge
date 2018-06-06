@@ -1,10 +1,7 @@
 package model;
 
-import model.Splittable;
 import utility.IterableUtility;
 import javafx.util.Pair;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Merger {
