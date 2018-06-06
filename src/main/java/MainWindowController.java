@@ -392,6 +392,7 @@ public class MainWindowController {
 
             }
 
+            compareButton.setDisable(false);
             initializeComponent(true);
         }
     }
@@ -406,6 +407,7 @@ public class MainWindowController {
 
             }
 
+            compareButton.setDisable(false);
             initializeComponent(false);
         }
     }
