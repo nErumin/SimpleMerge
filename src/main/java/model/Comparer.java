@@ -9,6 +9,10 @@ import java.util.List;
 public class Comparer {
     private int pairNum;
 
+    public Comparer() {
+
+    }
+
     /*
      * calculate LcS length
      * @param x: Left Panel String
@@ -16,22 +20,20 @@ public class Comparer {
      * @return LcS Length
      */
     private int lcsLength(String x, String y) {
-        int i, j;
-
         // Add 0(null) string for counting
         x = "0" + x;
         y = "0" + y;
         Integer[][] board = new Integer[x.length()][y.length()];
 
-        for (i = 0; i < x.length(); i++) {
+        for (int i = 0; i < x.length(); i++) {
             board[i][0] = 0;
         }
-        for (j = 0; j < y.length(); j++) {
+        for (int j = 0; j < y.length(); j++) {
             board[0][j] = 0;
         }
 
-        for (i = 1; i < x.length(); i++) {
-            for (j = 1; j < y.length(); j++) {
+        for (int i = 1; i < x.length(); i++) {
+            for (int j = 1; j < y.length(); j++) {
                 if (x.charAt(i) == y.charAt(j)) {
                     board[i][j] = board[i - 1][j - 1] + 1;
                 } else {

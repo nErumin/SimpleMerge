@@ -5,6 +5,10 @@ import javafx.util.Pair;
 import java.util.List;
 
 public class Merger {
+
+    public Merger() {
+
+    }
     /**
      * left String to Right panel
      * @param index: Copy line
