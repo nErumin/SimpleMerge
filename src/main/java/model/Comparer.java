@@ -63,7 +63,7 @@ public class Comparer {
      * @param leftSplitter 왼쪽 패널  내용
      * @param rightSplitter 오른쪽 패널 내용
      * */
-    private int[][] lcsPanelLength(Splittable leftSplitter, Splittable rightSplitter) {
+    private int[][] lcsSamePosition(Splittable leftSplitter, Splittable rightSplitter) {
 
         List<String> x = IterableUtility.toList(leftSplitter.lines());
         List<String> y = IterableUtility.toList(rightSplitter.lines());
@@ -152,7 +152,7 @@ public class Comparer {
         int howMany;
         int[][] pair;
 
-        pair = lcsPanelLength(leftSplitter, rightSplitter);
+        pair = lcsSamePosition(leftSplitter, rightSplitter);
 
         List<String> leftPanelList = IterableUtility.toList(leftSplitter.lines());
         List<String> rightPanelList = IterableUtility.toList(rightSplitter.lines());
