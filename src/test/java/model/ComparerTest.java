@@ -1039,4 +1039,369 @@ public class ComparerTest {
 
         Assert.assertEquals(2, actual.size());
     }
+
+    @Test
+    public void professorSample1() {
+        left.add("1");
+        left.add("2");
+        left.add("3");
+        left.add("4");
+        left.add("5");
+        left.add("6");
+        left.add("7");
+        left.add("8");
+        left.add("9");
+        left.add("10");
+
+        right.add("1");
+        right.add("2");
+        right.add("3");
+        right.add("4");
+        right.add("5");
+        right.add("6");
+        right.add("7");
+        right.add("8");
+        right.add("9");
+        right.add("10");
+
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(twoPanel.getKey(), twoPanel.getValue());
+    }
+
+    @Test
+    public void professorSample2() {
+        left.add("1");
+        left.add("");
+        left.add("3");
+        left.add("4");
+        left.add("5");
+        left.add("6");
+        left.add("7");
+        left.add("8");
+        left.add("9");
+        left.add("10");
+
+        right.add("1");
+        right.add("2");
+        right.add("3");
+        right.add("4");
+        right.add("5");
+        right.add("6");
+        right.add("7");
+        right.add("8");
+        right.add("9");
+        right.add("10");
+
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        Assert.assertNotEquals (twoPanel.getKey().get(1), twoPanel.getValue().get(1));
+    }
+
+    @Test
+    public void professorSample8() {
+        left.add("");
+        left.add("");
+        left.add("mainprog illegal;");
+        left.add("");
+        left.add("");
+        left.add("");
+        left.add("procedure proc1 (a : integer; b,c : integer);");
+        left.add("var d,e:string;");
+        left.add("begin");
+        left.add("\ta := 10;");
+        left.add("\tb := 20;");
+        left.add("\tc := 30;");
+        left.add("end");
+        left.add("");
+        left.add("function max (a: integer; b: integer) : integer; ");
+        left.add("");
+        left.add("var r,y:float;");
+        left.add("");
+        left.add("");
+        left.add("begin");
+        left.add("\tif a >= b then return a; ");
+        left.add("\telse return b;");
+        left.add("end");
+        left.add("");
+        left.add("function func1(a,b : integer) : float;");
+        left.add("");
+        left.add("var fval : float;");
+        left.add("begin");
+        left.add("");
+        left.add("\treturn a;");
+        left.add("");
+        left.add("end");
+        left.add("");
+        left.add("");
+        left.add("begin");
+        left.add("");
+        left.add("   proc1(10,20.0,30.0);");
+        left.add("   proc1(10,20);");
+        left.add("");
+        left.add("");
+        left.add("");
+        left.add("   a := 33;");
+        left.add("   print a;");
+        left.add("   print max(10,2.4);");
+        left.add("   print func1(3,4);");
+        left.add("");
+        left.add("end. ");
+        left.add("");
+
+        right.add("");
+        right.add("");
+        right.add("");
+        right.add("");
+        right.add("");
+        right.add("mainprog illegal;");
+        right.add("");
+        right.add("procedure proc1 (a : integer; b,c : integer);");
+        right.add("var d,e:string;");
+        right.add("begin");
+        right.add("\ta := 10;");
+        right.add("\tb := 20;");
+        right.add("\tc := 30;");
+        right.add("end");
+        right.add("");
+        right.add("function max (a: integer; b: integer) : integer; ");
+        right.add("var r,y:float;");
+        right.add("begin");
+        right.add("\tif a >= b then return a; ");
+        right.add("\telse return b;");
+        right.add("end");
+        right.add("");
+        right.add("function func1(a,b : integer) : float;");
+        right.add("var fval : float;");
+        right.add("begin");
+        right.add("\treturn a;");
+        right.add("end");
+        right.add("");
+        right.add("");
+        right.add("begin");
+        right.add("");
+        right.add("   proc1(10,20.0,30.0);");
+        right.add("   proc1(10,20);");
+        right.add("");
+        right.add("   a := 33;");
+        right.add("   print a;");
+        right.add("   print max(10,2.4);");
+        right.add("   print func1(3,4);");
+        right.add("");
+        right.add("end. ");
+        right.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        for(int i = 0; i < right.size(); i++) {
+            Assert.assertEquals(twoPanel.getKey().get(i), twoPanel.getValue().get(i));
+        }
+    }
+
+    @Test
+    public void professorSample9() {
+        left.add("A");
+        left.add("AA");
+        left.add("AAA");
+        left.add(" AAAA");
+        left.add("AAAAA");
+        left.add("  AAAAAA");
+        left.add("AAAAAAA");
+        left.add("AAAAAA");
+        left.add("AAAAA");
+        left.add("AAAA");
+        left.add("AAA");
+        left.add("AA");
+        left.add("A");
+        left.add("A");
+        left.add("");
+        left.add("");
+        left.add("");
+        left.add("");
+        left.add("A");
+        left.add("A");
+        left.add("");
+        left.add("");
+        left.add("A");
+        left.add("");
+
+        right.add("A");
+        right.add("AA");
+        right.add("AAA");
+        right.add("AAAA");
+        right.add("AAAAA");
+        right.add("AAAAAA");
+        right.add("AAAAAAA");
+        right.add("AAAAAA");
+        right.add("AAAAA");
+        right.add("AAAA");
+        right.add("AAA");
+        right.add("AA");
+        right.add("A");
+        right.add("A");
+        right.add("A");
+        right.add("A");
+        right.add("A");
+        right.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        for(int i = 0; i < right.size(); i++) {
+            if(i == 3 || i == 5) {
+                Assert.assertNotEquals(twoPanel.getKey().get(i), twoPanel.getValue().get(i));
+            } else {
+                Assert.assertEquals(twoPanel.getKey().get(i), twoPanel.getValue().get(i));
+            }
+        }
+    }
+
+
+    @Test
+    public void professorSample10() {
+        left.add("1");
+        left.add("X");
+        left.add("X");
+        left.add("X");
+        left.add("2");
+        left.add("3");
+        left.add("4");
+        left.add("5");
+        left.add("6");
+        left.add("7");
+        left.add("8");
+        left.add("9");
+        left.add("10");
+
+        right.add("1");
+        right.add("2");
+        right.add("3");
+        right.add("4");
+        right.add("5");
+        right.add("6");
+        right.add("7");
+        right.add("8");
+        right.add("9");
+        right.add("10");
+
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        Assert.assertNotEquals(twoPanel.getKey().get(1), twoPanel.getValue().get(1));
+        Assert.assertNotEquals(twoPanel.getKey().get(2), twoPanel.getValue().get(2));
+        Assert.assertNotEquals(twoPanel.getKey().get(3), twoPanel.getValue().get(3));
+    }
+
+
+    @Test
+    public void professorSample11() {
+        left.add("");
+        right.add("");
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        Assert.assertEquals(twoPanel.getKey(), twoPanel.getValue());
+    }
+
+    @Test
+    public void professorSample14() {
+        left.add("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        left.add("X                                               X");
+        left.add("X XXXXX X  X XXXX    XXXX X   X XXXX    XX      X");
+        left.add("X   X   X  X X       X    XX  X X   X   XX      X");
+        left.add("X   X   XXXX XXXX    XXXX X X X X   X   XX      X");
+        left.add("X   X   X  X X       X    X  XX X   X           X");
+        left.add("X   X   X  X XXXX    XXXX X   X XXXX    XX      X");
+        left.add("X                                               X");
+        left.add("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+        right.add("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        right.add("X                                               X");
+        right.add("X XXXXX X  X XXXX    XXXX X   X XXXX            X");
+        right.add("X   X   X  X X       X    XX  X X   X           X");
+        right.add("X   X   XXXX XXXX    XXXX X X X X   X           X");
+        right.add("X   X   X  X X       X    X  XX X   X           X");
+        right.add("X   X   X  X XXXX    XXXX X   X XXXX            X");
+        right.add("X                                               X");
+        right.add("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+
+        EasyMock.expect(splitLeftMock.lines())
+            .andReturn(left)
+            .anyTimes();
+        EasyMock.expect(splitRightMock.lines())
+            .andReturn(right)
+            .anyTimes();
+
+        EasyMock.replay(splitRightMock);
+        EasyMock.replay(splitLeftMock);
+
+        twoPanel = c.panelFix(splitLeftMock, splitRightMock);
+
+        Assert.assertNotEquals (twoPanel.getKey().get(2), twoPanel.getValue().get(2));
+        Assert.assertNotEquals (twoPanel.getKey().get(3), twoPanel.getValue().get(3));
+        Assert.assertNotEquals (twoPanel.getKey().get(4), twoPanel.getValue().get(4));
+        Assert.assertNotEquals (twoPanel.getKey().get(6), twoPanel.getValue().get(6));
+    }
 }
