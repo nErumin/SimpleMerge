@@ -308,12 +308,12 @@ public final class Text implements Splittable {
     public int positionToLineIndex(int position) {
         int countedLine = 0;
         for (String line : StreamUtility.toIterable(lineStream())) {
-            ++countedLine;
-            position -= line.length();
-
             if (position < 0) {
                 break;
             }
+
+            ++countedLine;
+            position -= line.length();
         }
 
         return countedLine - 1;

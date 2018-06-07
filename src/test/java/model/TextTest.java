@@ -289,25 +289,28 @@ public class TextTest {
     @Test
     public void getLineTest(){
         final Text text = new Text("Hello, World!\n\nHello, Universe!");
-        text.getLine(2);
+        Assert.assertThat(text.getLine(2), is(equalTo("Hello, Universe!")));
     }
 
     @Test
     public void positionToLineIndexText(){
         final Text text = new Text("Hello, World!\n\nHello, Universe!\n\ntest");
-        text.positionToLineIndex(20);
+        Assert.assertThat(text.positionToLineIndex(20), is(equalTo(2)));
     }
 
     @Test
-    public void replaceLengthZeroTest(){
+    public void replaceTextWithInitialBlankTest(){
         final Text text = new Text("");
         text.replace(0,"fine");
+        Assert.assertThat(text.toString(), is(equalTo("fine")));
     }
+
     @Test
     public void positionToLineIndexExceptionText(){
         final Text text = new Text("Hello, World!\n\nHello, Universe!");
-        text.positionToLineIndex(-1);
+        Assert.assertThat(text.positionToLineIndex(-1), is(equalTo(-1)));
     }
+
     @Test
     public void singleAppendTest() {
         final String originalContent = " Hello \t";
@@ -524,20 +527,26 @@ public class TextTest {
     }
 
     @Test
-    public void indexOfExceptionTest(){
+    public void findStringOverLengthTest(){
         final Text text = new Text("Hello, World!\n\nHello, Universe!");
-        text.indexOf("Hello",100);
+
+        Assert.assertThat(text.indexOf("Hello",100),
+            is(equalTo(-1)));
     }
     @Test
-    public void indexOfStartFromLineTest(){
+    public void findStringFromOverLineTest(){
         final Text text = new Text("Hello, World!\n\nHello, Universe!");
-        text.indexOfStartFromLine("Hello",15);
+
+        Assert.assertThat(text.indexOfStartFromLine("Hello",15),
+            is(equalTo(-1)));
     }
 
     @Test
-    public void indexOfStartFromLineZeroTest(){
+    public void findStringFromStartLineTest(){
         final Text text = new Text("Hello, World!\n\nHello, Universe!");
-        text.indexOfStartFromLine("Hello",0);
+
+        Assert.assertThat(text.indexOfStartFromLine("Hello",0),
+            is(equalTo(0)));
     }
 
     @Test
