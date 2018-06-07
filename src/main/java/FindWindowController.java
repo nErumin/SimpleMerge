@@ -96,7 +96,7 @@ public class FindWindowController {
 
         }
 
-        lastFoundPosition = position + 1;
+        lastFoundPosition = position;
         lastContent = contentText.toString();
         resultConsumer.accept(position, searchTextField.getText());
     }
