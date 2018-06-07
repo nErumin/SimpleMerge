@@ -287,6 +287,28 @@ public class TextTest {
     }
 
     @Test
+    public void getLineTest(){
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+        text.getLine(2);
+    }
+
+    @Test
+    public void positionToLineIndexText(){
+        final Text text = new Text("Hello, World!\n\nHello, Universe!\n\ntest");
+        text.positionToLineIndex(20);
+    }
+
+    @Test
+    public void replaceLengthZeroTest(){
+        final Text text = new Text("");
+        text.replace(0,"fine");
+    }
+    @Test
+    public void positionToLineIndexExceptionText(){
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+        text.positionToLineIndex(-1);
+    }
+    @Test
     public void singleAppendTest() {
         final String originalContent = " Hello \t";
         final Text text = new Text(originalContent);
@@ -499,6 +521,23 @@ public class TextTest {
         final Text text = new Text(originalContent);
 
         text.delete(15, 10);
+    }
+
+    @Test
+    public void indexOfExceptionTest(){
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+        text.indexOf("Hello",100);
+    }
+    @Test
+    public void indexOfStartFromLineTest(){
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+        text.indexOfStartFromLine("Hello",15);
+    }
+
+    @Test
+    public void indexOfStartFromLineZeroTest(){
+        final Text text = new Text("Hello, World!\n\nHello, Universe!");
+        text.indexOfStartFromLine("Hello",0);
     }
 
     @Test
