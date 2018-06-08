@@ -15,6 +15,15 @@ repositories {
 jar {
     baseName = 'SimpleMerge'
     version =  '0.0.0'
+    manifest {
+        attributes 'Main-Class' : 'MainApplication', 'Version' : 0.0
+    }
+    archiveName "SimpleMerge.jar"
+
+    dependsOn configurations.runtime
+    from {
+        configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
+    }
 }
 
 dependencies {

@@ -14,6 +14,20 @@
 - Project Management Report는 [documents/2018 SE Team#3 Project Management Report.pdf](https://github.com/nErumin/SimpleMerge/blob/master/documents/2018%20SE%20Team%233%20Project%20Management%20Report.pdf) 파일을 참고해주세요.
 - Analysis & Design, Implementation and Test Document는 [documents/2018 SE Team#3 Analysis & Design, Implementation, and Test Document.pdf](https://github.com/nErumin/SimpleMerge/blob/master/documents/2018%20SE%20Team%233%20Analysis%20%26%20Design%2C%20Implementation%2C%20and%20Test%20Document.pdf) 파일을 참고해주세요.
 
+### Build Project
+- 프로젝트를 빌드하기 위해서는 컴퓨터에 다음 환경이 설치되어 있어야 합니다.
+    - JDK 9 이상
+    - Gradle 4.7
+- 프로젝트를 빌드하려면, 커맨드/터미널에서 다음 명령어를 입력해주세요.
+```bash
+    gradle jar
+```
+### Execute Project
+- 아래 두 방법을 통해 프로그램을 실행시킬 수 있습니다.
+    - ```{PROJECT_FOLDER}/build/libs/SimpleMerge.jar```를 직접 클릭하여 실행
+    -  커맨드/터미널에서 ```java -jar {PROJECT_FOLDER}/build/libs/SimpleMerge.jar```를 직접 입력하여 실행
+
+
 ## Team Member (Team #3)
 Role   | Github ID                                     |
 -------|-----------------------------------------------| 
