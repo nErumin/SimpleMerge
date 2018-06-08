@@ -10,6 +10,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.testfx.api.FxRobot;
 import org.junit.*;
+import org.testfx.api.FxRobotException;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.robot.Motion;
@@ -156,13 +157,16 @@ public class MainApplicationTest extends ApplicationTest {
             rightPanel.clear();
 
             leftPanel.appendText("Hello!");
-
-            robot.clickOn("#findButton", Motion.DIRECT,
-                MouseButton.PRIMARY);
+            try {
+                robot.clickOn("#findButtonRight", Motion.DIRECT,
+                    MouseButton.PRIMARY);
+            } catch (FxRobotException exception) {
+                // Empty
+            }
 
             lookup("#compareButton").query().setDisable(false);
         });
-        
+
         verifyThat("#copytoleftButton", Button::isDisabled);
         verifyThat("#copytorightButton", Button::isDisabled);
     }
