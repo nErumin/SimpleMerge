@@ -23,7 +23,7 @@
     gradle jar
 ```
 ### Execute Project
-- 아래 두 방법을 통해 프로그램을 실행시킬 수 있습니다.
+- 프로젝트 빌드 후에, 아래 두 방법을 통해 프로그램을 실행시킬 수 있습니다.
     - ```{PROJECT_FOLDER}/build/libs/SimpleMerge.jar```를 직접 클릭하여 실행
     -  커맨드/터미널에서 ```java -jar {PROJECT_FOLDER}/build/libs/SimpleMerge.jar```를 직접 입력하여 실행
 
