@@ -159,9 +159,10 @@ public class MainApplicationTest extends ApplicationTest {
 
             robot.clickOn("#findButton", Motion.DIRECT,
                 MouseButton.PRIMARY);
-        });
 
-        lookup("#compareButton").query().setDisable(false);
+            lookup("#compareButton").query().setDisable(false);
+        });
+        
         verifyThat("#copytoleftButton", Button::isDisabled);
         verifyThat("#copytorightButton", Button::isDisabled);
     }
