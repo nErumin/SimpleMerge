@@ -64,6 +64,8 @@ public class MainApplicationTest extends ApplicationTest {
         InlineCssTextArea leftPanel = lookup("#textpane").query();
         InlineCssTextArea rightPanel = lookup("#textpaneRight").query();
 
+        lookup("#compareButton").query().setDisable(false);
+
         robot.interact(() -> {
             robot.sleep(500);
             leftPanel.clear();
@@ -121,6 +123,7 @@ public class MainApplicationTest extends ApplicationTest {
         InlineCssTextArea leftPanel = lookup("#textpane").query();
         InlineCssTextArea rightPanel = lookup("#textpaneRight").query();
 
+        lookup("#compareButton").query().setDisable(false);
         robot.interact(() -> {
             robot.sleep(1000);
             leftPanel.clear();
@@ -176,6 +179,7 @@ public class MainApplicationTest extends ApplicationTest {
         InlineCssTextArea leftPanel = lookup("#textpane").query();
         InlineCssTextArea rightPanel = lookup("#textpaneRight").query();
 
+        lookup("#compareButton").query().setDisable(false);
         robot.interact(() -> {
             robot.sleep(500);
             leftPanel.clear();
