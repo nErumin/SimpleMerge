@@ -10,7 +10,7 @@ May 24, 2018
 
 해당 SRS 문서에는 프로그램 구현 시 고려해야 할 기능들과 제한 사항들이 명시되어 있다.
 
-![Use Case Diagram](https://github.com/nErumin/SimpleMerge/blob/master/documents/diagram/Usediagram.png)
+![Use Case Diagram](https://github.com/nErumin/SimpleMerge/blob/master/documents/legacy/diagram/Usediagram.png)
 
 ### 2. Use cases
 #### UC1. 새 텍스트 생성
